@@ -1,0 +1,1 @@
+import{j as s,B as a}from"./index-DtuYDPSp.js";const e=({children:r})=>s.jsx(a,{sx:{width:"100%",transition:"transform 0.3s ease",":hover":{transform:"translateY(-5px)"},borderRadius:"var(--main-border-radius)",overflow:"hidden"},children:r});export{e as W};

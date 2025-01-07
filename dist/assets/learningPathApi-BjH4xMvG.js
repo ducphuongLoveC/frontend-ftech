@@ -1,0 +1,1 @@
+import{a as t}from"./index-DtuYDPSp.js";const r=async a=>(await t("api/learning-path",{params:a})).data.data,i=async a=>await t.post("api/learning-path",a),c=async(a,n)=>(await t.patch(`api/learning-path/${a}`,n)).data,o=async a=>await t.delete(`api/learning-path/${a}`);export{o as d,r as f,i as n,c as u};

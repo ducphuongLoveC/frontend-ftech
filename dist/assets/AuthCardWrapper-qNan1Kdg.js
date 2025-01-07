@@ -1,0 +1,1 @@
+import{s as x,j as s,a5 as o,B as n}from"./index-DtuYDPSp.js";const p=x("div")(({theme:a})=>({backgroundColor:a==null?void 0:a.palette.grey[100],margin:"20px 0 110px 0"})),t=({children:a,...r})=>s.jsx(o,{sx:{maxWidth:{xs:400,lg:475},margin:{xs:2.5,md:3},"& > *":{flexGrow:1,flexBasis:"50%"}},content:!1,...r,children:s.jsx(n,{children:a})});export{p as A,t as a};

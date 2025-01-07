@@ -1,0 +1,1 @@
+import{a}from"./index-DtuYDPSp.js";const i=async({user_id:r,course_id:t,payment_method:s,amount:e,code:o,email:n})=>(await a.post("api/order",{user_id:r,course_id:t,payment_method:s,amount:e,code:o,email:n,test:"123"})).data,p=async()=>(await a.get("api/order")).data;export{i as c,p as g};

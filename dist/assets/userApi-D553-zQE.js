@@ -1,0 +1,1 @@
+import{a as t}from"./index-DtuYDPSp.js";const e=async s=>{try{const{data:r}=await t.get(`api/user/${s}/courses`);return r}catch(r){throw r}},o=async s=>{try{return await t.put("api/user/reset-password",s)}catch(r){throw r}};export{e as g,o as r};
