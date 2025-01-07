@@ -1,0 +1,54 @@
+declare const path: {
+    admin: {
+        dashboards: string;
+        courses: string;
+        newCourse: string;
+        listCategory: string;
+        listContent: string;
+        addContent: string;
+        updateCourse: (id: string) => string;
+        LearningPathList: string;
+        newLearningPath: string;
+        posts: string;
+        newPosts: string;
+        transaction: string;
+        transactionHistory: string;
+        statistics: string;
+        profiles: string;
+        profile: string;
+        hr: string;
+        studentList: string;
+        categorys: string;
+        Articlecategorys: string;
+        usersDetail: (id: string) => string;
+        reviewList: string;
+        commentList: string;
+        coupon: string;
+        courseStatistics: (id: string) => string;
+        carousel: string;
+    };
+    client: {
+        auth: {
+            login: string;
+            register: string;
+        };
+        learning: string;
+        learningId: (id: string) => string;
+        myCourses: string;
+        learningPath: string;
+        learningPathDetail: string;
+        courses: string;
+        logAuth: string;
+        news: string;
+        newsDetail: string;
+        contact: string;
+        profile: (id: string) => string;
+        setting: string;
+        newPost: string;
+        myPost: string;
+        bookmark: string;
+        checkCertificate: string;
+        forgetPass: string;
+    };
+};
+export default path;

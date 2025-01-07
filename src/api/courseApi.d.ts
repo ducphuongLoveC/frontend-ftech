@@ -1,0 +1,11 @@
+export declare const getPaidCourses: () => Promise<any>;
+export declare const getSingleCourseById: (id: string) => Promise<any>;
+export declare const getCourseList: (params: {}) => Promise<any>;
+export declare const getCourseSearch: (search: string) => Promise<any>;
+export declare const getCourseStatistics: (id: string, params: {}) => Promise<any>;
+export declare const getCourse: (id: string) => Promise<any>;
+export declare const getCourseFull: (id: string) => Promise<any>;
+export declare const getCourseFullList: () => Promise<any>;
+export declare const newCourse: (data: any) => Promise<any>;
+export declare const updateCourse: (id: string, data: any) => Promise<any>;
+export declare const deleteCourse: (id: string) => Promise<import("axios").AxiosResponse<any, any>>;
