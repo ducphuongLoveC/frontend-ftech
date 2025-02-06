@@ -7,10 +7,8 @@ import * as path from "path";
 export default defineConfig({
   plugins: [react()],
   base: "/",
-  server: {
-    fs: {
-      strict: false,
-    },
+  build: {
+    outDir: 'dist'
   },
   resolve: {
     alias: [
