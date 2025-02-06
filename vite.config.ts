@@ -6,7 +6,7 @@
   // https://vite.dev/config/
   export default defineConfig({
     plugins: [react()],
-    base: "./",
+    base: "/",
     build: {
       outDir: "dist",
       emptyOutDir: true,
