@@ -6,16 +6,16 @@
   // https://vite.dev/config/
   export default defineConfig({
     plugins: [react()],
-    base: "/",
-    build: {
-      outDir: "dist",
-      emptyOutDir: true,
-    },
-    server: {
-      fs: {
-        strict: false,
-      }
-    },
+    // base: "/",
+    // build: {
+    //   outDir: "dist",
+    //   emptyOutDir: true,
+    // },
+    // server: {
+    //   fs: {
+    //     strict: false,
+    //   }
+    // },
     resolve: {
       alias: [
         {
