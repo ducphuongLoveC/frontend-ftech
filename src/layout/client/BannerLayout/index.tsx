@@ -59,7 +59,7 @@ const BannerLayout: React.FC = () => {
               xl: "1350px",
             },
             margin: {
-              xl: "0 auto",
+              xl: "auto",
             },
             px: downMD ? 2 : 0,
           }}
@@ -70,7 +70,7 @@ const BannerLayout: React.FC = () => {
             <Carousel dot auto time={15000} sliders={carousels} />
           )}
           {/* <Box mt={4}>{children}</Box> */}
-          <Box mt={4}>
+          <Box mt={4} >
             <Outlet />
           </Box>
         </Box>
