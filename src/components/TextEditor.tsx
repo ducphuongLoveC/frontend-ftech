@@ -195,8 +195,6 @@ const TextEditor: React.FC<TextEditorProps> = ({
       }
     `,
   };
-  
-  
 
   return (
     <div>

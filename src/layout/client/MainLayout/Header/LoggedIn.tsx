@@ -60,6 +60,9 @@ interface UserProp {
 const socket = io(import.meta.env.VITE_URL_SERVER);
 
 const LoggedIn: React.FC<UserProp> = ({ user }) => {
+
+  console.log(user);
+  
   const dispatch = useDispatch();
   const theme = useTheme();
   const downSM = useMediaQuery(theme.breakpoints.down("sm"));
