@@ -7,10 +7,9 @@ import Header from "../MainLayout/Header";
 import Footer from "../MainLayout/Footer";
 import axiosInstance from "@/api/axiosInstance";
 
-
-interface BannerLayoutProp {
-  children: React.ReactNode;
-}
+// interface BannerLayoutProp {
+//   children: React.ReactNode;
+// }
 
 interface CarouselItem {
   _id: string;
@@ -20,8 +19,10 @@ interface CarouselItem {
   title: string;
   description: string;
 }
+import { Outlet } from "react-router-dom";
+// const BannerLayout: React.FC<BannerLayoutProp> = ({ children }) => {
 
-const BannerLayout: React.FC<BannerLayoutProp> = ({ children }) => {
+const BannerLayout: React.FC = () => {
   const theme: Theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -64,11 +65,14 @@ const BannerLayout: React.FC<BannerLayoutProp> = ({ children }) => {
           }}
         >
           {loading ? (
-            'loading...'
+            "loading..."
           ) : (
             <Carousel dot auto time={15000} sliders={carousels} />
           )}
-          <Box mt={4}>{children}</Box>
+          {/* <Box mt={4}>{children}</Box> */}
+          <Box mt={4}>
+            <Outlet />
+          </Box>
         </Box>
       </Box>
       <Footer />

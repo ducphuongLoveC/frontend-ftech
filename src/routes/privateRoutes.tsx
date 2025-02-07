@@ -1,159 +1,110 @@
-import { lazy } from 'react';
-import MainLayout from '@/layout/admin/MainLayout';
-import RouteProp from '../interfaces/route';
-import path from '@/constants/routes';
-import Loadable from '@/ui-component/Loadable';
+import { lazy } from "react";
+// layout
+import MainLayout from "@/layout/admin/MainLayout";
 
-const Dashboard = Loadable(lazy(() => import('../views/pages/admin/Home')));
-const LearningPathList = Loadable(lazy(() => import('../views/pages/admin/LearningPath/LearningPathList')));
-const CoursesList = Loadable(lazy(() => import('../views/pages/admin/Courses/CourseList')));
-const NewCourses = Loadable(lazy(() => import('../views/pages/admin/Courses/NewCourse')));
-const UpdateCourse = Loadable(lazy(() => import('../views/pages/admin/Courses/UpdateCourse')));
-const CategoryList = Loadable(lazy(() => import('../views/pages/admin/ListCategory')));
-const ContentList = Loadable(lazy(() => import('../views/pages/admin/Content')));
-const AddContent = Loadable(lazy(() => import('../views/pages/admin/Content/AddContent')));
+import Loadable from "@/ui-component/Loadable";
+import path from "@/constants/routes";
 
-const TransactionHistory = Loadable(lazy(() => import('@/views/pages/admin/Transactions/transactionHistory')));
-const Profile = Loadable(lazy(() => import('@/views/pages/admin/Profile/Profile')));
+// route admin
+const Dashboard = Loadable(lazy(() => import("../views/pages/admin/Home")));
+const LearningPathList = Loadable(
+  lazy(() => import("../views/pages/admin/LearningPath/LearningPathList"))
+);
+const CoursesList = Loadable(
+  lazy(() => import("../views/pages/admin/Courses/CourseList"))
+);
+const NewCourses = Loadable(
+  lazy(() => import("../views/pages/admin/Courses/NewCourse"))
+);
+const UpdateCourse = Loadable(
+  lazy(() => import("../views/pages/admin/Courses/UpdateCourse"))
+);
+const CategoryList = Loadable(
+  lazy(() => import("../views/pages/admin/ListCategory"))
+);
+const ContentList = Loadable(
+  lazy(() => import("../views/pages/admin/Content"))
+);
+const AddContent = Loadable(
+  lazy(() => import("../views/pages/admin/Content/AddContent"))
+);
 
-const StudentList = Loadable(lazy(() => import('../views/pages/admin/StudentList')));
+const TransactionHistory = Loadable(
+  lazy(() => import("@/views/pages/admin/Transactions/transactionHistory"))
+);
+const Profile = Loadable(
+  lazy(() => import("@/views/pages/admin/Profile/Profile"))
+);
 
-const HR = Loadable(lazy(() => import('../views/pages/admin/HR')));
+const StudentList = Loadable(
+  lazy(() => import("../views/pages/admin/StudentList"))
+);
 
-const Category = Loadable(lazy(() => import('../views/pages/admin/Category/Category')));
+const HR = Loadable(lazy(() => import("../views/pages/admin/HR")));
 
-const Articlecategory = Loadable(lazy(() => import('../views/pages/admin/Category/Articlecategory')));
+const Category = Loadable(
+  lazy(() => import("../views/pages/admin/Category/Category"))
+);
 
-const UserDetails = Loadable(lazy(() => import('../views/pages/admin/StudentList/UserDetail')));
+const Articlecategory = Loadable(
+  lazy(() => import("../views/pages/admin/Category/Articlecategory"))
+);
 
-const ReviewList = Loadable(lazy(() => import('../views/pages/admin/Review/index')));
+const UserDetails = Loadable(
+  lazy(() => import("../views/pages/admin/StudentList/UserDetail"))
+);
 
-const Comments = Loadable(lazy(() => import('../views/pages/admin/Comments/index')));
+const ReviewList = Loadable(
+  lazy(() => import("../views/pages/admin/Review/index"))
+);
 
-const Coupon = Loadable(lazy(() => import('../views/pages/admin/Coupon/index')));
+const Comments = Loadable(
+  lazy(() => import("../views/pages/admin/Comments/index"))
+);
 
-const CourseStatistics = Loadable(lazy(() => import('../views/pages/admin/Courses/CourseStatistics')));
-const CarouselManager = Loadable(lazy(() => import('../views/pages/admin/CarouselManager')));
+const Coupon = Loadable(
+  lazy(() => import("../views/pages/admin/Coupon/index"))
+);
 
-const PrivateRoutes: RouteProp[] = [
-  {
-    path: '/',
-    layout: MainLayout,
-    page: Dashboard,
-  },
-  {
-    path: path.admin.dashboards,
-    layout: MainLayout,
-    page: Dashboard,
-  },
-  {
-    path: path.admin.LearningPathList,
-    layout: MainLayout,
-    page: LearningPathList,
-  },
-  {
-    path: path.admin.courses,
-    layout: MainLayout,
-    page: CoursesList,
-  },
-  {
-    path: path.admin.updateCourse(':id'),
-    layout: MainLayout,
-    page: UpdateCourse,
-  },
-  {
-    path: path.admin.newCourse,
-    layout: MainLayout,
-    page: NewCourses,
-  },
-  {
-    path: path.admin.coupon,
-    layout: MainLayout,
-    page: Coupon,
-  },
-  {
-    path: path.admin.listCategory,
-    layout: MainLayout,
-    page: CategoryList,
-  },
-  {
-    path: path.admin.listContent,
-    layout: MainLayout,
-    page: ContentList,
-  },
-  {
-    path: path.admin.addContent,
-    layout: MainLayout,
-    page: AddContent,
-  },
-  {
-    path: path.admin.profile,
-    layout: MainLayout,
-    page: Profile,
-  },
-  {
-    path: path.admin.transactionHistory,
-    layout: MainLayout,
-    page: TransactionHistory,
-  },
-  {
-    path: path.admin.studentList,
-    layout: MainLayout,
-    page: StudentList,
-  },
-  {
-    path: path.admin.hr,
-    layout: MainLayout,
-    page: HR,
-  },
-  {
-    path: path.admin.categorys,
-    layout: MainLayout,
-    page: Category,
-  },
-  {
-    path: path.admin.Articlecategorys,
-    layout: MainLayout,
-    page: Articlecategory,
-  },
-  {
-    path: path.admin.studentList,
-    layout: MainLayout,
-    page: StudentList,
-  },
-  {
-    path: path.admin.hr,
-    layout: MainLayout,
-    page: HR,
-  },
+const CourseStatistics = Loadable(
+  lazy(() => import("../views/pages/admin/Courses/CourseStatistics"))
+);
+const CarouselManager = Loadable(
+  lazy(() => import("../views/pages/admin/CarouselManager"))
+);
 
+const privateRoutes = [
   {
-    path: path.admin.usersDetail(':id'),
-    layout: MainLayout,
-    page: UserDetails,
-  },
+    element: <MainLayout />,
+    path: "admin",
+    children: [
+      { path: path.admin.dashboards, element: <Dashboard /> },
+      { path: "", element: <Dashboard /> },
+      { path: path.admin.LearningPathList, element: <LearningPathList /> },
+      { path: path.admin.courses, element: <CoursesList /> },
+      { path: path.admin.updateCourse(":id"), element: <UpdateCourse /> },
+      { path: path.admin.newCourse, element: <NewCourses /> },
+      { path: path.admin.coupon, element: <Coupon /> },
 
-  {
-    path: path.admin.reviewList,
-    layout: MainLayout,
-    page: ReviewList,
-  },
-
-  {
-    path: path.admin.commentList,
-    layout: MainLayout,
-    page: Comments,
-  },
-  {
-    path: path.admin.courseStatistics(':id'),
-    layout: MainLayout,
-    page: CourseStatistics,
-  },
-  {
-    path: path.admin.carousel,
-    layout: MainLayout,
-    page: CarouselManager,
+      { path: path.admin.listCategory, element: <CategoryList /> },
+      { path: path.admin.listContent, element: <ContentList /> },
+      { path: path.admin.addContent, element: <AddContent /> },
+      { path: path.admin.profile, element: <Profile /> },
+      { path: path.admin.transactionHistory, element: <TransactionHistory /> },
+      { path: path.admin.studentList, element: <StudentList /> },
+      { path: path.admin.hr, element: <HR /> },
+      { path: path.admin.categorys, element: <Category /> },
+      { path: path.admin.Articlecategorys, element: <Articlecategory /> },
+      { path: path.admin.usersDetail(":id"), element: <UserDetails /> },
+      { path: path.admin.reviewList, element: <ReviewList /> },
+      { path: path.admin.commentList, element: <Comments /> },
+      {
+        path: path.admin.courseStatistics(":id"),
+        element: <CourseStatistics />,
+      },
+      { path: path.admin.carousel, element: <CarouselManager /> },
+    ],
   },
 ];
 
-export default PrivateRoutes;
+export default privateRoutes;

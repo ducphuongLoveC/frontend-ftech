@@ -2,12 +2,14 @@ import { useTheme, Theme, Box } from "@mui/material";
 import Footer from "./Footer";
 import Navbar from "./Header";
 import SideBar from "./SideBar";
+import { Outlet } from "react-router-dom";
+// interface MainLayoutProp {
+//   children: React.ReactNode;
+// }
 
-interface MainLayoutProp {
-  children: React.ReactNode;
-}
+// const MainLayout: React.FC<MainLayoutProp> = ({ children }) => {
+const MainLayout: React.FC = () => {
 
-const MainLayout: React.FC<MainLayoutProp> = ({ children }) => {
   const theme: Theme = useTheme();
 
   return (
@@ -39,7 +41,8 @@ const MainLayout: React.FC<MainLayoutProp> = ({ children }) => {
             },
           }}
         >
-          {children}
+          {/* {children} */}
+          <Outlet />
         </Box>
       </Box>
       <Footer />

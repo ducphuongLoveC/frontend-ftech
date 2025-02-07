@@ -5,123 +5,82 @@ import BannerLayout from '@/layout/client/BannerLayout';
 import BasicLayout from '@/layout/client/BasicLayout';
 
 import Loadable from '@/ui-component/Loadable';
-import path from '@/constants/routes';
 
-// mid
+// middlewares
 import RedirectIfAuthenticated from '@/middlewares/RedirectIfAuthenticated';
 import HasAccess from '@/middlewares/HasAccess';
+import HasUser from '@/middlewares/HasUser';
 
+// route components
 const Home = Loadable(lazy(() => import('@/views/pages/Home')));
 const SettingUser = Loadable(lazy(() => import('@/views/pages/SettingUser')));
-const ProFile = Loadable(lazy(() => import('@/views/pages/ProfileUser')));
+const Profile = Loadable(lazy(() => import('@/views/pages/ProfileUser')));
 const LearningPath = Loadable(lazy(() => import('@/views/pages/LearningPath/LearningPath')));
 const LearningPathDetail = Loadable(lazy(() => import('@/views/pages/LearningPathDetail/LearningPathDetail')));
-const Login3 = Loadable(lazy(() => import('@/views/pages/authentication3/Login3')));
-const LogAuth = Loadable(lazy(() => import('@/views/pages/logAuth')));
-const Register3 = Loadable(lazy(() => import('@/views/pages/authentication3/Register3')));
+const Login = Loadable(lazy(() => import('@/views/pages/authentication3/Login3')));
+const Register = Loadable(lazy(() => import('@/views/pages/authentication3/Register3')));
 const Contact = Loadable(lazy(() => import('@/views/pages/Contact')));
 const PostOverview = Loadable(lazy(() => import('@/views/pages/PostOverview')));
 const PostDetail = Loadable(lazy(() => import('@/views/pages/PostDetail')));
-//learning
 const Learning = Loadable(lazy(() => import('@/views/pages/Learning')));
 const CourseDetail = Loadable(lazy(() => import('@/views/pages/CourseDetail')));
-//posts route
 const NewPost = Loadable(lazy(() => import('@/views/pages/Post/NewPost')));
 const MyCourses = Loadable(lazy(() => import('@/views/pages/MyCourses')));
 const CertificateCheck = Loadable(lazy(() => import('@/views/pages/CertificateCheck')));
-const ForgetPassword = Loadable(lazy(() => import('../views/pages/authentication3/ForgetPassword')));
+const ForgetPassword = Loadable(lazy(() => import('@/views/pages/authentication3/ForgetPassword')));
 
-import RouteProp from '@/interfaces/route';
-import HasUser from '@/middlewares/HasUser';
-
-const publicRoutes : RouteProp[] = [
+const mainRoutes = [
   {
     path: '/',
-    layout: BannerLayout,
-    page: Home,
+    element: <BannerLayout />, // Layout cho trang chủ
+    children: [{ path: '/', element: <Home /> }],
+    zzz: '11'
   },
   {
-    path: path.client.contact,
-    layout: MainLayout,
-    page: Contact,
+    path: '/learning',
+    element: <HasAccess><Learning /></HasAccess>,
   },
   {
-    path: path.client.news,
-    layout: MainLayout,
-    page: PostOverview,
+    path: '/',
+    element: <MainLayout />, // Layout chính
+    children: [
+      { path: 'courses/:id', element: <CourseDetail /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'news', element: <PostOverview /> },
+      { path: 'news/:id', element: <PostDetail /> },
+      { path: 'learning-path', element: <LearningPath /> },
+      { path: 'learning-path/:id', element: <LearningPathDetail /> },
+      { path: 'profile', element: <Profile /> },
+      { path: 'setting', element: <SettingUser /> },
+      {
+        path: 'my-courses',
+        element: <HasUser><MyCourses /></HasUser>,
+      },
+    ],
   },
   {
-    path: path.client.newsDetail,
-    layout: MainLayout,
-    page: PostDetail,
+    path: '/auth',
+    element: <BasicLayout />, // Layout cho xác thực
+    children: [
+      {
+        path: 'login',
+        element: <RedirectIfAuthenticated><Login /></RedirectIfAuthenticated>,
+      },
+      {
+        path: 'register',
+        element: <RedirectIfAuthenticated><Register /></RedirectIfAuthenticated>,
+      },
+      { path: 'forget-password', element: <ForgetPassword /> },
+    ],
   },
   {
-    middleware: [RedirectIfAuthenticated],
-    path: path.client.auth.login,
-    layout: MainLayout,
-    page: Login3,
-  },
-  {
-    middleware: [RedirectIfAuthenticated],
-    path: path.client.logAuth,
-    page: LogAuth,
-  },
-  {
-    middleware: [RedirectIfAuthenticated],
-    path: path.client.auth.register,
-    layout: MainLayout,
-    page: Register3,
-  },
-  {
-    middleware: [HasAccess],
-    path: path.client.learning,
-    page: Learning,
-  },
-  {
-    layout: MainLayout,
-    path: path.client.learningPath,
-    page: LearningPath,
-  },
-  {
-    layout: MainLayout,
-    path: path.client.learningPathDetail,
-    page: LearningPathDetail,
-  },
-  {
-    layout: MainLayout,
-    path: path.client.courses,
-    page: CourseDetail,
-  },
-  {
-    path: path.client.profile(''),
-    layout: MainLayout,
-    page: ProFile,
-  },
-  {
-    path: path.client.setting,
-    page: SettingUser,
-  },
-  {
-    layout: BasicLayout,
-    path: path.client.newPost,
-    page: NewPost,
-  },
-  {
-    layout: MainLayout,
-    middleware: [HasUser],
-    path: path.client.myCourses,
-    page: MyCourses,
-  },
-  {
-    layout: BasicLayout,
-    path: path.client.checkCertificate,
-    page: CertificateCheck,
-  },
-  {
-    layout: MainLayout,
-    path: path.client.forgetPass,
-    page: ForgetPassword,
+    path: '/',
+    element: <BasicLayout />, // Layout cơ bản cho các trang khác
+    children: [
+      { path: 'new-post', element: <NewPost /> },
+      { path: 'certificate/check', element: <CertificateCheck /> },
+    ],
   },
 ];
 
-export default publicRoutes;
+export default mainRoutes;

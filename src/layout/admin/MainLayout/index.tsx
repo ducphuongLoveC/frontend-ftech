@@ -11,9 +11,10 @@ import { drawerWidth } from '@/store/constant';
 import Breadcrumb from '@/components/Breadcrumb';
 import { RootState } from '@/store/reducer';
 import Cookies from 'js-cookie';
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
+import { Outlet } from 'react-router-dom';
+// interface MainLayoutProps {
+//   children: React.ReactNode;
+// }
 
 // Styled component for main content
 const Main = styled('main', {
@@ -52,7 +53,10 @@ const Main = styled('main', {
   },
 }));
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+// const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+
+const MainLayout: React.FC = () => {
+
   const theme: any = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -99,7 +103,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Main theme={theme} open={leftDrawerOpened}>
         {/* Assuming Outlet is imported correctly */}
         <Breadcrumb />
-        {children}
+        {/* {children} */}
+        <Outlet />
       </Main>
       <Customization />
     </Box>

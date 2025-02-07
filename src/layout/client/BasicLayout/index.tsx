@@ -4,10 +4,13 @@ import { Box } from '@mui/material';
 import Footer from '../MainLayout/Footer';
 
 import { useTheme } from '@mui/material';
-interface BasicLayoutProps {
-  children: React.ReactNode;
-}
-const BasicLayout: React.FC<BasicLayoutProps> = ({ children }) => {
+import { Outlet } from 'react-router-dom';
+// interface BasicLayoutProps {
+//   children: React.ReactNode;
+// }
+// const BasicLayout: React.FC<BasicLayoutProps> = ({ children }) => {
+const BasicLayout: React.FC = () => {
+
   const theme = useTheme();
   return (
     <Box
@@ -25,7 +28,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({ children }) => {
           },
         }}
       >
-        {children}
+        {/* {children} */}
+        <Outlet />
       </Box>
       <Footer />
     </Box>
