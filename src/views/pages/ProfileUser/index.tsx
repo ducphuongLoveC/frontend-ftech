@@ -1,48 +1,40 @@
-import axiosInstance from '@/api/axiosInstance';
-import { useUserCourses } from '@/api/useUserCourses';
-import clsx from 'clsx';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import s from './index.module.scss';
-import { PersonPinCircleRounded } from '@mui/icons-material';
-import Progress from '@/components/Progress';
-import useQueryParams from '@/hooks/useQueryParams';
-
-// icon
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { User } from '@/store/authReducer';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
+import { useUserCourses } from "@/api/useUserCourses";
+import useQueryParams from "@/hooks/useQueryParams";
+import { User } from "@/store/authReducer";
+import { Box, Typography, Avatar, Paper, Link } from "@mui/material";
+import { PersonPinCircleRounded, CheckCircle } from "@mui/icons-material";
+import Progress from "@/components/Progress";
 
 const ProFile = () => {
   const query = useQueryParams();
-  const userIdFromURL = query.get('id');
-  console.log(userIdFromURL);
-  
+  const userIdFromURL = query.get("id");
   const navigate = useNavigate();
-
   const { courses, coursesError } = useUserCourses(userIdFromURL);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  console.log('User ID from URL:', userIdFromURL);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       if (userIdFromURL) {
         try {
-          const response = await axiosInstance.get(`/api/user/${userIdFromURL}`);
-          // console.log(response.data)
+          const response = await axiosInstance.get(
+            `/api/user/${userIdFromURL}`
+          );
           if (response.status === 200) {
             if (response.data.data) {
               setUser(response.data.data);
               setError(null);
             } else {
-              setError('Không tìm thấy người dùng với ID này.');
+              setError("Không tìm thấy người dùng với ID này.");
             }
           } else {
-            setError('Không tìm thấy người dùng với ID này.');
+            setError("Không tìm thấy người dùng với ID này.");
           }
         } catch (error) {
-          setError('Lỗi khi lấy thông tin người dùng.');
+          setError("Lỗi khi lấy thông tin người dùng.");
         }
       }
     };
@@ -50,93 +42,200 @@ const ProFile = () => {
   }, [userIdFromURL]);
 
   useEffect(() => {
-    console.log('Current user data:', user);
-  }, [user]);
-
-  useEffect(() => {
     if (error) {
-      navigate('/notfound');
+      navigate("/notfound");
     }
   }, [error, navigate]);
 
   if (!userIdFromURL) {
-    return <div>ID không hợp lệ!</div>;
+    return <Typography>ID không hợp lệ!</Typography>;
   }
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+      return text.substring(0, maxLength) + "...";
     }
     return text;
   };
 
   return (
-    <div className={clsx(s['main-profileUser'])}>
-      <div className={clsx(s['banner-profileUser'])}>
-        <img src="/images/banner-user.png" alt="Banner" />
-      </div>
+    <Box sx={{ position: "relative" }}>
+      <Box
+        sx={{
+          margin: "auto",
+          width: 1100,
+          height: 308,
+          borderRadius: "0px 0px 20px 20px",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <img
+          src="/images/banner-user.png"
+          alt="Banner"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      </Box>
 
-      <div className={clsx(s['box-avatar-name'])}>
-        <div className={clsx(s['avatar-profileUser'])}>
-          <img src={user?.profile_picture || 'default-avatar.png'} alt="Avatar" />
-        </div>
-        <span className={clsx(s['name-profileProfile'])}>
-          {user?.name || 'Tên người dùng'}
-          {user?.role === 'admin' && <CheckCircleIcon sx={{ fontSize: 'var(--medium-icon)', color: 'primary.main', ml: 1 }} />}
-        </span>
-      </div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+          top: -80,
+          left: -280,
+        }}
+      >
+        <Avatar
+          src={user?.profile_picture || "default-avatar.png"}
+          alt="Avatar"
+          sx={{
+            width: 172,
+            height: 172,
+            borderRadius: "50%",
+            border: "4px solid white",
+          }}
+        />
+        <Typography
+          variant="h4"
+          sx={{
+            marginLeft: 2,
+            fontSize: 30,
+            fontWeight: "bold",
+            color: "black",
+            marginTop: 6,
+          }}
+        >
+          {user?.name || "Tên người dùng"}
+          {user?.role === "admin" && (
+            <CheckCircle
+              sx={{
+                fontSize: "var(--medium-icon)",
+                color: "primary.main",
+                ml: 1,
+              }}
+            />
+          )}
+        </Typography>
+      </Box>
 
-      {/* Nội dung */}
-      <div className={clsx(s['container-profileUser'])}>
-        {/* Cột trái */}
-        <div className={clsx(s['column-left'])}>
-          <div className={clsx(s['box-top'])}>
-            <h4 className={clsx(s['h4-title'])}>Giới thiệu</h4>
-            <div className={clsx(s['box-icon-name'])}>
-              <span>Biệt danh: {user?.referring}</span>
-              <br />
+      <Box
+        sx={{
+          border: "0px solid #ccc",
+          width: 1100,
+          height: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "-50px auto",
+          padding: "0px 24px",
+          gap: 2,
+        }}
+      >
+        <Box sx={{ width: "40%", padding: "0px 12px" }}>
+          <Paper
+            sx={{
+              border: "0px solid #ccc",
+              width: "100%",
+              marginBottom: 2,
+              padding: "18px 14px",
+              background: "#fff",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <Typography variant="h6" sx={{ fontSize: 16, marginBottom: 1 }}>
+              Giới thiệu
+            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography variant="body2">
+                Biệt danh: {user?.referring}
+              </Typography>
               <PersonPinCircleRounded />
+              <Typography variant="body2">
+                Thành viên của Ftech - Ngày tham gia:{" "}
+                {user?.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString()
+                  : "Chưa có thông tin"}
+              </Typography>
+            </Box>
+          </Paper>
 
-              <span>
-                Thành viên của Ftech - Ngày tham gia:{' '}
-                {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Chưa có thông tin'}
-              </span>
-            </div>
-          </div>
-          <div className={clsx(s['box-bottom'])}>
-            <h4 className={clsx(s['h4-title'])}>Hoạt động gần đây</h4>
-            <div className={clsx(s['box-icon-name'])}>Chưa có hoạt động gần đây</div>
-          </div>
-        </div>
+          <Paper
+            sx={{
+              border: "0px solid #ccc",
+              width: "100%",
+              marginBottom: 2,
+              padding: "18px 14px",
+              background: "#fff",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <Typography variant="h6" sx={{ fontSize: 16, marginBottom: 1 }}>
+              Hoạt động gần đây
+            </Typography>
+            <Typography variant="body2">Chưa có hoạt động gần đây</Typography>
+          </Paper>
+        </Box>
 
-        {/* Cột phải */}
-        <div className={clsx(s['column-right'])}>
-          <h6 className={clsx(s['h5-title'])}>Các khóa học đã tham gia</h6>
-          {coursesError && <div>{coursesError}</div>}
+        <Box sx={{ width: "60%", padding: "0 14px" }}>
+          <Typography variant="h6" sx={{ fontSize: 16, marginBottom: 2 }}>
+            Các khóa học đã tham gia
+          </Typography>
+          {coursesError && (
+            <Typography color="error">{coursesError}</Typography>
+          )}
           {courses.length > 0 ? (
             courses.map((course, index) => (
-              <div key={index} className={clsx(s['box-small-right'])}>
-                <div className={clsx(s['thumbnail-img'])}>
-                  <img src={course.thumbnail} alt={course.title} />
-                </div>
-                <div className={clsx(s['div-Info'])}>
-                  <h3 className={clsx(s['info-title'])}>
-                    <a href="#">{course.title}</a>
-                  </h3>
-                  <p className={clsx(s['info-desc'])}>
-                    <p dangerouslySetInnerHTML={{ __html: truncateText(course.description, 70) }} />
-                  </p>
-                  <p className={clsx(s['info-progress'])}>Tiến độ: {course.progress}%</p>
+              <Box
+                key={index}
+                sx={{
+                  borderBottom: "1px solid #ccc",
+                  width: "100%",
+                  margin: "20px 0px",
+                  padding: "0px 0px 12px",
+                  display: "flex",
+                  gap: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 228,
+                    height: 128,
+                    borderRadius: "20px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <img
+                    src={course.thumbnail}
+                    alt={course.title}
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="h6">
+                    <Link href="#">{course.title}</Link>
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    dangerouslySetInnerHTML={{
+                      __html: truncateText(course.description, 70),
+                    }}
+                  />
+                  <Typography variant="body2">
+                    Tiến độ: {course.progress}%
+                  </Typography>
                   <Progress value={course.progress || 0} />
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))
           ) : (
-            <div>Không có khóa học nào</div>
+            <Typography>Không có khóa học nào</Typography>
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
