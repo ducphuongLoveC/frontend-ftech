@@ -56,7 +56,7 @@ const BannerLayout: React.FC = () => {
               sm: "85%",
               md: "80%",
               lg: "87%",
-              xl: "1300px",
+              xl: "1350px",
             },
             margin: {
               ["@media (min-width:1500px)"]: "auto",
