@@ -7,8 +7,8 @@ import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import themes from '@/themes';
 
 // project imports
-// import { router } from '@/routes';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { router } from '@/routes';
+// import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App: React.FC = () => {
   const state = useSelector(
@@ -19,14 +19,14 @@ const App: React.FC = () => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={themes(state)}>
         <CssBaseline />
-        {/* <div>{router}</div> */}
+        <div>{router}</div>
 
-        <BrowserRouter>
+        {/* <BrowserRouter>
           <Routes>
             <Route path="/" element={<h1>home</h1>} />
             <Route path="/login" element={<h1>login</h1>} />
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter> */}
 
 
       </ThemeProvider>

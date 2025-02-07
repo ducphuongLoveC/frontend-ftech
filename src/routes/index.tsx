@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import RouteProp from '@/interfaces/route';
 
 import mainRoutes from './mainRoutes';
@@ -10,12 +10,12 @@ import subDomainRouter from '../helpers/subDomainRouter';
 import subRouterProp from '@/interfaces/sub';
 import getMainDomain from '@/utils/getMainDoumain';
 import NotFound from '@/views/pages/NotFound';
-import ResetScroll from '@/components/ResetScroll';
+// import ResetScroll from '@/components/ResetScroll';
+// <ResetScroll />
 import Cookies from 'js-cookie';
 const createRoutes = (routes: RouteProp[]) => {
   return (
-    <Router>
-      <ResetScroll />
+    <BrowserRouter>
       <Routes>
         {routes.map((route, index) => {
           const Middlewares = route.middleware || [];
@@ -29,7 +29,7 @@ const createRoutes = (routes: RouteProp[]) => {
         })}
         {!getMainDomain().url.hostname.includes('admin') && <Route path="*" element={<NotFound />} />}
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
