@@ -79,7 +79,7 @@ const mainRoutes = [
   },
   {
     path: "/auth",
-    element: <BasicLayout />, // Layout cho xác thực
+    element: <BasicLayout />, 
     children: [
       {
         path: "login",

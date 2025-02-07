@@ -136,6 +136,7 @@ const Header = () => {
             border: "1px solid", 
             borderColor: theme.palette.divider, 
             py: 0.5,
+            marginLeft: {xs: '10px'},
           }}
         >
           <SearchIcon sx={{ mr: 1 }} />

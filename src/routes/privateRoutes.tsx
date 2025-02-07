@@ -3,7 +3,7 @@ import { lazy } from "react";
 import MainLayout from "@/layout/admin/MainLayout";
 
 import Loadable from "@/ui-component/Loadable";
-import path from "@/constants/routes";
+import HasAccessAdmin from "@/middlewares/HasAccessAdmin";
 
 // route admin
 const Dashboard = Loadable(lazy(() => import("../views/pages/admin/Home")));
@@ -75,34 +75,39 @@ const CarouselManager = Loadable(
 
 const privateRoutes = [
   {
-    element: <MainLayout />,
-    path: "admin",
+    element: (
+      <HasAccessAdmin>
+        <MainLayout />
+      </HasAccessAdmin>
+    ),
+    path: "/admin",
     children: [
-      { path: path.admin.dashboards, element: <Dashboard /> },
+      { path: "dashboards", element: <Dashboard /> },
       { path: "", element: <Dashboard /> },
-      { path: path.admin.LearningPathList, element: <LearningPathList /> },
-      { path: path.admin.courses, element: <CoursesList /> },
-      { path: path.admin.updateCourse(":id"), element: <UpdateCourse /> },
-      { path: path.admin.newCourse, element: <NewCourses /> },
-      { path: path.admin.coupon, element: <Coupon /> },
-
-      { path: path.admin.listCategory, element: <CategoryList /> },
-      { path: path.admin.listContent, element: <ContentList /> },
-      { path: path.admin.addContent, element: <AddContent /> },
-      { path: path.admin.profile, element: <Profile /> },
-      { path: path.admin.transactionHistory, element: <TransactionHistory /> },
-      { path: path.admin.studentList, element: <StudentList /> },
-      { path: path.admin.hr, element: <HR /> },
-      { path: path.admin.categorys, element: <Category /> },
-      { path: path.admin.Articlecategorys, element: <Articlecategory /> },
-      { path: path.admin.usersDetail(":id"), element: <UserDetails /> },
-      { path: path.admin.reviewList, element: <ReviewList /> },
-      { path: path.admin.commentList, element: <Comments /> },
+      { path: "learning-path", element: <LearningPathList /> },
       {
-        path: path.admin.courseStatistics(":id"),
-        element: <CourseStatistics />,
+        path: "courses",
+        children: [
+          { path: "", element: <CoursesList /> },
+          { path: "new", element: <NewCourses /> },
+          { path: ":id/update", element: <UpdateCourse /> },
+          { path: "statistics/:id", element: <CourseStatistics /> },
+        ],
       },
-      { path: path.admin.carousel, element: <CarouselManager /> },
+      { path: "coupon", element: <Coupon /> },
+      { path: "category", element: <CategoryList /> },
+      { path: "content", element: <ContentList /> },
+      { path: "content/add", element: <AddContent /> },
+      { path: "profile", element: <Profile /> },
+      { path: "transaction/history", element: <TransactionHistory /> },
+      { path: "student-list", element: <StudentList /> },
+      { path: "hr", element: <HR /> },
+      { path: "categorys", element: <Category /> },
+      { path: "categorys/article", element: <Articlecategory /> },
+      { path: "user-detail/:id", element: <UserDetails /> },
+      { path: "reviewList", element: <ReviewList /> },
+      { path: "commentList", element: <Comments /> },
+      { path: "carousel", element: <CarouselManager /> },
     ],
   },
 ];

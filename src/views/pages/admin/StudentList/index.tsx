@@ -19,7 +19,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import useUsers from '../../../../api/useUsers';
 import { useNavigate } from 'react-router-dom';
 import HeaderTitle from '../Title';
-
+import path from '@/constants/routes';
 const StudentList = () => {
   const { rows, loading, error } = useUsers();
   const [page, setPage] = useState(0);
@@ -30,7 +30,7 @@ const StudentList = () => {
   const handleViewDetails = (user: any) => {
     const userId = user?.id || user?._id;
     if (userId) {
-      navigate(`/user-detail/${userId}`);
+      navigate(path.admin.usersDetail(userId));
     } else {
       console.error('Không tìm thấy id của người dùng.');
     }

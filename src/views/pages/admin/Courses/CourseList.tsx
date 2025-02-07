@@ -161,7 +161,7 @@ const CourseList: React.FC = () => {
                         {course.thumbnail && <img width={'100%'} src={typeof course.thumbnail === 'string' ? course.thumbnail : ''} />}
                       </Grid>
                       <Grid item xs={12}>
-                        <Button fullWidth component={Link} to={`/courses/${course._id}/update`} variant="outlined">
+                        <Button fullWidth component={Link} to={path.admin.updateCourse(course._id)} variant="outlined">
                           Xem và sửa khóa học
                         </Button>
                       </Grid>
