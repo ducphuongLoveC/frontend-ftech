@@ -9,7 +9,6 @@ import { Outlet } from "react-router-dom";
 
 // const MainLayout: React.FC<MainLayoutProp> = ({ children }) => {
 const MainLayout: React.FC = () => {
-
   const theme: Theme = useTheme();
 
   return (
@@ -34,10 +33,10 @@ const MainLayout: React.FC = () => {
               sm: "80%",
               md: "85%",
               lg: "87%",
-              xl: "1350px",
+              xl: "1330px",
             },
-            margin: {
-              ["@media (min-width:1500px)"]: "auto",
+            "@media (min-width:1500px)": {
+              margin: "auto",
             },
           }}
         >
