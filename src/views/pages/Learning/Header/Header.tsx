@@ -8,6 +8,7 @@ import {
   Button,
   Typography,
   useMediaQuery,
+  IconButton,
 } from "@mui/material";
 import { BiChevronLeft } from "react-icons/bi";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -33,12 +34,12 @@ const BoxHeader = styled("header")<{ isMobile: boolean }>(
         : theme.palette.background.paper,
     height: isMobile ? "40px" : "50px",
     alignItems: "center",
-    paddingRight: "20px",
   })
 );
 
-const StyledButton = styled(Button)({
+const StyledButton = styled(IconButton)({
   height: "50px",
+  width: "30px",
 });
 
 const BoxCenter = styled(Box)({
@@ -62,8 +63,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ data, notes }) => {
-  console.log(notes);
-
   const { id } = useParams();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -127,7 +126,15 @@ const Header: React.FC<HeaderProps> = ({ data, notes }) => {
   }, [data]);
 
   return (
-    <BoxHeader isMobile={isMobile}>
+    <BoxHeader
+      sx={{
+        px: {
+          xs: 0,
+          md: 2,
+        },
+      }}
+      isMobile={isMobile}
+    >
       <Box color="white" display="flex" alignItems="center">
         <Link to={"/"}>
           <StyledButton>
@@ -162,7 +169,7 @@ const Header: React.FC<HeaderProps> = ({ data, notes }) => {
                 <Typography color="white" variant="body2">
                   Ghi chú
                 </Typography>
-              )}
+              )} 
             </StyledDescriptionBox>
           )}
         >

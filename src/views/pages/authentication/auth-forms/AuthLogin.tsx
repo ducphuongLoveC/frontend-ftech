@@ -1,38 +1,38 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 // material-ui
-import { useTheme, styled } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import Divider from '@mui/material/Divider';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+import { useTheme, styled } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 // third-party
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 // project imports
-import AnimateButton from '@/ui-component/extended/AnimateButton';
+import AnimateButton from "@/ui-component/extended/AnimateButton";
 
 // assets
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Google from '@/assets/images/icons/social-google.svg';
-import { Link } from 'react-router-dom';
-import path from '@/constants/routes';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Google from "@/assets/images/icons/social-google.svg";
+import { Link } from "react-router-dom";
+import path from "@/constants/routes";
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -44,36 +44,50 @@ export interface FormLoginValues {
 interface AuthLoginProps {
   google?: boolean;
   onSubmit?: (values: FormLoginValues) => void;
+  textElement?: React.ReactNode | string;
 }
 
 const MainInput = styled(OutlinedInput)(() => ({
   input: {
-    color: 'black',
+    color: "black",
   },
 }));
 
 // Zod validation schema
 const schema = z.object({
-  email: z.string().email('Nhập đúng định dạng email').max(255, 'Email quá dài'),
-  password: z.string().min(6, 'Mật khẩu đăng nhập phải hơn hoặc bằng 6 ký tự').max(255, 'Mật khẩu quá dài'),
+  email: z
+    .string()
+    .email("Nhập đúng định dạng email")
+    .max(255, "Email quá dài"),
+  password: z
+    .string()
+    .min(6, "Mật khẩu đăng nhập phải hơn hoặc bằng 6 ký tự")
+    .max(255, "Mật khẩu quá dài"),
 });
 
-const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...others }) => {
+const AuthLogin: React.FC<AuthLoginProps> = ({
+  textElement,
+  google = false,
+  onSubmit,
+  ...others
+}) => {
   const theme: any = useTheme();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+  const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
   const customization = useSelector((state: any) => state.customization);
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   const googleHandler = async () => {
-    console.error('Login');
+    console.error("Login");
   };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
   };
 
@@ -84,8 +98,8 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
   } = useForm<FormLoginValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -95,7 +109,13 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
         <Grid container direction="column" justifyContent="center">
           <Grid item xs={12}>
             <AnimateButton>
-              <Button disableElevation fullWidth onClick={googleHandler} size="large" variant="outlined">
+              <Button
+                disableElevation
+                fullWidth
+                onClick={googleHandler}
+                size="large"
+                variant="outlined"
+              >
                 <Box
                   sx={{
                     mr: {
@@ -122,8 +142,8 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
           <Grid item xs={12}>
             <Box
               sx={{
-                alignItems: 'center',
-                display: 'flex',
+                alignItems: "center",
+                display: "flex",
               }}
             >
               <Divider
@@ -135,7 +155,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
               <Button
                 variant="outlined"
                 sx={{
-                  cursor: 'unset',
+                  cursor: "unset",
                   m: 2,
                   py: 0.5,
                   px: 7,
@@ -157,19 +177,31 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
               />
             </Box>
           </Grid>
-          <Grid item xs={12} container alignItems="center" justifyContent="center">
+          <Grid
+            item
+            xs={12}
+            container
+            alignItems="center"
+            justifyContent="center"
+          >
             <Box
               sx={{
                 mb: 2,
               }}
             >
-              <Typography variant="subtitle1">Đăng nhập với tài khoản hệ thống</Typography>
+              <Typography variant="subtitle1">
+                Đăng nhập với tài khoản hệ thống
+              </Typography>
             </Box>
           </Grid>
         </Grid>
       )}
 
-      <form noValidate onSubmit={handleSubmit((data) => onSubmit && onSubmit(data))} {...others}>
+      <form
+        noValidate
+        onSubmit={handleSubmit((data) => onSubmit && onSubmit(data))}
+        {...others}
+      >
         <FormControl
           fullWidth
           error={Boolean(errors.email)}
@@ -177,7 +209,9 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
             ...theme.typography.customInput,
           }}
         >
-          <InputLabel htmlFor="outlined-adornment-email-login">Email Address / Username</InputLabel>
+          <InputLabel htmlFor="outlined-adornment-email-login">
+            Email Address / Username
+          </InputLabel>
           <Controller
             name="email"
             control={control}
@@ -205,7 +239,9 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
             ...theme.typography.customInput,
           }}
         >
-          <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+          <InputLabel htmlFor="outlined-adornment-password-login">
+            Password
+          </InputLabel>
           <Controller
             name="password"
             control={control}
@@ -213,7 +249,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
               <MainInput
                 {...field}
                 id="outlined-adornment-password-login"
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -233,13 +269,21 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
             )}
           />
           {errors.password && (
-            <FormHelperText error id="standard-weight-helper-text-password-login">
+            <FormHelperText
+              error
+              id="standard-weight-helper-text-password-login"
+            >
               {errors.password.message}
             </FormHelperText>
           )}
         </FormControl>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          spacing={1}
+        >
           <FormControlLabel
             control={
               <Checkbox
@@ -256,8 +300,8 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
               variant="subtitle1"
               color="secondary"
               sx={{
-                textDecoration: 'none',
-                cursor: 'pointer',
+                textDecoration: "none",
+                cursor: "pointer",
               }}
             >
               Quên mật khẩu?
@@ -279,11 +323,12 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ google = false, onSubmit, ...othe
               type="submit"
               variant="contained"
               sx={{
-                background: 'var(--color-primary)', // Sử dụng biến CSS đã sửa
-                color: '#fff',
+                background: "var(--color-primary)",
+                color: "#fff",
+                height: "45px",
               }}
             >
-              Đăng nhập
+              {textElement}
             </Button>
           </AnimateButton>
         </Box>

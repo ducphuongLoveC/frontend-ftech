@@ -60,9 +60,8 @@ interface UserProp {
 const socket = io(import.meta.env.VITE_URL_SERVER);
 
 const LoggedIn: React.FC<UserProp> = ({ user }) => {
-
   console.log(user);
-  
+
   const dispatch = useDispatch();
   const theme = useTheme();
   const downSM = useMediaQuery(theme.breakpoints.down("sm"));
@@ -133,6 +132,8 @@ const LoggedIn: React.FC<UserProp> = ({ user }) => {
     };
   }, []);
 
+
+
   if (isLoadingNoti) return <div>Loading...</div>;
   return (
     <>
@@ -159,7 +160,7 @@ const LoggedIn: React.FC<UserProp> = ({ user }) => {
               <Wrapper
                 style={{
                   background: theme.palette.background.paper,
-                  width: "450px",
+                  width: `${downSM ? 300 : 400}px`,
                   maxHeight: "70vh",
                   overflow: "auto",
                 }}
@@ -235,14 +236,14 @@ const LoggedIn: React.FC<UserProp> = ({ user }) => {
           >
             <Tippy content="Thông báo">
               <IconButton>
-                <BiBell style={{color: theme.palette.text.primary}} />
+                <BiBell style={{ color: theme.palette.text.primary }} />
               </IconButton>
             </Tippy>
           </HeadlessTippy>
         </Box>
       </Box>
       {/* logined */}
-      <Box  sx={{ ml: downSM ? 0.5 : 1 }}>
+      <Box sx={{ ml: downSM ? 0.5 : 1 }}>
         <HeadlessTippy
           trigger="click"
           placement="bottom-end"

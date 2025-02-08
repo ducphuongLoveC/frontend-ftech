@@ -262,7 +262,13 @@ const CourseDetail: React.FC = () => {
   if (isError) return <div>Error...</div>;
 
   return (
-    <Box mt={"var(--large-space)"}>
+    <Box
+      sx={{
+        padding: {
+          xs: 2,
+        },
+      }}
+    >
       <Grid
         container
         spacing={{ xs: 0, sm: 2, lg: 4 }}
@@ -404,6 +410,7 @@ const CourseDetail: React.FC = () => {
               backgroundColor: theme.palette.background.paper2,
               paddingBottom: "20px",
               minHeight: "80vh",
+             
             }}
           >
             {/* preview video */}

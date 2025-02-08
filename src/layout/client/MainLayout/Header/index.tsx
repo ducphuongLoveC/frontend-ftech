@@ -148,7 +148,7 @@ const Header = () => {
               <Wrapper
                 sx={{
                   bgcolor: theme.palette.background.paper,
-                  width: 400,
+                  width: '100%',
                   maxHeight: "70vh",
                   overflow: "auto",
                 }}

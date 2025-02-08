@@ -1,28 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 // material-ui
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { Theme } from '@mui/material/styles';
-import { useTheme } from '@mui/material';
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { Theme } from "@mui/material/styles";
+import { useTheme } from "@mui/material";
 
 //toast
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 
 // project imports
-import AuthWrapper1 from '../AuthWrapper1';
-import AuthCardWrapper from '../AuthCardWrapper';
+import AuthWrapper1 from "../AuthWrapper1";
+import AuthCardWrapper from "../AuthCardWrapper";
 
-import AuthRegister, { AuthRegisterData } from '../authentication/auth-forms/AuthRegister';
-import { registerUser } from '@/api/authApi';
-import sleep from '@/utils/sleep';
-import { AxiosError } from 'axios';
+import AuthRegister, {
+  AuthRegisterData,
+} from "../authentication/auth-forms/AuthRegister";
+import { registerUser } from "@/api/authApi";
+import sleep from "@/utils/sleep";
+import { AxiosError } from "axios";
+import { BeatLoader } from "react-spinners";
 
 interface ErrorResponse {
   message?: string; // message có thể không tồn tại
@@ -33,21 +36,22 @@ interface ErrorResponse {
 const Register: React.FC = () => {
   const navigate = useNavigate();
   const mutation = useMutation({
-    mutationKey: ['user'],
+    mutationKey: ["user"],
     mutationFn: registerUser,
     onSuccess: async (data) => {
-      toast.success('Đăng ký thành công!');
+      toast.success("Đăng ký thành công!");
       await sleep(2000);
-      navigate('/auth/login');
+      navigate("/auth/login");
       console.log(data);
     },
     onError: (error: AxiosError<ErrorResponse>) => {
-      const errorMessage = error.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại!';
+      const errorMessage =
+        error.response?.data?.message || "Có lỗi xảy ra, vui lòng thử lại!";
       toast.error(`Đăng ký thất bại. ${errorMessage}`);
       console.log(error);
     },
   });
-  const downMD = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  const downMD = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
   const theme = useTheme();
 
@@ -73,7 +77,14 @@ const Register: React.FC = () => {
               background: theme.palette.background.paper,
             }}
           >
-            <Grid item md={6} xs={12} container justifyContent="center" alignItems="center">
+            <Grid
+              item
+              md={6}
+              xs={12}
+              container
+              justifyContent="center"
+              alignItems="center"
+            >
               <AuthCardWrapper>
                 <Grid>
                   <Grid
@@ -88,22 +99,27 @@ const Register: React.FC = () => {
                     <Grid
                       container
                       direction={{
-                        xs: 'column-reverse',
-                        md: 'row',
+                        xs: "column-reverse",
+                        md: "row",
                       }}
                       alignItems="center"
                       justifyContent="center"
                     >
                       <Grid item>
-                        <Stack alignItems="center" justifyContent="center" spacing={1} marginBottom={'20px'}>
+                        <Stack
+                          alignItems="center"
+                          justifyContent="center"
+                          spacing={1}
+                          marginBottom={"20px"}
+                        >
                           <Typography
                             sx={{
-                              background: 'var(--color-primary)',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
+                              background: "var(--color-primary)",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
                             }}
                             gutterBottom
-                            variant={downMD ? 'h3' : 'h2'}
+                            variant={downMD ? "h3" : "h2"}
                           >
                             Đăng ký
                           </Typography>
@@ -112,19 +128,37 @@ const Register: React.FC = () => {
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <AuthRegister onSubmit={handleRegisterUser} />
+                    <AuthRegister
+                      textElement={
+                        mutation.isPending ? (
+                          <BeatLoader
+                            color={theme.palette.background.paper}
+                            size={6}
+                          />
+                        ) : (
+                          "Đăng ký"
+                        )
+                      }
+                      onSubmit={handleRegisterUser}
+                    />
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid item container direction="column" alignItems="center" xs={12}>
+                    <Grid
+                      item
+                      container
+                      direction="column"
+                      alignItems="center"
+                      xs={12}
+                    >
                       <Typography
                         component={Link}
                         to="/auth/login"
                         variant="subtitle1"
                         sx={{
-                          textDecoration: 'none',
+                          textDecoration: "none",
                           color: theme.palette.primary.main,
                         }}
                       >
@@ -137,7 +171,7 @@ const Register: React.FC = () => {
             </Grid>
             {!downMD && (
               <Grid item md={6}>
-                <img width={'80%'} src="/images/banauth.webp" alt="" />
+                <img width={"80%"} src="/images/banauth.webp" alt="" />
               </Grid>
             )}
           </Grid>

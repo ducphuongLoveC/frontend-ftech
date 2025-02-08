@@ -47,7 +47,7 @@ const LessonNavigation = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0 10px',
+  // padding: '0 10px',
 }));
 
 const ButtonStyle = styled(Button)(({ theme }) => ({
@@ -242,7 +242,7 @@ const Learning: React.FC = () => {
             )}
           </Box>
           <LessonNavigation>
-            {/* sử dụng placement để mở 1 popup kéo từ bên placement vào */}
+          
             <PlacementToggle
               defaultOpen={query.get('comment') ? true : false}
               placement="left"
@@ -336,6 +336,9 @@ const Learning: React.FC = () => {
                 <MenuOpenIcon sx={{ fontSize: '25px' }} />
               )}
             </Button>
+
+
+            
           </LessonNavigation>
           <BackgroundOverlay onClick={toggleLearningList} open={downMD && openTrackList} />
         </Box>

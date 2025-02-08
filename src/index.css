@@ -107,3 +107,11 @@ h5 {
 h6 {
   font-size: 1rem; /* Kích thước chữ cho h6 */
 }
+
+
+input, textarea {
+  touch-action: manipulation;
+}
+input, textarea {
+  transform: scale(1);
+}

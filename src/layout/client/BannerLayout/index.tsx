@@ -20,8 +20,12 @@ const BannerLayout: React.FC = () => {
   const theme: Theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down("md"));
 
-  const { data: carousels, isLoading, isError } = useQuery<CarouselItem[], Error>({
-    queryKey: ['carousels'],
+  const {
+    data: carousels,
+    isLoading,
+    isError,
+  } = useQuery<CarouselItem[], Error>({
+    queryKey: ["carousels"],
     queryFn: async () => {
       const response = await axiosInstance.get("/api/carousel");
       return response.data.data;
@@ -37,7 +41,9 @@ const BannerLayout: React.FC = () => {
       <Header />
       <Box sx={{ display: "flex", background: theme.palette.background.paper }}>
         <SideBar />
+       
         <Box
+
           sx={{
             width: {
               xs: "100%",
@@ -46,6 +52,10 @@ const BannerLayout: React.FC = () => {
               lg: "87%",
               xl: "1320px",
             },
+            [`@media (min-width:1700px)`]: {
+              margin: "auto",
+            },
+
             px: downMD ? 2 : 0,
           }}
         >
