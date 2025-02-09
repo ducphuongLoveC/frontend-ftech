@@ -1,5 +1,6 @@
 import { SET_BORDER_RADIUS, SET_FONT_FAMILY, TOGGLE_THEME } from '@/store/actions';
 import { gridSpacing } from '@/store/constant';
+import { RootState } from '@/store/reducer';
 import SubCard from '@/ui-component/cards/SubCard';
 import {
   Drawer,
@@ -13,7 +14,7 @@ import {
   useTheme,
   Slider,
 } from '@mui/material';
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,22 +30,16 @@ interface DrawerSettingProps {
 const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const customization = useSelector((state: any) => state.customization);
+  const customization = useSelector((state: RootState) => state.mainReducer);
 
-  // state - border radius
-  const [borderRadius, setBorderRadius] = useState<number>(customization.borderRadius);
   const handleBorderRadius = (_event: Event | SyntheticEvent, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
-      setBorderRadius(newValue);
+      dispatch({
+        type: SET_BORDER_RADIUS,
+        borderRadius: newValue,
+      });
     }
   };
-
-  useEffect(() => {
-    dispatch({
-      type: SET_BORDER_RADIUS,
-      borderRadius,
-    });
-  }, [dispatch, borderRadius]);
 
   let initialFont: string;
   switch (customization.fontFamily) {
@@ -60,11 +55,12 @@ const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
       break;
   }
 
-  // state - font family
   const [fontFamily, setFontFamily] = useState<string>(initialFont);
-  useEffect(() => {
+  const handleFontFamilyChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFont = e.target.value;
+    setFontFamily(selectedFont);
     let newFont: string;
-    switch (fontFamily) {
+    switch (selectedFont) {
       case 'Inter':
         newFont = `'Inter', sans-serif`;
         break;
@@ -80,21 +76,18 @@ const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
       type: SET_FONT_FAMILY,
       fontFamily: newFont,
     });
-  }, [dispatch, fontFamily]);
-
-  // state - theme
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
-  const handleToggleThemeMode = () => {
-    const newTheme = themeMode === 'light' ? 'dark' : 'light';
-    setThemeMode(newTheme);
   };
 
-  useEffect(() => {
+  const handleToggleThemeMode = () => {
+
+    console.log(customization.theme);
+    
+    const newTheme = customization.theme === 'light' ? 'dark' : 'light';
     dispatch({
       type: TOGGLE_THEME,
-      theme: themeMode,
+      theme: newTheme,
     });
-  }, [dispatch, themeMode]);
+  };
 
   return (
     <Drawer
@@ -122,7 +115,7 @@ const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
                 <RadioGroup
                   aria-label="font-family"
                   value={fontFamily}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setFontFamily(e.target.value)}
+                  onChange={handleFontFamilyChange}
                   name="row-radio-buttons-group"
                 >
                   <FormControlLabel
@@ -189,7 +182,7 @@ const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
                 <Grid item xs>
                   <Slider
                     size="small"
-                    value={borderRadius}
+                    value={customization.borderRadius}
                     onChange={handleBorderRadius}
                     getAriaValueText={valueText}
                     valueLabelDisplay="on"
@@ -220,8 +213,8 @@ const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
             <SubCard title="Theme">
               <FormControl>
                 <FormControlLabel
-                  control={<Switch checked={themeMode === 'dark'} onChange={handleToggleThemeMode} />}
-                  label={themeMode === 'light' ? 'Light Mode' : 'Dark Mode'}
+                  control={<Switch checked={customization.theme === 'dark'} onChange={handleToggleThemeMode} />}
+                  label={customization.theme === 'light' ? 'Light Mode' : 'Dark Mode'}
                 />
               </FormControl>
             </SubCard>

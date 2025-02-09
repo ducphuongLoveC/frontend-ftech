@@ -21,7 +21,7 @@ const LearningList: React.FC<LearningListProps> = memo(
     const dispatch = useDispatch();
 
     const storedExpandedIndexs = useSelector(
-      (state: RootState) => state.homeReducer.expandedIndexs
+      (state: RootState) => state.mainReducer.expandedIndexs
     );
 
     const handleToggleExpanded = (index: number) => {

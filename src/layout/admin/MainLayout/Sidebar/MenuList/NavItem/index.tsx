@@ -1,66 +1,63 @@
-import React, { forwardRef, Ref, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import React, { forwardRef, Ref, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom'
 
 // material-ui
-import { useTheme } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import Chip from '@mui/material/Chip'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 // project imports
-import { MENU_OPEN, SET_MENU } from '@/store/actions';
+import { MENU_OPEN, SET_MENU } from '@/store/actions'
 
 // assets
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
+import { RootState } from '@/store/reducer'
 
 // Define types for props
 interface ChipProps {
-  color: 'default' | 'primary' | 'secondary';
-  variant: 'filled' | 'outlined';
-  size: 'small' | 'medium';
-  label: string;
-  avatar?: React.ReactElement; // Ensure avatar is a ReactElement or undefined
+  color: 'default' | 'primary' | 'secondary'
+  variant: 'filled' | 'outlined'
+  size: 'small' | 'medium'
+  label: string
+  avatar?: React.ReactElement // Ensure avatar is a ReactElement or undefined
 }
 
 interface NavItemProps {
   item: {
-    id: string;
-    title: string;
-    caption?: string;
-    url?: string;
-    target?: boolean;
-    external?: boolean;
-    disabled?: boolean;
+    id: string
+    title: string
+    caption?: string
+    url?: string
+    target?: boolean
+    external?: boolean
+    disabled?: boolean
     icon?: React.ComponentType<{
-      stroke?: number;
-      size?: string;
-    }>;
-    chip?: ChipProps;
-  };
-  level: number;
+      stroke?: number
+      size?: string
+    }>
+    chip?: ChipProps
+  }
+  level: number
 }
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
 const NavItem: React.FC<NavItemProps> = ({ item, level }) => {
-  const theme = useTheme();
-  const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const customization = useSelector((state: any) => state.customization);
-  const matchesSM = useMediaQuery(theme.breakpoints.down('lg'));
+  const theme = useTheme()
+  const dispatch = useDispatch()
+  const { pathname } = useLocation()
+  const customization = useSelector((state: RootState) => state.mainReducer)
+  const matchesSM = useMediaQuery(theme.breakpoints.down('lg'))
 
-  const Icon : any = item.icon;
+  const Icon: any = item.icon
   const itemIcon = Icon ? (
-    <Icon
-      stroke={1.5}
-      size="1.3rem"
-      style={{ color: theme.palette.text.primary }}
-    />
+    <Icon stroke={1.5} size="1.3rem" style={{ color: theme.palette.text.primary }} />
   ) : (
     <FiberManualRecordIcon
       sx={{
@@ -69,21 +66,13 @@ const NavItem: React.FC<NavItemProps> = ({ item, level }) => {
       }}
       fontSize={level > 0 ? 'inherit' : 'medium'}
     />
-  );
+  )
 
-  const itemTarget = item.target ? '_blank' : '_self';
+  const itemTarget = item.target ? '_blank' : '_self'
 
-  const ListItemLink = forwardRef<
-    HTMLAnchorElement,
-    React.ComponentPropsWithoutRef<'a'>
-  >((props, ref) => (
-    <Link
-      ref={ref as Ref<HTMLAnchorElement>}
-      {...props}
-      to={item.url || '/'}
-      target={itemTarget}
-    />
-  ));
+  const ListItemLink = forwardRef<HTMLAnchorElement, React.ComponentPropsWithoutRef<'a'>>((props, ref) => (
+    <Link ref={ref as Ref<HTMLAnchorElement>} {...props} to={item.url || '/'} target={itemTarget} />
+  ))
 
   const listItemProps = item.external
     ? {
@@ -93,33 +82,31 @@ const NavItem: React.FC<NavItemProps> = ({ item, level }) => {
       }
     : {
         component: ListItemLink,
-      };
+      }
 
   const itemHandler = (id: string) => {
     dispatch({
       type: MENU_OPEN,
       id,
-    });
+    })
     if (matchesSM)
       dispatch({
         type: SET_MENU,
         opened: false,
-      });
-  };
+      })
+  }
 
   // active menu item on page load
   useEffect(() => {
-    const currentIndex = document.location.pathname
-      .split('/')
-      .findIndex((id) => id === item.id);
+    const currentIndex = document.location.pathname.split('/').findIndex((id) => id === item.id)
     if (currentIndex > -1) {
       dispatch({
         type: MENU_OPEN,
         id: item.id,
-      });
+      })
     }
     // eslint-disable-next-line
-  }, [pathname]);
+  }, [pathname])
 
   return (
     <ListItemButton
@@ -133,10 +120,10 @@ const NavItem: React.FC<NavItemProps> = ({ item, level }) => {
         py: level > 1 ? 1 : 1.25,
         pl: `${level * 24}px`,
         ':hover': {
-          backgroundColor: theme.palette.background.paper2, 
+          backgroundColor: theme.palette.background.paper2,
         },
         ':focus': {
-          backgroundColor: theme.palette.background.paper2, 
+          backgroundColor: theme.palette.background.paper2,
         },
       }}
       selected={customization.isOpen.includes(item.id)}
@@ -151,13 +138,7 @@ const NavItem: React.FC<NavItemProps> = ({ item, level }) => {
         {itemIcon}
       </ListItemIcon>
       <ListItemText
-        primary={
-          <Typography
-            variant={customization.isOpen.includes(item.id) ? 'h5' : 'body1'}
-          >
-            {item.title}
-          </Typography>
-        }
+        primary={<Typography variant={customization.isOpen.includes(item.id) ? 'h5' : 'body1'}>{item.title}</Typography>}
         secondary={
           item.caption && (
             <Typography variant="caption" display="block" gutterBottom>
@@ -178,7 +159,7 @@ const NavItem: React.FC<NavItemProps> = ({ item, level }) => {
         />
       )}
     </ListItemButton>
-  );
-};
+  )
+}
 
-export default NavItem;
+export default NavItem

@@ -14,8 +14,8 @@ const CourseListSkl: React.FC = () => {
       <Grid container spacing={2}>
         {Array(4)
           .fill('')
-          .map(() => (
-            <Grid item sm={12} md={6}>
+          .map((_, index: number) => (
+            <Grid key={index} item sm={12} md={6}>
               <Box
                 sx={{ backgroundColor: theme.palette.background.paper }}
                 p={2}

@@ -5,7 +5,6 @@ import {
   Box,
   styled,
   useTheme,
-  Button,
   Typography,
   useMediaQuery,
   IconButton,
@@ -14,7 +13,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_THEME_HOME } from "@/store/actions";
+import { TOGGLE_THEME } from "@/store/actions";
 
 import StarsIcon from "@mui/icons-material/Stars";
 // pj
@@ -66,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ data, notes }) => {
   const { id } = useParams();
   const theme = useTheme();
   const dispatch = useDispatch();
-  const homeState = useSelector((state: RootState) => state.homeReducer);
+  const homeState = useSelector((state: RootState) => state.mainReducer);
   const user = useSelector((state: RootState) => state.authReducer.user);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -94,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ data, notes }) => {
   const handleToggleTheme = () => {
     const newTheme = homeState.theme === "light" ? "dark" : "light";
     dispatch({
-      type: TOGGLE_THEME_HOME,
+      type: TOGGLE_THEME,
       theme: newTheme,
     });
   };
@@ -169,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({ data, notes }) => {
                 <Typography color="white" variant="body2">
                   Ghi chú
                 </Typography>
-              )} 
+              )}
             </StyledDescriptionBox>
           )}
         >

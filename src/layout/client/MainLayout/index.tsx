@@ -1,27 +1,27 @@
-import { useTheme, Theme, Box } from "@mui/material";
-import Footer from "./Footer";
-import Navbar from "./Header";
-import SideBar from "./SideBar";
-import { Outlet } from "react-router-dom";
+import { useTheme, Theme, Box } from '@mui/material'
+import Footer from './Footer'
+import Navbar from './Header'
+import SideBar from './SideBar'
+import { Outlet } from 'react-router-dom'
 // interface MainLayoutProp {
 //   children: React.ReactNode;
 // }
 
 // const MainLayout: React.FC<MainLayoutProp> = ({ children }) => {
 const MainLayout: React.FC = () => {
-  const theme: Theme = useTheme();
+  const theme: Theme = useTheme()
 
   return (
     <Box
       sx={{
         background: theme.palette.background.paper,
-        minHeight: "100vh",
+        minHeight: '100vh',
       }}
     >
       <Navbar />
       <Box
         sx={{
-          display: "flex",
+          display: 'flex',
           background: theme.palette.background.paper,
         }}
       >
@@ -29,11 +29,14 @@ const MainLayout: React.FC = () => {
         <Box
           sx={{
             width: {
-              xs: "100%",
-              sm: "80%",
-              md: "85%",
-              lg: "87%",
-              xl: "1320px",
+              xs: '100%',
+              sm: '80%',
+              md: '85%',
+              lg: '87%',
+              xl: '1320px',
+            },
+            [`@media (min-width:1600px)`]: {
+              margin: 'auto',
             },
           }}
         >
@@ -43,7 +46,7 @@ const MainLayout: React.FC = () => {
       </Box>
       <Footer />
     </Box>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

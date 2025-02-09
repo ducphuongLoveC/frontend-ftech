@@ -1,17 +1,16 @@
-import React from 'react';
-import Header from '../MainLayout/Header';
-import { Box } from '@mui/material';
-import Footer from '../MainLayout/Footer';
+import React from 'react'
+import Header from '../MainLayout/Header'
+import { Box } from '@mui/material'
+import Footer from '../MainLayout/Footer'
 
-import { useTheme } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { useTheme } from '@mui/material'
+import { Outlet } from 'react-router-dom'
 // interface BasicLayoutProps {
 //   children: React.ReactNode;
 // }
 // const BasicLayout: React.FC<BasicLayoutProps> = ({ children }) => {
 const BasicLayout: React.FC = () => {
-
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Box
       sx={{
@@ -26,6 +25,9 @@ const BasicLayout: React.FC = () => {
             sm: '100%',
             md: '90%',
           },
+          [`@media (min-width:1600px)`]: {
+            margin: 'auto',
+          },
         }}
       >
         {/* {children} */}
@@ -33,6 +35,6 @@ const BasicLayout: React.FC = () => {
       </Box>
       <Footer />
     </Box>
-  );
-};
-export default BasicLayout;
+  )
+}
+export default BasicLayout

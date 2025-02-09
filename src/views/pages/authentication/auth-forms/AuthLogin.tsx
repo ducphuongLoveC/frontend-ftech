@@ -33,6 +33,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Google from "@/assets/images/icons/social-google.svg";
 import { Link } from "react-router-dom";
 import path from "@/constants/routes";
+import { RootState } from "@/store/reducer";
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -73,7 +74,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({
 }) => {
   const theme: any = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
-  const customization = useSelector((state: any) => state.customization);
+  const customization = useSelector((state: RootState) => state.mainReducer);
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -295,7 +296,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({
             }
             label="Lưu cho lần đăng nhập sau"
           />
-          <Link to={path.client.forgetPass}>
+          <Link to={path.client.auth.forgetPass}>
             <Typography
               variant="subtitle1"
               color="secondary"

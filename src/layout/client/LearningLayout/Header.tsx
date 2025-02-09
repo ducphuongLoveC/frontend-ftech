@@ -12,7 +12,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_THEME_HOME } from "@/store/actions";
+import { TOGGLE_THEME } from "@/store/actions";
 
 // pj
 import { RootState } from "@/store/reducer";
@@ -51,13 +51,13 @@ const StyledDescriptionBox = styled(BoxCenter)({
 const Header: React.FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const homeState = useSelector((state: RootState) => state.homeReducer);
+  const homeState = useSelector((state: RootState) => state.mainReducer);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleToggleTheme = () => {
     const newTheme = homeState.theme === "light" ? "dark" : "light";
     dispatch({
-      type: TOGGLE_THEME_HOME,
+      type: TOGGLE_THEME,
       theme: newTheme,
     });
   };

@@ -39,7 +39,7 @@ interface NavCollapseProps {
 
 const NavCollapse: React.FC<NavCollapseProps> = ({ menu, level }) => {
   const theme = useTheme();
-  const customization = useSelector((state: RootState) => state.customization);
+  const customization = useSelector((state: RootState) => state.mainReducer);
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);

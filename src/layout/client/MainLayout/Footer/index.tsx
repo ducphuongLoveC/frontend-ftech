@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  useTheme,
   Typography,
   Box,
 } from "@mui/material";
@@ -9,13 +8,12 @@ import {
 // ===============================|| FOOTER ||=============================== //
 
 const Footer: React.FC = () => {
-  const theme = useTheme();
 
   return (
     <footer
       style={{
-        background: theme.palette.background.paper,
-        color: theme.palette.text.primary,
+        background: "#29303b",
+        color: "#fff",
         marginTop: "20px",
       }}
     >
@@ -33,7 +31,7 @@ const Footer: React.FC = () => {
             <Typography
               variant="h3"
               sx={{
-                color: theme.palette.text.secondary,
+                color: "#fff",  
                 marginTop: 4,
                 marginBottom: 3,
               }}
@@ -59,7 +57,7 @@ const Footer: React.FC = () => {
           <Typography
             variant="h3"
             sx={{
-              color: theme.palette.text.secondary,
+              color: "#fff",
               marginTop: 4,
               marginBottom: 3,
             }}
@@ -79,7 +77,7 @@ const Footer: React.FC = () => {
                 <Link
                   to="/"
                   style={{
-                    color: theme.palette.text.primary,
+                    
                     fontSize: "14px",
                     display: "flex",
                     alignItems: "center",
@@ -100,7 +98,7 @@ const Footer: React.FC = () => {
           <Typography
             variant="h3"
             sx={{
-              color: theme.palette.text.secondary,
+              color: "#fff",
               marginTop: 4,
               marginBottom: 3,
             }}
@@ -120,7 +118,7 @@ const Footer: React.FC = () => {
                 <Link
                   to="/"
                   style={{
-                    color: theme.palette.text.primary,
+                    
                     fontSize: "14px",
                     display: "flex",
                     alignItems: "center",
@@ -141,7 +139,7 @@ const Footer: React.FC = () => {
           <Typography
             variant="h3"
             sx={{
-              color: theme.palette.text.secondary,
+              color: "#fff",
               marginTop: 4,
              
             }}
@@ -150,7 +148,7 @@ const Footer: React.FC = () => {
           </Typography>
           <Typography
             variant="body2"
-            sx={{ color: theme.palette.text.primary, marginBottom: 4 }}
+            sx={{ marginBottom: 4 }}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut odit
             magnam officia sequi aliquid facere corporis dolorem beatae? Dolore

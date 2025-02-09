@@ -1,126 +1,113 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Typography,
-  IconButton,
-  InputBase,
-  useMediaQuery,
-  styled,
-  useTheme,
-  Paper,
-} from "@mui/material";
-import { BiAdjust, BiX } from "react-icons/bi";
-import Tippy from "@tippyjs/react";
-import HeadlessTippy from "@tippyjs/react/headless";
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Box, Typography, IconButton, InputBase, useMediaQuery, styled, useTheme, Paper } from '@mui/material'
+import { BiAdjust, BiX } from 'react-icons/bi'
+import Tippy from '@tippyjs/react'
+import HeadlessTippy from '@tippyjs/react/headless'
 
-import Logo from "@/ui-component/Logo";
-import Wrapper from "@/components/Wrapper";
-import { TOGGLE_THEME_HOME } from "@/store/actions";
-import useDebounce from "@/hooks/useDebounce";
-import { BeatLoader } from "react-spinners";
-import LoggedIn from "./LoggedIn";
-import NotLoggedIn from "./NotLoggedIn";
-import { RootState } from "@/store/reducer";
-import { getCourseSearch } from "@/api/courseApi";
-import path from "@/constants/routes";
-import SearchIcon from "@mui/icons-material/Search";
+import Logo from '@/ui-component/Logo'
+import Wrapper from '@/components/Wrapper'
+import { TOGGLE_THEME } from '@/store/actions'
+import useDebounce from '@/hooks/useDebounce'
+import { BeatLoader } from 'react-spinners'
+import LoggedIn from './LoggedIn'
+import NotLoggedIn from './NotLoggedIn'
+import { RootState } from '@/store/reducer'
+import { getCourseSearch } from '@/api/courseApi'
+import path from '@/constants/routes'
+import SearchIcon from '@mui/icons-material/Search'
 
 const ContentSearch = styled(Box)(() => ({
-  display: "flex",
-  alignItems: "center",
-  margin: "5px 10px",
-}));
+  display: 'flex',
+  alignItems: 'center',
+  margin: '5px 10px',
+}))
 
-const ImageContentSearch = styled("img")({
-  width: "30px",
-  height: "30px",
-  borderRadius: "50%",
-  marginRight: "10px",
-});
+const ImageContentSearch = styled('img')({
+  width: '30px',
+  height: '30px',
+  borderRadius: '50%',
+  marginRight: '10px',
+})
 
 const Header = () => {
-  const theme = useTheme();
-  const dispatch = useDispatch();
-  const homeState = useSelector((state: RootState) => state.homeReducer);
-  const authState = useSelector((state: RootState) => state.authReducer);
+  const theme = useTheme()
+  const dispatch = useDispatch()
+  const homeState = useSelector((state: RootState) => state.mainReducer)
+  const authState = useSelector((state: RootState) => state.authReducer)
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [dataSearch, setDataSearch] = useState([]);
-  const debounced = useDebounce(searchValue, 500);
+  const [isLoading, setIsLoading] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+  const [dataSearch, setDataSearch] = useState([])
+  const debounced = useDebounce(searchValue, 500)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
-        const { data } = await getCourseSearch(searchValue);
-        setDataSearch(data);
-        setIsLoading(false);
+        setIsLoading(true)
+        const { data } = await getCourseSearch(searchValue)
+        setDataSearch(data)
+        setIsLoading(false)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
-    if (searchValue) {
-      fetchData();
     }
-  }, [debounced]);
+    if (searchValue) {
+      fetchData()
+    }
+  }, [debounced])
 
   const handleToggleThemeMode = () => {
-    const newTheme = homeState.theme === "light" ? "dark" : "light";
-    dispatch({ type: TOGGLE_THEME_HOME, theme: newTheme });
-  };
+    const newTheme = homeState.theme === 'light' ? 'dark' : 'light'
+    dispatch({ type: TOGGLE_THEME, theme: newTheme })
+  }
 
   const handleSearchValue = (value: string) => {
-    if (!value.startsWith(" ")) {
-      setSearchValue(value);
+    if (!value.startsWith(' ')) {
+      setSearchValue(value)
     }
-  };
+  }
 
-  const clearSearchValue = () => setSearchValue("");
-  const downMD = useMediaQuery(theme.breakpoints.down("md"));
-  const downSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const clearSearchValue = () => setSearchValue('')
+  const downMD = useMediaQuery(theme.breakpoints.down('md'))
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Box
       sx={{
-        position: "sticky",
+        position: 'sticky',
         top: 0,
         zIndex: 50,
         bgcolor: theme.palette.background.paper,
         py: 1,
       }}
     >
-      {authState.user?.role === "admin" && (
+      {authState.user?.role === 'admin' && (
         <Box
           sx={{
             bgcolor: theme.palette.background.paper2,
             p: 1,
-            display: "flex",
-            justifyContent: "space-between",
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <Typography>Xin chào admin {authState.user.name}!</Typography>
-          <Link
-            to={`${import.meta.env.VITE_URL_ADMIN}?accessToken=${encodeURIComponent(JSON.stringify(authState.accessToken))}&info=${encodeURIComponent(JSON.stringify(authState.user))}`}
-          >
-            Đăng nhập vào quản trị nội dung
-          </Link>
+          <Link to="/admin">Đăng nhập vào quản trị nội dung</Link>
         </Box>
       )}
 
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          maxWidth: downMD ? "100%" : "90%",
-          mx: "auto",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          maxWidth: downMD ? '100%' : '90%',
+          mx: 'auto',
         }}
       >
         {!downSM && (
-          <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
             <Logo />
             <Typography fontWeight="bold">Lập trình Ftech</Typography>
           </Link>
@@ -128,15 +115,15 @@ const Header = () => {
 
         <Paper
           sx={{
-            display: "flex",
-            alignItems: "center",
-            width: downSM ? "100%" : "33%",
-            p: "2px 8px",
-            borderRadius: "20px",
-            border: "1px solid", 
-            borderColor: theme.palette.divider, 
+            display: 'flex',
+            alignItems: 'center',
+            width: downSM ? '100%' : '33%',
+            p: '2px 8px',
+            borderRadius: '20px',
+            border: '1px solid',
+            borderColor: theme.palette.divider,
             py: 0.5,
-            marginLeft: {xs: '10px'},
+            marginLeft: { xs: '10px' },
           }}
         >
           <SearchIcon sx={{ mr: 1 }} />
@@ -149,8 +136,8 @@ const Header = () => {
                 sx={{
                   bgcolor: theme.palette.background.paper,
                   width: '100%',
-                  maxHeight: "70vh",
-                  overflow: "auto",
+                  maxHeight: '70vh',
+                  overflow: 'auto',
                 }}
                 {...attrs}
               >
@@ -158,10 +145,7 @@ const Header = () => {
                   <Typography>Đang tìm '{searchValue}'</Typography>
                 ) : dataSearch.length > 0 ? (
                   dataSearch.map((course: any) => (
-                    <Link
-                      key={course._id}
-                      to={path.client.learningId(course._id)}
-                    >
+                    <Link key={course._id} to={path.client.learningId(course._id)}>
                       <ContentSearch>
                         <ImageContentSearch src={course.thumbnail} />
                         <Typography>{course.title}</Typography>
@@ -169,19 +153,12 @@ const Header = () => {
                     </Link>
                   ))
                 ) : (
-                  <Typography>
-                    Không tìm thấy kết quả cho '{searchValue}'
-                  </Typography>
+                  <Typography>Không tìm thấy kết quả cho '{searchValue}'</Typography>
                 )}
               </Wrapper>
             )}
           >
-            <InputBase
-              value={searchValue}
-              onChange={(e) => handleSearchValue(e.target.value)}
-              placeholder="Tìm kiếm khóa học"
-              sx={{ flex: 1 }}
-            />
+            <InputBase value={searchValue} onChange={(e) => handleSearchValue(e.target.value)} placeholder="Tìm kiếm khóa học" sx={{ flex: 1 }} />
           </HeadlessTippy>
 
           {isLoading ? (
@@ -195,21 +172,17 @@ const Header = () => {
           )}
         </Paper>
 
-        <Box sx={{ display: "flex", alignItems: "center"}}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Tippy content="Thay đổi theme">
             <IconButton onClick={handleToggleThemeMode}>
               <BiAdjust style={{ color: theme.palette.text.primary }} />
             </IconButton>
           </Tippy>
-          {authState?.accessToken ? (
-            <LoggedIn user={authState.user} />
-          ) : (
-            <NotLoggedIn />
-          )}
+          {authState?.accessToken ? <LoggedIn user={authState.user} /> : <NotLoggedIn />}
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

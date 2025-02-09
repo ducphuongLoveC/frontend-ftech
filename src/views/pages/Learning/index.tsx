@@ -66,7 +66,7 @@ const ButtonStyle = styled(Button)(({ theme }) => ({
 
 const Learning: React.FC = () => {
   const dispatch = useDispatch();
-  const storedExpandedIndexs = useSelector((state: RootState) => state.homeReducer.expandedIndexs);
+  const storedExpandedIndexs = useSelector((state: RootState) => state.mainReducer.expandedIndexs);
   const user = useSelector((state: RootState) => state.authReducer.user);
 
   const [seek, setSeek] = useState<any>(0);

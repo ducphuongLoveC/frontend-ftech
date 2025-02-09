@@ -4,6 +4,9 @@ import {
   Telegram as TelegramIcon,
 } from '@mui/icons-material';
 
+
+import FacebookIcon from '@mui/icons-material/Facebook';
+
 import path from '@/constants/routes';
 
 export interface Props {
@@ -27,10 +30,10 @@ const menus: Props[] = [
     target: false,
   },
   {
-    icon: TelegramIcon,
-    title: 'Contact',
-    url: '/contact',
-    target: false,
+    icon: FacebookIcon,
+    title: 'Facebook',
+    url: 'https://www.facebook.com/phuongg.profile',
+    target: true,
   },
 ];
 

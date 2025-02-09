@@ -51,7 +51,7 @@ const MyCourses: React.FC = () => {
   const currentCourses = coursesWithProgress?.courses.slice(offset, offset + rowsPerPage);
 
   return (
-    <Box mt={3}>
+    <Box mt={3} sx={{ px: 2 }}>
       <Typography variant="h2">Khóa học của tôi</Typography>
       <Typography my={2} variant="body1">
         Các khóa học bạn đăng ký sẽ được hiện thị ở đây

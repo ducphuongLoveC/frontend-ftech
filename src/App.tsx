@@ -1,25 +1,23 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
-import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, StyledEngineProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles'
+import { CssBaseline, StyledEngineProvider } from '@mui/material'
 
 // defaultTheme
-import themes from '@/themes';
+import themes from '@/themes'
 
 // project imports
 // import { router } from '@/routes';
 // import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ElementsRoutes from './routes';
-import { BrowserRouter } from 'react-router-dom';
+import ElementsRoutes from './routes'
+import { BrowserRouter } from 'react-router-dom'
+import { RootState } from './store/reducer'
 
 const App: React.FC = () => {
-  const state = useSelector(
-    (state: any) => (window.location.hostname.startsWith('admin') ? state.customization : state.homeReducer),
-    (prev, next) => prev === next
-  );
+  const globalState = useSelector((state: RootState) => state.mainReducer)
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={themes(state)}>
+      <ThemeProvider theme={themes(globalState)}>
         <CssBaseline />
         {/* <div>{router}</div> */}
 
@@ -30,10 +28,10 @@ const App: React.FC = () => {
           </Routes>
         </BrowserRouter> */}
         <BrowserRouter>
-        <ElementsRoutes />
+          <ElementsRoutes />
         </BrowserRouter>
       </ThemeProvider>
     </StyledEngineProvider>
-  );
-};
-export default App;
+  )
+}
+export default App

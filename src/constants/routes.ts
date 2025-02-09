@@ -84,11 +84,11 @@ const path = {
     studentList: "/admin/student-list",
     categorys: "/admin/categorys",
     Articlecategorys: "/admin/categorys/article",
-    usersDetail: (id: string) => `/admin/user-detail/${id}`, // ✅ Sửa lỗi, thêm "/admin/"
+    usersDetail: (id: string) => `/admin/user-detail/${id}`, 
     reviewList: "/admin/reviewList",
     commentList: "/admin/commentList",
     coupon: "/admin/coupon",
-    courseStatistics: (id: string) => `/admin/course-statistics/${id}`, // ✅ Sửa lỗi, thêm "/admin/"
+    courseStatistics: (id: string) => `/admin/course-statistics/${id}`, 
     carousel: "/admin/carousel",
   },
 
@@ -96,6 +96,8 @@ const path = {
     auth: {
       login: "/auth/login",
       register: "/auth/register",
+      forgetPass: "/auth/forget-password",
+      
     },
     learning: "/learning/:id/",
     learningId: (id: string) => `/learning/${id}`,
@@ -107,13 +109,13 @@ const path = {
     news: "/news",
     newsDetail: "/news-detail",
     contact: "/contact",
-    profile: (id: string) => `/profile/${id}`, // ✅ Sửa lỗi, thêm dấu "/"
+    profile: (id: string) => `/profile/${id}`,
     setting: "/setting",
     newPost: "/new-post",
     myPost: "/my-post",
     bookmark: "/me/bookmark",
     checkCertificate: "/certificate/check",
-    forgetPass: "/forget-password",
+   
   },
 };
 

@@ -1,94 +1,94 @@
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // material-ui
-import { useTheme } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
 // import Card from '@mui/material/Card';
 // import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip'
+import ClickAwayListener from '@mui/material/ClickAwayListener'
+import Divider from '@mui/material/Divider'
 // import Grid from '@mui/material/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import Stack from '@mui/material/Stack';
+import InputAdornment from '@mui/material/InputAdornment'
+import List from '@mui/material/List'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import Paper from '@mui/material/Paper'
+import Popper from '@mui/material/Popper'
+import Stack from '@mui/material/Stack'
 // import Switch from '@mui/material/Switch';
-import Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography'
 
 // cookies
 
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 // third-party
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // project imports
-import MainCard from '@/ui-component/cards/MainCard';
-import Transitions from '@/ui-component/extended/Transitions';
+import MainCard from '@/ui-component/cards/MainCard'
+import Transitions from '@/ui-component/extended/Transitions'
 
 // assets
-import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store/reducer';
-import { SET_USER } from '@/store/actions';
-import DrawerSetting from '@/layout/admin/DrawerSetting';
+import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store/reducer'
+import { SET_USER } from '@/store/actions'
+import DrawerSetting from '@/layout/admin/DrawerSetting'
 
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection: React.FC = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.authReducer.user);
-  const theme = useTheme();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.authReducer.user)
+  const theme = useTheme()
+  const navigate = useNavigate()
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>('')
   // const [notification, setNotification] = useState<boolean>(false);
-  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
-  const [open, setOpen] = useState<boolean>(false);
-  const [openDrawerSetting, setOpenDrawerSetting] = useState<boolean>(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1)
+  const [open, setOpen] = useState<boolean>(false)
+  const [openDrawerSetting, setOpenDrawerSetting] = useState<boolean>(false)
 
-  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const anchorRef = useRef<HTMLButtonElement | null>(null)
 
   const handleLogout = async () => {
-    dispatch({ type: SET_USER, payload: null });
-    Cookies.remove('user', { domain: 'admin.localhost', path: '/' });
-    Cookies.remove('accessToken', { domain: 'admin.localhost', path: '/' });
-    window.location.reload();
-  };
+    dispatch({ type: SET_USER, payload: null })
+    Cookies.remove('user', { domain: 'admin.localhost', path: '/' })
+    Cookies.remove('accessToken', { domain: 'admin.localhost', path: '/' })
+    window.location.reload()
+  }
   const handleClose = (event: any) => {
     if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
-      return;
+      return
     }
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleListItemClick = (event: React.MouseEvent<HTMLLIElement>, index: number, route: string = '') => {
-    setSelectedIndex(index);
-    handleClose(event);
+    setSelectedIndex(index)
+    handleClose(event)
 
     if (route && route !== '') {
-      navigate(route);
+      navigate(route)
     }
-  };
+  }
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    setOpen((prevOpen) => !prevOpen)
+  }
 
-  const prevOpen = useRef(open);
+  const prevOpen = useRef(open)
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current?.focus();
+      anchorRef.current?.focus()
     }
-    prevOpen.current = open;
-  }, [open]);
+    prevOpen.current = open
+  }, [open])
 
   return (
     <>
@@ -250,25 +250,29 @@ const ProfileSection: React.FC = () => {
                           bgcolor: theme.palette.background.paper,
                         }}
                       >
-                        <ListItemButton
-                          selected={selectedIndex === 0}
-                          onClick={(event: any) => handleListItemClick(event, 0, '/profile')}
-                        >
+                        <ListItemButton selected={selectedIndex === 0} onClick={(event: any) => handleListItemClick(event, 0, 'profile')}>
                           <ListItemIcon>
                             <IconUser stroke={1.5} size="1.25rem" />
                           </ListItemIcon>
                           <ListItemText primary="Trang cá nhân" />
                         </ListItemButton>
+
                         <ListItemButton
                           selected={selectedIndex === 1}
                           onClick={(_event: any) => {
-                            setOpenDrawerSetting(true);
+                            setOpenDrawerSetting(true)
                           }}
                         >
                           <ListItemIcon>
                             <IconSettings stroke={1.5} size="1.25rem" />
                           </ListItemIcon>
                           <ListItemText primary="Cài đặt" />
+                        </ListItemButton>
+                        <ListItemButton selected={selectedIndex === 0} onClick={(event: any) => handleListItemClick(event, 0, '/')}>
+                          <ListItemIcon>
+                            <IconUser stroke={1.5} size="1.25rem" />
+                          </ListItemIcon>
+                          <ListItemText primary="Trang người dùng" />
                         </ListItemButton>
                         <ListItemButton onClick={handleLogout}>
                           <ListItemIcon>
@@ -287,7 +291,7 @@ const ProfileSection: React.FC = () => {
       </Popper>
       <DrawerSetting open={openDrawerSetting} onClose={() => setOpenDrawerSetting(false)} />
     </>
-  );
-};
+  )
+}
 
-export default ProfileSection;
+export default ProfileSection

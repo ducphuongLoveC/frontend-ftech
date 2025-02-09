@@ -61,7 +61,7 @@ const MainLayout: React.FC = () => {
   const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const user = useSelector((state: RootState) => state.authReducer.user);
-  const leftDrawerOpened = useSelector((state: RootState) => state.customization.opened);
+  const leftDrawerOpened = useSelector((state: RootState) => state.mainReducer.opened);
   const dispatch = useDispatch();
 
   if (user == null) {

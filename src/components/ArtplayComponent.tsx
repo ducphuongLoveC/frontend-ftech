@@ -16,8 +16,8 @@ interface ArtPlayerComponentProps {
 
 const ArtPlayerComponent = forwardRef(
   ({ finished, videoUrl, poster, onCompleted, onTimeUpdate }: ArtPlayerComponentProps, ref) => {
-    const seek = useSelector((state: RootState) => state.homeReducer.seek);
-    const isFirstPlaying = useSelector((state: RootState) => state.homeReducer.isFirstPlayingVideo);
+    const seek = useSelector((state: RootState) => state.mainReducer.seek);
+    const isFirstPlaying = useSelector((state: RootState) => state.mainReducer.isFirstPlayingVideo);
 
     const artPlayerRef = useRef<HTMLDivElement>(null);
     const art = useRef<ArtPlayer | null>(null);
