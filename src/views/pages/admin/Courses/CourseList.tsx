@@ -1,34 +1,34 @@
-import { useMemo } from 'react';
-import { useQueries } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import { Box, Button, Grid, styled, TablePagination, Typography, useTheme, List, ListItem } from '@mui/material';
-import { More } from '@mui/icons-material';
-import moment from 'moment';
+import { useMemo } from 'react'
+import { useQueries } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
+import { Box, Button, Grid, styled, TablePagination, Typography, useTheme, List, ListItem } from '@mui/material'
+import { More } from '@mui/icons-material'
+import moment from 'moment'
 // import * as _ from 'lodash';
-import HeadlessTippy from '@tippyjs/react/headless';
+import HeadlessTippy from '@tippyjs/react/headless'
 // my pj
-import CourseListSkl from '@/ui-component/cards/Skeleton/CourseListSkl';
-import HeaderTitle from '../Title';
-import path from '@/constants/routes';
-import { Course } from '@/interfaces/course';
-import FilterComponent from '@/components/Filter';
-import { getCourseList } from '@/api/courseApi';
-import { useState } from 'react';
-import { fetchLearningPaths } from '@/api/learningPathApi';
-import Wrapper from '@/components/Wrapper';
+import CourseListSkl from '@/ui-component/cards/Skeleton/CourseListSkl'
+import HeaderTitle from '../Title'
+import path from '@/constants/routes'
+import { Course } from '@/interfaces/course'
+import FilterComponent from '@/components/Filter'
+import { getCourseList } from '@/api/courseApi'
+import { useState } from 'react'
+import { fetchLearningPaths } from '@/api/learningPathApi'
+import Wrapper from '@/components/Wrapper'
 
 const BoxBetween = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   marginBottom: '25px',
-}));
+}))
 
 const CourseList: React.FC = () => {
-  const theme = useTheme();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const theme = useTheme()
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(4)
 
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState({})
 
   const queries = useQueries({
     queries: [
@@ -41,64 +41,64 @@ const CourseList: React.FC = () => {
         queryFn: fetchLearningPaths,
       },
     ],
-  });
+  })
 
-  const { data: courses, isLoading: isLoadingCourses } = queries[0];
-  const learningPaths = queries[1];
-  ``;
+  const { data: courses, isLoading: isLoadingCourses } = queries[0]
+  const learningPaths = queries[1]
+
   const filterLearningPathList = useMemo(() => {
-    return learningPaths?.data?.map((l: any) => ({ display: l.title, value: l._id }));
-  }, [learningPaths]);
+    return learningPaths?.data?.map((l: any) => ({ display: l.title, value: l._id }))
+  }, [learningPaths])
 
-  if (isLoadingCourses) return <CourseListSkl />;
+  if (isLoadingCourses) return <CourseListSkl />
 
   const handleSetParams = (params: any) => {
-    const { search, ...rest } = params;
+    const { search, ...rest } = params
 
     const transform = Object.entries(rest).reduce((acc: any, [key, values]: [string, any]) => {
-      acc[key] = values.map(({ value }: { value: string }) => value).join(',');
-      return acc;
-    }, {});
+      acc[key] = values.map(({ value }: { value: string }) => value).join(',')
+      return acc
+    }, {})
 
-    setParams({ ...transform, search });
-  };
+    setParams({ ...transform, search })
+  }
 
   const handleChangePage = (_event: unknown, newPage: number) => {
-    setPage(newPage);
+    setPage(newPage)
     setParams((pre) => {
-      return { ...pre, page: newPage };
-    });
-  };
+      return { ...pre, page: newPage }
+    })
+  }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newRowsPerPage = parseInt(event.target.value, 10);
-    setRowsPerPage(newRowsPerPage);
-    setPage(0);
+    const newRowsPerPage = parseInt(event.target.value, 10)
+    setRowsPerPage(newRowsPerPage)
+    setPage(0)
     setParams((pre) => {
-      return { ...pre, limit: newRowsPerPage };
-    });
-  };
+      return { ...pre, limit: newRowsPerPage }
+    })
+  }
 
   const CourseDuration = (course: any) => {
     const totalDuration = course.modules.reduce((moduleAcc: number, module: any) => {
       return (
         moduleAcc +
         module.resources.reduce((resourceAcc: number, resource: any) => {
-          return resourceAcc + resource.duration;
+          return resourceAcc + resource.duration
         }, 0)
-      );
-    }, 0);
+      )
+    }, 0)
 
-    return <div>{moment.utc(totalDuration * 1000).format('HH:mm:ss')}</div>;
-  };
+    return <div>{moment.utc(totalDuration * 1000).format('HH:mm:ss')}</div>
+  }
 
   const CourseResourceTotal = (course: any) => {
     const resourceTotal = course.modules.reduce((moduleAcc: number, module: any) => {
-      return moduleAcc + module.resources.length;
-    }, 0);
+      return moduleAcc + module.resources.length
+    }, 0)
 
-    return resourceTotal;
-  };
+    return resourceTotal
+  }
 
   return (
     <Box>
@@ -143,7 +143,7 @@ const CourseList: React.FC = () => {
                       <Wrapper sx={{ p: 0 }} {...attrs}>
                         <List sx={{ p: 0 }}>
                           <ListItem>
-                            <Link to={path.admin.courseStatistics(course._id)}>Xem chi tiết</Link>
+                            <Link to={'/admin/courses/statistics/' + course._id}>Xem chi tiết</Link>
                           </ListItem>
                           {/* <ListItem><Link to={path.admin.courseStatistics(course._id)}>Xóa</Link></ListItem> */}
                         </List>
@@ -157,9 +157,7 @@ const CourseList: React.FC = () => {
                 <Grid container spacing={3}>
                   <Grid item lg={6}>
                     <Grid container spacing={2}>
-                      <Grid item>
-                        {course.thumbnail && <img width={'100%'} src={typeof course.thumbnail === 'string' ? course.thumbnail : ''} />}
-                      </Grid>
+                      <Grid item>{course.thumbnail && <img width={'100%'} src={typeof course.thumbnail === 'string' ? course.thumbnail : ''} />}</Grid>
                       <Grid item xs={12}>
                         <Button fullWidth component={Link} to={path.admin.updateCourse(course._id)} variant="outlined">
                           Xem và sửa khóa học
@@ -205,6 +203,6 @@ const CourseList: React.FC = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
-  );
-};
-export default CourseList;
+  )
+}
+export default CourseList

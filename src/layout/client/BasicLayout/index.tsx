@@ -30,11 +30,10 @@ const BasicLayout: React.FC = () => {
           },
         }}
       >
-        {/* {children} */}
         <Outlet />
       </Box>
       <Footer />
     </Box>
   )
 }
-export default BasicLayout
+export default BasicLayout;

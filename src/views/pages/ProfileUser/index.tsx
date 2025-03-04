@@ -196,7 +196,7 @@ const ProFile = () => {
                     <img
                       src={course.thumbnail}
                       alt={course.title}
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "100%"}}
                     />
                   </Box>
                   <Box>

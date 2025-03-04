@@ -298,7 +298,7 @@ const Coupon: React.FC = () => {
         <Grid container spacing={3}>
           {applyCourseMoreData.map((c: any) => (
             <Grid item md={4} key={c.id}>
-              <Link to={`/courses/${c._id}/update`}>
+              <Link to={`/admin/courses/${c._id}/update`}>
                 <Card sx={{ backgroundColor: theme.palette.background.paper2 }}>
                   <CardMedia component="img" alt={c.title} height="140" image={c.thumbnail} />
                   <CardContent sx={{ p: 0 }}>
