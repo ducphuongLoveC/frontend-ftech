@@ -10,7 +10,7 @@ import Logo from '@/ui-component/Logo'
 import Wrapper from '@/components/Wrapper'
 import { TOGGLE_THEME } from '@/store/actions'
 import useDebounce from '@/hooks/useDebounce'
-import { BeatLoader } from 'react-spinners'
+import { BeatLoader, SkewLoader } from 'react-spinners'
 import LoggedIn from './LoggedIn'
 import NotLoggedIn from './NotLoggedIn'
 import { RootState } from '@/store/reducer'
@@ -109,7 +109,7 @@ const Header = () => {
         {!downSM && (
           <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
             <Logo />
-            <Typography fontWeight="bold">Lập trình Ftech</Typography>
+            <Typography fontWeight="bold"  display={'flex'} alignItems={'center'}>Lập trình Ftech <SkewLoader  size={7} cssOverride={{marginLeft:'5px'}} /></Typography>
           </Link>
         )}
 

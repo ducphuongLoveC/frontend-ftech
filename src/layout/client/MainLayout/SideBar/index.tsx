@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useTheme, useMediaQuery, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { useTheme, useMediaQuery, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import { SvgIconComponent } from '@mui/icons-material'
 
 import menus, { Props as PropsMenuHome } from '@/menu-items/sidebar-home'
@@ -69,12 +69,12 @@ const SideBar: React.FC = () => {
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
-                    fontSize: downSM ? '10px' : '15px',
+                    
                   }}
                 >
                   {Icon && <Icon style={{color: theme.palette.text.primary}} />}
                 </ListItemIcon>
-                <ListItemText primary={m.title} sx={{ textAlign: 'center' }} />
+                <Typography sx={{ textAlign: 'center', fontSize: downSM ? '10px' : '13px', }} >{m.title}</Typography>
               </ListItemButton>
             </ListItem>
           )

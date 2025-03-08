@@ -1,46 +1,42 @@
-import { Accordion, AccordionSummary, Box, Typography, AccordionDetails } from '@mui/material';
-import { ExpandMore } from '@mui/icons-material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { useTheme } from '@mui/material';
-import { memo } from 'react';
-import moment from 'moment';
+import { Accordion, AccordionSummary, Box, Typography, AccordionDetails } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import { useTheme } from '@mui/material'
+import { memo } from 'react'
+import moment from 'moment'
 
-import useQueryParams from '@/hooks/useQueryParams';
+import useQueryParams from '@/hooks/useQueryParams'
 // icon
-import LockIcon from '@mui/icons-material/Lock';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import ArticleIcon from '@mui/icons-material/Article';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import QuizIcon from '@mui/icons-material/Quiz';
+import LockIcon from '@mui/icons-material/Lock'
+import PlayCircleIcon from '@mui/icons-material/PlayCircle'
+import ArticleIcon from '@mui/icons-material/Article'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import QuizIcon from '@mui/icons-material/Quiz'
+import { ScaleLoader } from 'react-spinners'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/reducer'
 interface ModuleProps {
-  isCompleted?: boolean;
-  isRedirect?: boolean;
-  styleM?: 'one' | 'two';
-  title: string;
-  items: any;
-  expanded?: boolean;
-  onClick: (e: any) => void;
+  isCompleted?: boolean
+  isRedirect?: boolean
+  styleM?: 'one' | 'two'
+  title: string
+  items: any
+  expanded?: boolean
+  onClick: (e: any) => void
 }
 
-const Module: React.FC<ModuleProps> = ({
-  isRedirect = false,
-  styleM = 'one',
-  title,
-  items,
-  expanded = false,
-  onClick,
-}) => {
-  const theme = useTheme();
+const Module: React.FC<ModuleProps> = ({ isRedirect = false, styleM = 'one', title, items, expanded = false, onClick }) => {
+  const theme = useTheme()
 
-  const query = useQueryParams();
+  const query = useQueryParams()
+
+  const isPlaying = useSelector((state: RootState) => state.mainReducer.isPlaying)
 
   const renderTitle = () => (
     <Box>
       <Box fontSize={'16px'}>
-        {styleM === 'two' &&
-          (expanded ? <RemoveIcon sx={{ fontSize: '17px' }} /> : <AddIcon sx={{ fontSize: '17px' }} />)}{' '}
-        {title}
+        {styleM === 'two' && (expanded ? <RemoveIcon sx={{ fontSize: '17px' }} /> : <AddIcon sx={{ fontSize: '17px' }} />)} {title}
         {styleM === 'two' && (
           <Box fontSize={'15px'} position={'absolute'} right={10} top={'50%'} sx={{ transform: 'translateY(-50%)' }}>
             {items.length} bài học
@@ -48,19 +44,19 @@ const Module: React.FC<ModuleProps> = ({
         )}
       </Box>
     </Box>
-  );
+  )
 
   const renderSummary = () => {
     const completedResourceTotal = () => {
-      return items.reduce((acc: number, resource: any) => acc + (resource?.progress?.is_completed ? 1 : 0), 0);
-    };
+      return items.reduce((acc: number, resource: any) => acc + (resource?.progress?.is_completed ? 1 : 0), 0)
+    }
     return (
       <Typography variant="caption">
         {`${completedResourceTotal()}/${items.length} - `}
         {moment.utc(items.reduce((acc: any, c: any) => acc + c.duration, 0) * 1000).format('HH:mm:ss')}
       </Typography>
-    );
-  };
+    )
+  }
 
   const renderItems = () =>
     items.map((item: any, idx: number) => (
@@ -82,14 +78,14 @@ const Module: React.FC<ModuleProps> = ({
             {(() => {
               switch (item.resource_type) {
                 case 'Video':
-                  return <PlayCircleIcon sx={{ fontSize: '15px' }} />;
+                  return query.get('id') == item._id && isPlaying ? <ScaleLoader width={2} height={9} margin={1} /> : <PlayCircleIcon sx={{ fontSize: '15px' }} />
                 case 'Question':
-                  return <QuizIcon sx={{ fontSize: '15px' }} />;
+                  return <QuizIcon sx={{ fontSize: '15px' }} />
                 case 'Document':
-                  return <ArticleIcon sx={{ fontSize: '15px' }} />;
+                  return <ArticleIcon sx={{ fontSize: '15px' }} />
 
                 default:
-                  return null;
+                  return null
               }
             })()}
             <Typography variant="caption" ml={1}>
@@ -108,7 +104,7 @@ const Module: React.FC<ModuleProps> = ({
           </Box>
         )}
       </Box>
-    ));
+    ))
 
   return (
     <Accordion
@@ -142,7 +138,7 @@ const Module: React.FC<ModuleProps> = ({
         {renderItems()}
       </AccordionDetails>
     </Accordion>
-  );
-};
+  )
+}
 
-export default memo(Module);
+export default memo(Module)

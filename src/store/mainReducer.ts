@@ -10,6 +10,7 @@ interface CustomizationState {
   fontFamily: string
   borderRadius: number
   opened: boolean
+  isPlaying: boolean
 }
 export const initialState: CustomizationState = {
   seek: undefined,
@@ -21,6 +22,7 @@ export const initialState: CustomizationState = {
   fontFamily: `'Roboto', sans-serif`,
   borderRadius: 5,
   opened: true,
+  isPlaying: false,
 }
 
 const mainReducer = (state = initialState, action: any) => {
@@ -68,6 +70,11 @@ const mainReducer = (state = initialState, action: any) => {
         ...state,
         borderRadius: action.borderRadius,
       }
+      case actionTypes.SET_ISPLAYING:
+        return {
+          ...state,
+          isPlaying: action.payload,
+        }
     default:
       return state
   }

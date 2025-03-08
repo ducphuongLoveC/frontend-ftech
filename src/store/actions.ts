@@ -12,6 +12,9 @@ const TOGGLE_THEME = '@home/TOGGLE_THEME';
 const SET_EXPANDED_INDEXS = '@/home/SET_EXPANDED_INDEXS';
 const SET_IS_FIRST_PLAYING_VIDEO = '@/home/SET_IS_FIRST_PLAYING_VIDEO';
 const SET_SEEK = '@/home/SET_SEEK';
+const SET_ISPLAYING = '@/home/SET_ISPLAYING';
+
+
 
 // auth
 const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
@@ -32,6 +35,7 @@ export {
   SET_EXPANDED_INDEXS,
   SET_IS_FIRST_PLAYING_VIDEO,
   SET_SEEK,
+  SET_ISPLAYING
 };
   
   export const updateUser = (userData: Partial<any>) => ({

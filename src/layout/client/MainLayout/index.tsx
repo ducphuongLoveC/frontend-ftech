@@ -1,6 +1,6 @@
 import { useTheme, Theme, Box } from '@mui/material'
 import Footer from './Footer'
-import Navbar from './Header'
+import Header from './Header'
 import SideBar from './SideBar'
 import { Outlet } from 'react-router-dom'
 // interface MainLayoutProp {
@@ -18,7 +18,8 @@ const MainLayout: React.FC = () => {
         minHeight: '100vh',
       }}
     >
-      <Navbar />
+      <Header />
+        
       <Box
         sx={{
           display: 'flex',
