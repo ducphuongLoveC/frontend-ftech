@@ -34,7 +34,7 @@ import Resource from './Resource'
 import TrackList from './TrackList'
 import { RootState } from '@/store/reducer'
 import Header from './Header/Header'
-import { SET_EXPANDED_INDEXS, SET_IS_FIRST_PLAYING_VIDEO } from '@/store/actions'
+import { SET_EXPANDED_INDEXS, SET_IS_FIRST_PLAYING_VIDEO, SET_ISPLAYING } from '@/store/actions'
 
 const LessonNavigation = styled(Box)(({ theme }) => ({
   position: 'fixed',
@@ -182,10 +182,13 @@ const Learning: React.FC = () => {
       })
 
       dispatch({ type: SET_IS_FIRST_PLAYING_VIDEO, payload: false })
-
       dispatch({
         type: SET_EXPANDED_INDEXS,
         payload: [0],
+      })
+      dispatch({
+        type: SET_ISPLAYING,
+        payload: false,
       })
     }
   }, [queryClient])
