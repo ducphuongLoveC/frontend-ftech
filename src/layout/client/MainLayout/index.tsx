@@ -33,10 +33,9 @@ const MainLayout: React.FC = () => {
               sm: '80%',
               md: '85%',
               lg: '87%',
-              xl: '90%',
+              xl: '1320px',
             },
             [`@media (min-width:1800px)`]: {
-              width: "1520px",
               margin: "auto",
             },
           }}
