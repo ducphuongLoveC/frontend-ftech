@@ -19,7 +19,7 @@ const MainLayout: React.FC = () => {
       }}
     >
       <Header />
-        
+
       <Box
         sx={{
           display: 'flex',
@@ -34,7 +34,7 @@ const MainLayout: React.FC = () => {
               sm: '80%',
               md: '85%',
               lg: '87%',
-              xl: '1420px',
+              xl: '1350px',
             },
             [`@media (min-width:1800px)`]: {
               margin: "auto",
