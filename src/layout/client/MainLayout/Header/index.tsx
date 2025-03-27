@@ -80,14 +80,14 @@ const Header = () => {
         top: 0,
         zIndex: 50,
         bgcolor: theme.palette.background.paper,
-        py: 1,
+        // py: 1,
       }}
     >
       {authState.user?.role === 'admin' && (
         <Box
           sx={{
             bgcolor: theme.palette.background.paper2,
-            p: 1,
+            // p: 1,
             display: 'flex',
             justifyContent: 'space-between',
           }}
@@ -118,7 +118,7 @@ const Header = () => {
             display: 'flex',
             alignItems: 'center',
             width: downSM ? '100%' : '33%',
-            p: '2px 8px',
+            // p: '2px 8px',
             borderRadius: '20px',
             border: '1px solid',
             borderColor: theme.palette.divider,
@@ -126,7 +126,7 @@ const Header = () => {
             marginLeft: { xs: '10px' },
           }}
         >
-          <SearchIcon sx={{ mr: 1 }} />
+          <SearchIcon sx={{ mx: 1 }} />
           <HeadlessTippy
             visible={searchValue.length > 0}
             placement="top-start"

@@ -77,7 +77,7 @@
 //       <TabPanel value={value} index={0}>
 //         <Grid container spacing={3}>
 //           {allCourses?.map((course: any, index: number) => (
-//             <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+//             <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2.4}>
 //               <CourseItem
 //                 to={`/learning/${course._id}`}
 //                 title={course.title}
@@ -103,7 +103,7 @@
 //             ) : (
 //               <Grid container spacing={3}>
 //                 {coursesByPath?.map((course: any, courseIndex: number) => (
-//                   <Grid key={courseIndex} item xs={12} sm={6} md={4} lg={3}>
+//                   <Grid key={courseIndex} item xs={12} sm={6} md={4} lg={3} xl={2.4}>
 //                     <CourseItem
 //                       to={`/learning/${course._id}`}
 //                       title={course.title}
@@ -224,7 +224,7 @@ const Course: React.FC = () => {
       <TabPanel value={value} index={0}>
         <Grid container spacing={3}>
           {paginatedCourses?.map((course: any, index: number) => (
-            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+            <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2.4}>
               <CourseItem
                 to={`/learning/${course._id}`}
                 title={course.title}
@@ -263,7 +263,7 @@ const Course: React.FC = () => {
               <Grid container spacing={3}>
                 {paginatedCoursesByPath?.length ? (
                   paginatedCoursesByPath?.map((course: any, courseIndex: number) => (
-                    <Grid key={courseIndex} item xs={12} sm={6} md={4} lg={3}>
+                    <Grid key={courseIndex} item xs={12} sm={6} md={4} lg={3} xl={2.4}>
                       <CourseItem
                         to={`/learning/${course._id}`}
                         title={course.title}

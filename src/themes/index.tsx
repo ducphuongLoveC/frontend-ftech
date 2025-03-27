@@ -1,12 +1,12 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 
 // assets
-import colors from '@/assets/scss/_themes-vars.module.scss';
+import colors from '@/assets/scss/_themes-vars.module.scss'
 
 // project imports
-import componentStyleOverrides from './compStyleOverride';
-import themePalette from './palette';
-import themeTypography from './typography';
+import componentStyleOverrides from './compStyleOverride'
+import themePalette from './palette'
+import themeTypography from './typography'
 
 /**
  * Represent theme style and structure as per Material-UI
@@ -14,8 +14,7 @@ import themeTypography from './typography';
  */
 
 export const theme = (state: any) => {
-  
-  const color = colors;
+  const color = colors
   const themeOptionsLight = {
     colors: color,
     borderColor: color.gray,
@@ -31,7 +30,7 @@ export const theme = (state: any) => {
     menuSelectedBack: color.secondaryLight,
     divider: color.grey200,
     state,
-  };
+  }
 
   const themeOptionsDark = {
     colors: color,
@@ -47,13 +46,20 @@ export const theme = (state: any) => {
     menuSelectedBack: color.secondaryDark, // Background color for selected menu item
     divider: color.grey700, // Darker divider color
     state,
-  };
+  }
 
   const themeOptions: any = {
     direction: 'ltr',
-    palette: themePalette(
-      state.theme === 'light' ? themeOptionsLight : themeOptionsDark
-    ),
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1700,
+      },
+    },
+    palette: themePalette(state.theme === 'light' ? themeOptionsLight : themeOptionsDark),
     mixins: {
       toolbar: {
         minHeight: '48px',
@@ -63,25 +69,21 @@ export const theme = (state: any) => {
         },
       },
     },
-    typography: themeTypography(
-      state.theme === 'light' ? themeOptionsLight : themeOptionsDark
-    ),
-   
-    //  components: { 
+    typography: themeTypography(state.theme === 'light' ? themeOptionsLight : themeOptionsDark),
+
+    //  components: {
     //   MuiCssBaseline: {
     //     styleOverrides: {},
     //   },
     // },
-    // classnamePrefix: 'ftech' 
-  };
+    // classnamePrefix: 'ftech'
+  }
 
-  const themes = createTheme(themeOptions);
+  const themes = createTheme(themeOptions)
 
-  themes.components = componentStyleOverrides(
-    state.theme === 'light' ? themeOptionsLight : themeOptionsDark
-  );
+  themes.components = componentStyleOverrides(state.theme === 'light' ? themeOptionsLight : themeOptionsDark)
 
-  return themes;
-};
+  return themes
+}
 
-export default theme;
+export default theme

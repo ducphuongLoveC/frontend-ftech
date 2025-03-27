@@ -5,7 +5,7 @@ const NotLoggedIn = () => {
   const theme = useTheme();
   return (
     <>
-      <ListItem sx={{ display: { xs: "none", md: "block" } }}>
+      <ListItem sx={{ display: { xs: "none", md: "block" },  }}>
         <Button
           component={Link}
           to="/auth/register"
@@ -20,7 +20,7 @@ const NotLoggedIn = () => {
           Đăng ký
         </Button>
       </ListItem>
-      <ListItem>
+      <ListItem sx={{padding: 0}}>
         <Button
           component={Link}
           to="/auth/login"
