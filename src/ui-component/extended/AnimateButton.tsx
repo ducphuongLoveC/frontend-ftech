@@ -19,10 +19,7 @@ interface AnimateButtonProps {
 // ==============================|| ANIMATION BUTTON ||============================== //
 
 const AnimateButton = React.forwardRef<HTMLDivElement, AnimateButtonProps>(
-  (
-    { children, type = 'scale', direction = 'right', offset = 10, scale },
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
+  ({ children, type = 'scale', direction = 'right', offset = 10, scale }, ref: ForwardedRef<HTMLDivElement>) => {
     let offset1: number;
     let offset2: number;
 
@@ -111,7 +108,7 @@ const AnimateButton = React.forwardRef<HTMLDivElement, AnimateButtonProps>(
           </motion.div>
         );
     }
-  }
+  },
 );
 
 export default AnimateButton;

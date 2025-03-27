@@ -1,4 +1,16 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Skeleton, TablePagination, Typography } from '@mui/material';
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Skeleton,
+  TablePagination,
+  Typography,
+} from '@mui/material';
 
 const LearningPathSkeletonList = () => {
   return (

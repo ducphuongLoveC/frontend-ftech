@@ -1,83 +1,83 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // material-ui
-import { useTheme, styled } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
-import FormControl from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormHelperText from '@mui/material/FormHelperText'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
-import InputLabel from '@mui/material/InputLabel'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import Typography from '@mui/material/Typography'
-import Stack from '@mui/material/Stack'
+import { useTheme, styled } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 
 // third-party
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 // project imports
-import AnimateButton from '@/ui-component/extended/AnimateButton'
+import AnimateButton from '@/ui-component/extended/AnimateButton';
 
 // assets
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Google from '@/assets/images/icons/social-google.svg'
-import { Link } from 'react-router-dom'
-import path from '@/constants/routes'
-import { RootState } from '@/store/reducer'
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Google from '@/assets/images/icons/social-google.svg';
+import { Link } from 'react-router-dom';
+import path from '@/constants/routes';
+import { RootState } from '@/store/reducer';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 export interface FormLoginValues {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 interface AuthLoginProps {
-  google?: boolean
-  onSubmit?: (values: FormLoginValues) => void
-  textElement?: React.ReactNode | string
+  google?: boolean;
+  onSubmit?: (values: FormLoginValues) => void;
+  textElement?: React.ReactNode | string;
 }
 
 const MainInput = styled(OutlinedInput)(() => ({
   input: {
     color: 'black',
   },
-}))
+}));
 
 // Zod validation schema
 const schema = z.object({
   email: z.string().email('Nhập đúng định dạng email').max(255, 'Email quá dài'),
   password: z.string().min(6, 'Mật khẩu đăng nhập phải hơn hoặc bằng 6 ký tự').max(255, 'Mật khẩu quá dài'),
-})
+});
 
 const AuthLogin: React.FC<AuthLoginProps> = ({ textElement, google = false, onSubmit, ...others }) => {
-  const theme: any = useTheme()
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'))
-  const customization = useSelector((state: RootState) => state.mainReducer)
-  const [checked, setChecked] = useState(true)
-  const [showPassword, setShowPassword] = useState(false)
+  const theme: any = useTheme();
+  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+  const customization = useSelector((state: RootState) => state.mainReducer);
+  const [checked, setChecked] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const googleHandler = async () => {
-    console.error('Login')
-  }
+    console.error('Login');
+  };
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   const {
     control,
@@ -89,7 +89,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ textElement, google = false, onSu
       email: '',
       password: '',
     },
-  })
+  });
 
   return (
     <>
@@ -183,7 +183,15 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ textElement, google = false, onSu
           <Controller
             name="email"
             control={control}
-            render={({ field }) => <MainInput {...field} id="outlined-adornment-email-login" type="email" label="Email Address / Username" inputProps={{}} />}
+            render={({ field }) => (
+              <MainInput
+                {...field}
+                id="outlined-adornment-email-login"
+                type="email"
+                label="Email Address / Username"
+                inputProps={{}}
+              />
+            )}
           />
           {errors.email && (
             <FormHelperText error id="standard-weight-helper-text-email-login">
@@ -210,7 +218,13 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ textElement, google = false, onSu
                 type={showPassword ? 'text' : 'password'}
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end" size="large">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                      size="large"
+                    >
                       {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
@@ -228,7 +242,17 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ textElement, google = false, onSu
         </FormControl>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-          <FormControlLabel control={<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />} label="Lưu cho lần đăng nhập sau" />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={(event) => setChecked(event.target.checked)}
+                name="checked"
+                color="primary"
+              />
+            }
+            label="Lưu cho lần đăng nhập sau"
+          />
           <Link to={path.client.auth.forgetPass}>
             <Typography
               variant="subtitle1"
@@ -268,7 +292,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ textElement, google = false, onSu
         </Box>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default AuthLogin
+export default AuthLogin;

@@ -24,10 +24,7 @@ const MobileSection: React.FC = () => {
   };
 
   const handleClose = (event: any) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event?.target as Node)
-    ) {
+    if (anchorRef.current && anchorRef.current.contains(event?.target as Node)) {
       return;
     }
     setOpen(false);

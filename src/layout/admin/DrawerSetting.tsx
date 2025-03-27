@@ -79,9 +79,6 @@ const DrawerSetting: React.FC<DrawerSettingProps> = ({ open, onClose }) => {
   };
 
   const handleToggleThemeMode = () => {
-
-    console.log(customization.theme);
-    
     const newTheme = customization.theme === 'light' ? 'dark' : 'light';
     dispatch({
       type: TOGGLE_THEME,

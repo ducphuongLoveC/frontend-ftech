@@ -1,15 +1,15 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { Card, CardContent, Typography, TextField, Button, Box, Grid, IconButton } from '@mui/material'
-import PhoneIcon from '@mui/icons-material/Phone'
-import EmailIcon from '@mui/icons-material/Email'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Card, CardContent, Typography, TextField, Button, Box, Grid, IconButton } from '@mui/material';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 interface ContactFormData {
-  name: string
-  email: string
-  phone: string
-  message: string
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
 }
 
 const Contact: React.FC = () => {
@@ -17,11 +17,11 @@ const Contact: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ContactFormData>()
+  } = useForm<ContactFormData>();
 
   const onSubmit = (data: ContactFormData) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
     <Box sx={{ p: 3 }}>
@@ -31,8 +31,8 @@ const Contact: React.FC = () => {
             Liên hệ
           </Typography>
           <Typography variant="body1" paragraph>
-            Chúng tôi luôn lắng nghe và tiếp nhận mọi ý kiến đóng góp của bạn. Hãy liên hệ với chúng mình bằng cách điền thông tin vào form dưới đây. Chúng mình sẽ phản hồi bạn trong thời gian sớm
-            nhất.
+            Chúng tôi luôn lắng nghe và tiếp nhận mọi ý kiến đóng góp của bạn. Hãy liên hệ với chúng mình bằng cách điền
+            thông tin vào form dưới đây. Chúng mình sẽ phản hồi bạn trong thời gian sớm nhất.
           </Typography>
         </CardContent>
       </Card>
@@ -49,7 +49,9 @@ const Contact: React.FC = () => {
               <IconButton>
                 <LocationOnIcon />
               </IconButton>
-              <Typography variant="body1">Địa chỉ: Tòa nhà FPT Polytechnic, Xuân Phương, Nam Từ Liêm, Hà Nội</Typography>
+              <Typography variant="body1">
+                Địa chỉ: Tòa nhà FPT Polytechnic, Xuân Phương, Nam Từ Liêm, Hà Nội
+              </Typography>
             </Box>
             <Box display="flex" alignItems="center">
               <IconButton>
@@ -61,9 +63,30 @@ const Contact: React.FC = () => {
           <Card>
             <CardContent>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField fullWidth label="Họ và tên *" margin="normal" {...register('name', { required: true })} error={!!errors.name} helperText={errors.name && 'Vui lòng nhập họ tên.'} />
-                <TextField fullWidth label="Email" margin="normal" {...register('email', { required: true })} error={!!errors.email} helperText={errors.email && 'Vui lòng nhập email hợp lệ.'} />
-                <TextField fullWidth label="Điện thoại" margin="normal" {...register('phone', { required: true })} error={!!errors.phone} helperText={errors.phone && 'Vui lòng nhập số điện thoại.'} />
+                <TextField
+                  fullWidth
+                  label="Họ và tên *"
+                  margin="normal"
+                  {...register('name', { required: true })}
+                  error={!!errors.name}
+                  helperText={errors.name && 'Vui lòng nhập họ tên.'}
+                />
+                <TextField
+                  fullWidth
+                  label="Email"
+                  margin="normal"
+                  {...register('email', { required: true })}
+                  error={!!errors.email}
+                  helperText={errors.email && 'Vui lòng nhập email hợp lệ.'}
+                />
+                <TextField
+                  fullWidth
+                  label="Điện thoại"
+                  margin="normal"
+                  {...register('phone', { required: true })}
+                  error={!!errors.phone}
+                  helperText={errors.phone && 'Vui lòng nhập số điện thoại.'}
+                />
                 <TextField
                   fullWidth
                   label="Nội dung"
@@ -98,7 +121,7 @@ const Contact: React.FC = () => {
         </Grid>
       </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

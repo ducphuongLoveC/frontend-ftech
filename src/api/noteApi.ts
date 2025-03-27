@@ -28,7 +28,7 @@ export const getNotes = async (resource_id: string, user_id: string, queries: an
     .join('&');
   try {
     const { data } = await axiosInstance.get(
-      `api/note?resource_id=${resource_id}&user_id=${user_id}${queryString ? `&${queryString}` : ''}`
+      `api/note?resource_id=${resource_id}&user_id=${user_id}${queryString ? `&${queryString}` : ''}`,
     );
     return data.notes;
   } catch (error) {

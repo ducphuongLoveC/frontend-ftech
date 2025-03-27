@@ -15,7 +15,15 @@ export const createOrder = async ({
   code?: string;
   email: string;
 }) => {
-  const res = await axiosInstance.post(`api/order`, { user_id, course_id, payment_method, amount, code, email, test: '123' });
+  const res = await axiosInstance.post(`api/order`, {
+    user_id,
+    course_id,
+    payment_method,
+    amount,
+    code,
+    email,
+    test: '123',
+  });
   return res.data;
 };
 

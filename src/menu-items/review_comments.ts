@@ -36,5 +36,4 @@ const review_comments = {
   ],
 };
 
-
 export default review_comments;

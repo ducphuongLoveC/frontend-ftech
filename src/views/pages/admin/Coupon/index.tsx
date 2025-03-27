@@ -265,8 +265,6 @@ const Coupon: React.FC = () => {
         page={params.page - 1}
         rowsPerPage={params?.limit}
         onPageChange={(_event, newPage) => {
-          console.log(newPage);
-
           setParams((pre: any) => ({ ...pre, page: newPage + 1 }));
           // query.set('page', (newPage + 1).toString());
         }}

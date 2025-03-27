@@ -2,10 +2,7 @@ import { Dialog, DialogContent, Typography } from '@mui/material';
 import { BeatLoader } from 'react-spinners';
 export default function Loading() {
   return (
-    <Dialog
-      open={true} 
-      disableEscapeKeyDown={true}
-    >
+    <Dialog open={true} disableEscapeKeyDown={true}>
       <DialogContent
         sx={{
           display: 'flex',

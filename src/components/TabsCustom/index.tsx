@@ -5,7 +5,7 @@ import TabPanel from './TabPanel';
 export interface TabsCustomProps {
   labels: string[] | React.ReactNode[];
   contents: React.ReactNode[];
-  onChange: ()=> void;
+  onChange: () => void;
 }
 
 const TabsCustom: React.FC<TabsCustomProps> = ({ labels, contents, onChange }) => {
@@ -32,7 +32,7 @@ const TabsCustom: React.FC<TabsCustomProps> = ({ labels, contents, onChange }) =
           '& .MuiTabs-indicator': {
             backgroundColor: theme.palette.text.primary,
           },
-          boxShadow: "var(--main-box-shadow)"
+          boxShadow: 'var(--main-box-shadow)',
         }}
       >
         {labels.map((label, index) => (

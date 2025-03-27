@@ -40,9 +40,7 @@ const StudentList = () => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredRows = rows.filter((row) =>
-    row.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredRows = rows.filter((row) => row.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   if (loading) return <Typography>Loading...</Typography>;
   if (error) return <Typography>Error: {error}</Typography>;
@@ -52,17 +50,17 @@ const StudentList = () => {
   return (
     <Box>
       <HeaderTitle des="Đây là trang chi danh sách người dùng" />
-      
+
       {/* Tìm kiếm người dùng */}
-       <Box sx={{ mb: 2, p: 2 }} component={Paper}>
-      <TextField
-        label="Tìm kiếm theo tên"
-        variant="outlined"
-        fullWidth
-        value={searchQuery}
-        onChange={handleSearchChange}
-        sx={{ marginBottom: 2 }}
-      />
+      <Box sx={{ mb: 2, p: 2 }} component={Paper}>
+        <TextField
+          label="Tìm kiếm theo tên"
+          variant="outlined"
+          fullWidth
+          value={searchQuery}
+          onChange={handleSearchChange}
+          sx={{ marginBottom: 2 }}
+        />
       </Box>
       <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
         <Table>

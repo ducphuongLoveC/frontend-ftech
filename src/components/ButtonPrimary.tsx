@@ -7,15 +7,10 @@ interface ButtonPrimaryProps extends Omit<ButtonProps, 'variant'> {
   customVariant?: 'outlined' | 'primary';
 }
 
-const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({
-  children,
-  customVariant = 'primary',
-  ...props
-}) => {
+const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ children, customVariant = 'primary', ...props }) => {
   const theme = useTheme();
 
   let sxes = {
-
     padding: 'var(--medium-p) 50px',
     ...(props.sx || {}),
   };

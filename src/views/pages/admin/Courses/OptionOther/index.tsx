@@ -99,7 +99,7 @@ const OptionOther = forwardRef(({ defaultValue }: any, ref) => {
     const outcomes = watch('learning_outcomes');
     setValue(
       'learning_outcomes',
-      outcomes.filter((_, i) => i !== index)
+      outcomes.filter((_, i) => i !== index),
     );
   };
 
@@ -117,8 +117,8 @@ const OptionOther = forwardRef(({ defaultValue }: any, ref) => {
   };
 
   const onSubmit = (data: CourseData) => {
-    console.log(data);
     alert('Dữ liệu đã được in ra console');
+    console.log(data);
   };
 
   const options = useMemo(() => {

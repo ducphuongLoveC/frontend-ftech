@@ -9,11 +9,7 @@ interface TabPanelProps {
 
 const TabPanel: React.FC<TabPanelProps> = ({ children, index, value }) => {
   return (
-    <div
-      role="tabpanel"
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-    >
+    <div role="tabpanel" id={`tabpanel-${index}`} aria-labelledby={`tab-${index}`}>
       {/* Luôn render nội dung */}
       <Box p={2} hidden={value !== index}>
         {children}

@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -46,7 +46,6 @@ const difficultyLevels = [
 ];
 
 export default function CreateCodePractice() {
-    
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [codeTemplate, setCodeTemplate] = useState('// Start coding here...');
@@ -88,7 +87,6 @@ export default function CreateCodePractice() {
       problemType,
       testCases,
     };
-    console.log('Problem created:', problemData);
     setSnackbar({ open: true, message: 'Problem created successfully!', severity: 'success' });
   };
 
@@ -176,7 +174,7 @@ export default function CreateCodePractice() {
             <Typography variant="h6" gutterBottom>
               Code mẫu cho trước
             </Typography>
-            <Paper sx={{bgcolor: 'background.default' }}>
+            <Paper sx={{ bgcolor: 'background.default' }}>
               <Editor
                 height="300px"
                 language={problemType}

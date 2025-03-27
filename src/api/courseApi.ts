@@ -13,7 +13,6 @@ export const getSingleCourseById = async (id: string) => {
   }
 };
 export const getCourseList = async (params: {}) => {
-  console.log(params);
   const res = await axiosInstance.get(`api/courses/modules-resources`, {
     params,
   });
@@ -47,7 +46,6 @@ export const newCourse = async (data: any) => {
   // Append the main course data
   // formData.append('learning_path_id', data?.learning_path_id || '');
   if (Array.isArray(data.learning_path_ids)) {
-    console.log('check');
     data.learning_path_ids.forEach((id: string) => formData.append('learning_path_ids[]', id));
   }
   formData.append('user_id', data.user_id || '');
@@ -100,25 +98,25 @@ export const newCourse = async (data: any) => {
             // Append question text
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][question]`,
-              question.question
+              question.question,
             );
 
             // Append options
             Object.keys(question.options).forEach((optionKey) => {
               formData.append(
                 `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][options][${optionKey}]`,
-                question.options[optionKey]
+                question.options[optionKey],
               );
             });
 
             // Append the correct answer
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][correctAnswer]`,
-              question.correctAnswer // You need to ensure that this field is correctly mapped in your schema
+              question.correctAnswer, // You need to ensure that this field is correctly mapped in your schema
             );
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][hint]`,
-              question.hint
+              question.hint,
             );
           });
           break;
@@ -146,7 +144,6 @@ export const updateCourse = async (id: string, data: any) => {
   // formData.append('learning_path_id', data?.learning_path_id || '');
 
   if (Array.isArray(data.learning_path_ids)) {
-    console.log('check');
     data.learning_path_ids.forEach((id: string) => formData.append('learning_path_ids[]', id));
   }
 
@@ -203,30 +200,30 @@ export const updateCourse = async (id: string, data: any) => {
           resource.questions.forEach((question: any, questionIndex: number) => {
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][_id]`,
-              question._id || ''
+              question._id || '',
             );
             // Append question text
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][question]`,
-              question.question
+              question.question,
             );
 
             // Append options
             Object.keys(question.options).forEach((optionKey) => {
               formData.append(
                 `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][options][${optionKey}]`,
-                question.options[optionKey]
+                question.options[optionKey],
               );
             });
 
             // Append the correct answer
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][correctAnswer]`,
-              question.correctAnswer // You need to ensure that this field is correctly mapped in your schema
+              question.correctAnswer, // You need to ensure that this field is correctly mapped in your schema
             );
             formData.append(
               `modules[${moduleIndex}][resources][${resourceIndex}][questions][${questionIndex}][hint]`,
-              question.hint
+              question.hint,
             );
           });
 

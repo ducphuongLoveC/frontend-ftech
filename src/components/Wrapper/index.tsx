@@ -12,7 +12,7 @@ const Wrapper: React.FC<BoxProps> = ({ children, sx, ...props }) => (
       marginTop: '12px',
       borderRadius: '10px',
       boxShadow: '0 -4px 32px #0003',
-      ...sx, 
+      ...sx,
     }}
     {...props}
   >

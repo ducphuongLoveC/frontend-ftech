@@ -19,9 +19,7 @@ const PostItem: React.FC<PostItemProps> = ({ thumbnail, title, postUser }) => {
   return (
     <WrapperCard>
       <CustomCardMedia image={thumbnail} />
-      <Box
-        sx={{ padding: 3, backgroundColor: theme.palette.background.paper2 }}
-      >
+      <Box sx={{ padding: 3, backgroundColor: theme.palette.background.paper2 }}>
         <Typography mb={1} variant="body1">
           Đăng bởi {postUser}
         </Typography>

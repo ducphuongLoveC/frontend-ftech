@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Box, TextField } from '@mui/material';
 
-const OTPInput: React.FC<{ length?: number; onComplete: (otp: string) => void }> = ({
-  length = 6,
-  onComplete,
-}) => {
+const OTPInput: React.FC<{ length?: number; onComplete: (otp: string) => void }> = ({ length = 6, onComplete }) => {
   const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
 
   const handleChange = (value: string, index: number) => {

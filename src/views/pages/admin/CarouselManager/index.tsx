@@ -1,5 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Grid, TextField, Typography, Paper, TableRow, TableCell, IconButton, Tooltip, Collapse, TableContainer, Table, TableHead, TableBody, Backdrop, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  Paper,
+  TableRow,
+  TableCell,
+  IconButton,
+  Tooltip,
+  Collapse,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  Backdrop,
+  CircularProgress,
+} from '@mui/material';
 import axiosInstance from '@/api/axiosInstance';
 import Dialog from '@/components/Dialog';
 import HeaderTitle from '../Title';
@@ -25,7 +43,7 @@ const CarouselManager: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [_error, setError] = useState<string | null>(null);
   const [carouselToDelete, setCarouselToDelete] = useState<string | null>(null);
-  const [editCarouselId, setEditCarouselId] = useState<string | null>(null);  // For editing
+  const [editCarouselId, setEditCarouselId] = useState<string | null>(null); // For editing
 
   const handleToggler = (index: number) => {
     if (isIndexOpens.includes(index)) {
@@ -108,9 +126,7 @@ const CarouselManager: React.FC = () => {
         // Update state for carousel list
         if (editCarouselId) {
           setCarousels((prevCarousels) =>
-            prevCarousels.map((carousel) =>
-              carousel._id === editCarouselId ? response.data.data : carousel
-            )
+            prevCarousels.map((carousel) => (carousel._id === editCarouselId ? response.data.data : carousel)),
           );
           alert('Carousel đã được sửa thành công!');
         } else {
@@ -124,10 +140,9 @@ const CarouselManager: React.FC = () => {
         setEditCarouselId(null);
         setError(null);
         setOpenDialog(false);
-
       } else {
         // Kiểm tra thông điệp lỗi từ backend
-        if (response.data.message === "Đã đạt giới hạn 10 carousel, không thể tạo thêm") {
+        if (response.data.message === 'Đã đạt giới hạn 10 carousel, không thể tạo thêm') {
           setError('Đã đạt giới hạn 10 carousel, không thể tạo thêm');
           alert('Không thể tạo thêm carousel, đã đạt giới hạn!');
         } else {
@@ -150,9 +165,7 @@ const CarouselManager: React.FC = () => {
     try {
       const response = await axiosInstance.delete(`/api/carousel/${carouselToDelete}`);
       if (response.data.success) {
-        setCarousels((prevCarousels) =>
-          prevCarousels.filter((carousel) => carousel._id !== carouselToDelete)
-        );
+        setCarousels((prevCarousels) => prevCarousels.filter((carousel) => carousel._id !== carouselToDelete));
         alert('Carousel đã được xóa thành công!');
         setError(null);
       } else {
@@ -190,7 +203,7 @@ const CarouselManager: React.FC = () => {
       description: carousel.description,
     });
     setSelectedColor(carousel.background);
-    setEditCarouselId(carousel._id);  // Set the carousel ID for editing
+    setEditCarouselId(carousel._id); // Set the carousel ID for editing
     setOpenDialog(true);
   };
 
@@ -203,7 +216,7 @@ const CarouselManager: React.FC = () => {
       <HeaderTitle des="Quản lý banner" titleButton="Tạo carousel" onClick={() => setOpenDialog(true)} />
       <Box component={Paper} sx={{ padding: '20px' }}>
         <TabsCustom
-          onChange={() => { }}
+          onChange={() => {}}
           labels={['Xem trước', 'Dữ liệu']}
           contents={[
             <Carousel dot sliders={carousels.length > 0 ? carousels : []} />,
@@ -233,10 +246,7 @@ const CarouselManager: React.FC = () => {
                           <TableCell>{carousel.path}</TableCell>
                           <TableCell align="right">
                             <Tooltip title="Sửa">
-                              <IconButton
-                                color="primary"
-                                onClick={() => handleEdit(carousel)}
-                              >
+                              <IconButton color="primary" onClick={() => handleEdit(carousel)}>
                                 <Edit />
                               </IconButton>
                             </Tooltip>
@@ -320,7 +330,11 @@ const CarouselManager: React.FC = () => {
                                     padding: '10px',
                                   }}
                                 >
-                                  <img src={carousel.image} alt={carousel.title} style={{ height: '100%', objectFit: 'contain' }} />
+                                  <img
+                                    src={carousel.image}
+                                    alt={carousel.title}
+                                    style={{ height: '100%', objectFit: 'contain' }}
+                                  />
                                 </Box>
                               </Box>
                             </Collapse>
@@ -331,7 +345,7 @@ const CarouselManager: React.FC = () => {
                   )}
                 </TableBody>
               </Table>
-            </TableContainer>
+            </TableContainer>,
           ]}
         />
       </Box>
@@ -339,22 +353,10 @@ const CarouselManager: React.FC = () => {
       <Dialog open={openDialog} title={editCarouselId ? 'Sửa carousel' : 'Tạo carousel'} onClose={handleCloseDialog}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              label="Tên Carousel"
-              name="title"
-              fullWidth
-              value={newCarousel.title}
-              onChange={handleChange}
-            />
+            <TextField label="Tên Carousel" name="title" fullWidth value={newCarousel.title} onChange={handleChange} />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Đường dẫn"
-              name="path"
-              fullWidth
-              value={newCarousel.path}
-              onChange={handleChange}
-            />
+            <TextField label="Đường dẫn" name="path" fullWidth value={newCarousel.path} onChange={handleChange} />
           </Grid>
           <Grid item xs={12}>
             <TextField

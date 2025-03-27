@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { BrowserRouter , Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RouteProp from '@/interfaces/route';
 
 import mainRoutes from './mainRoutes';
@@ -23,7 +23,7 @@ const createRoutes = (routes: RouteProp[]) => {
           const Page = route.page;
           const WrappedPage = Middlewares.reduceRight(
             (child, Middleware) => <Middleware>{child}</Middleware>,
-            <Page />
+            <Page />,
           );
           return <Route key={index} path={route.path} element={<Layout>{WrappedPage}</Layout>} />;
         })}

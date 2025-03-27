@@ -1,32 +1,34 @@
-import React, { memo } from 'react'
-import { Typography, Box, useTheme, IconButton } from '@mui/material'
+import React, { memo } from 'react';
+import { Typography, Box, useTheme, IconButton } from '@mui/material';
 
 // redux
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
-import PerfectScrollbar from 'react-perfect-scrollbar'
-import Module from '@/components/Module'
-import CloseIcon from '@mui/icons-material/Close'
-import { Resource } from '@/interfaces/course'
-import { RootState } from '@/store/reducer'
-import { SET_EXPANDED_INDEXS } from '@/store/actions'
-import { ArrowDownward, ArrowUpward } from '@mui/icons-material'
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import Module from '@/components/Module';
+import CloseIcon from '@mui/icons-material/Close';
+import { Resource } from '@/interfaces/course';
+import { RootState } from '@/store/reducer';
+import { SET_EXPANDED_INDEXS } from '@/store/actions';
+import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
 
 interface LearningListProps {
-  modules: { title: string; resources: Resource }[]
-  onClose: () => void
+  modules: { title: string; resources: Resource }[];
+  onClose: () => void;
 }
 const LearningList: React.FC<LearningListProps> = memo(({ onClose, modules }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const storedExpandedIndexs = useSelector((state: RootState) => state.mainReducer.expandedIndexs)
+  const storedExpandedIndexs = useSelector((state: RootState) => state.mainReducer.expandedIndexs);
 
   const handleToggleExpanded = (index: number) => {
     dispatch({
       type: SET_EXPANDED_INDEXS,
-      payload: storedExpandedIndexs.includes(index) ? storedExpandedIndexs.filter((i: number) => i !== index) : [...storedExpandedIndexs, index],
-    })
-  }
+      payload: storedExpandedIndexs.includes(index)
+        ? storedExpandedIndexs.filter((i: number) => i !== index)
+        : [...storedExpandedIndexs, index],
+    });
+  };
 
   const handleToggleExpandedAll = () => {
     dispatch({
@@ -37,9 +39,9 @@ const LearningList: React.FC<LearningListProps> = memo(({ onClose, modules }) =>
           : Array(modules.length)
               .fill(0)
               .map((_, index: number) => index),
-    })
-  }
-  const theme = useTheme()
+    });
+  };
+  const theme = useTheme();
 
   return (
     <PerfectScrollbar
@@ -84,11 +86,18 @@ const LearningList: React.FC<LearningListProps> = memo(({ onClose, modules }) =>
       </Box>
       <Box>
         {modules.map((module, index) => (
-          <Module isRedirect onClick={() => handleToggleExpanded(index)} expanded={storedExpandedIndexs.includes(index)} key={index} title={module.title} items={module.resources} />
+          <Module
+            isRedirect
+            onClick={() => handleToggleExpanded(index)}
+            expanded={storedExpandedIndexs.includes(index)}
+            key={index}
+            title={module.title}
+            items={module.resources}
+          />
         ))}
       </Box>
     </PerfectScrollbar>
-  )
-})
+  );
+});
 
-export default LearningList
+export default LearningList;

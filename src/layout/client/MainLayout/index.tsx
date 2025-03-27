@@ -1,8 +1,8 @@
-import { useTheme, Theme, Box, useMediaQuery } from '@mui/material'
-import Footer from './Footer'
-import Header from './Header'
-import SideBar from './SideBar'
-import { Outlet } from 'react-router-dom'
+import { useTheme, Theme, Box, useMediaQuery } from '@mui/material';
+import Footer from './Footer';
+import Header from './Header';
+import SideBar from './SideBar';
+import { Outlet } from 'react-router-dom';
 // interface MainLayoutProp {
 //   children: React.ReactNode;
 // }
@@ -11,8 +11,7 @@ import { Outlet } from 'react-router-dom'
 const MainLayout: React.FC = () => {
   const theme: Theme = useTheme();
 
-    const downMD = useMediaQuery(theme.breakpoints.down('md'))
-  
+  const downMD = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Box
@@ -38,10 +37,6 @@ const MainLayout: React.FC = () => {
               md: '84%',
               lg: '87%',
             },
-            [`@media (min-width:1600px)`]: {
-              width: '100%',
-              paddingRight: '11%',
-            },
             [`@media (min-width:2000px)`]: {
               width: '1630px',
               margin: 'auto',
@@ -57,7 +52,7 @@ const MainLayout: React.FC = () => {
       </Box>
       <Footer />
     </Box>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;

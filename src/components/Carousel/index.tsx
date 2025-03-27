@@ -181,7 +181,7 @@ const Carousel: React.FC<CarouselProps> = ({ dot = false, time = 4000, auto = fa
                   display: { xs: 'none', sm: 'flex' },
                   justifyContent: 'center',
                   alignItems: 'center',
-                  flex:0.9
+                  flex: 0.9,
                 }}
               >
                 <img src={slider.image} alt={slider.title} style={{ height: '100%', objectFit: 'contain' }} />

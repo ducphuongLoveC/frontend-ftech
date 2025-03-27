@@ -65,7 +65,7 @@ const ForgetPassword: React.FC = () => {
   const { mutate: mttResetPassword, isPending: isPendingResetPassword } = useMutation({
     mutationKey: ['reset_password'],
     mutationFn: (data: any) => resetPassword({ email: email, ...data }),
-    onSuccess: async({ data }) => {
+    onSuccess: async ({ data }) => {
       toast.success(data.message);
       await sleep(1000);
       navigate(path.client.auth.login);

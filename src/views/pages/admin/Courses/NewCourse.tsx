@@ -33,7 +33,6 @@ const NewCourse: React.FC = () => {
   });
 
   const handleNewCourse = async (course: Course) => {
-    console.log(course);
     mutation.mutate(course);
   };
 

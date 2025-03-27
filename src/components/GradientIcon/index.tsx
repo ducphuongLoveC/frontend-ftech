@@ -11,28 +11,13 @@ const GradientIcon: React.FC<Prop> = ({ children }) => {
       <defs>
         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="red">
-            <animate
-              attributeName="stop-color"
-              values="red;yellow;green;red"
-              dur="4s"
-              repeatCount="indefinite"
-            />
+            <animate attributeName="stop-color" values="red;yellow;green;red" dur="4s" repeatCount="indefinite" />
           </stop>
           <stop offset="50%" stopColor="yellow">
-            <animate
-              attributeName="stop-color"
-              values="yellow;green;red;yellow"
-              dur="4s"
-              repeatCount="indefinite"
-            />
+            <animate attributeName="stop-color" values="yellow;green;red;yellow" dur="4s" repeatCount="indefinite" />
           </stop>
           <stop offset="100%" stopColor="green">
-            <animate
-              attributeName="stop-color"
-              values="green;red;yellow;green"
-              dur="4s"
-              repeatCount="indefinite"
-            />
+            <animate attributeName="stop-color" values="green;red;yellow;green" dur="4s" repeatCount="indefinite" />
           </stop>
         </linearGradient>
       </defs>

@@ -23,7 +23,6 @@ const CustomCardMedia = styled(CardMedia)({
 
 const MyCourses: React.FC = () => {
   const user = useSelector((state: RootState) => state.authReducer.user);
-  console.log(user);
 
   const theme = useTheme();
   const { data: coursesWithProgress, isLoading } = useQuery({

@@ -1,12 +1,10 @@
 const Articlecategory = () => {
   return (
     <>
-     <div className="bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl shadow-lg">
+      <div className="bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl shadow-lg">
         <form>
           <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">
-              Tên danh mục
-            </label>
+            <label className="block text-gray-700 font-medium mb-2">Tên danh mục</label>
             <input
               type="text"
               className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-purple-500 transition duration-200"
@@ -15,9 +13,7 @@ const Articlecategory = () => {
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">
-              Message
-            </label>
+            <label className="block text-gray-700 font-medium mb-2">Message</label>
             <textarea
               name="message"
               placeholder="Nhập nội dung của bạn ở đây"
@@ -26,9 +22,7 @@ const Articlecategory = () => {
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">
-              Ảnh danh mục
-            </label>
+            <label className="block text-gray-700 font-medium mb-2">Ảnh danh mục</label>
             <input
               type="file"
               className="border-solid border-2 border-gray-300 w-full py-2 bg-gray-50 rounded-lg px-3 focus:outline-none focus:border-blue-400 transition duration-200"
@@ -52,8 +46,8 @@ const Articlecategory = () => {
           </div>
         </form>
       </div>
-  </>
-  )
-}
+    </>
+  );
+};
 
-export default Articlecategory
+export default Articlecategory;

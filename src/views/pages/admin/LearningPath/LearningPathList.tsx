@@ -118,8 +118,6 @@ export default function LearningPathList() {
   }, [debouncedSearchValue]);
 
   useEffect(() => {
-    console.log(refInput);
-
     refInput.current?.focus();
   }, [data, debouncedSearchValue]);
 
@@ -172,8 +170,6 @@ export default function LearningPathList() {
   };
 
   const onSubmit = (data: LearningPath) => {
-    console.log('Saving changes:', data);
-
     switch (editMode) {
       case 'create':
         handleCreate(data);

@@ -6,7 +6,7 @@ export interface SectionItem {
   section: string;
 }
 interface SectionProps {
-    data: SectionItem[]
+  data: SectionItem[];
   onChange: (section: SectionItem) => void;
 }
 
@@ -25,8 +25,7 @@ const Section: React.FC<SectionProps> = ({ data, onChange }) => {
     >
       <h2 className="tw-text-2xl  tw-font-bold tw-mb-3">Cài đặt tài khoản</h2>
       <p className="tw-mb-3 tw-text-xs ">
-        Quản lý cài đặt tài khoản của bạn như thông tin cá nhân, cài đặt bảo
-        mật, quản lý thông báo, v.v.
+        Quản lý cài đặt tài khoản của bạn như thông tin cá nhân, cài đặt bảo mật, quản lý thông báo, v.v.
       </p>
       <div className="tw-space-y-4">
         {data.map((s: SectionItem) => (

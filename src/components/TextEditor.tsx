@@ -179,13 +179,13 @@ const TextEditor: React.FC<TextEditorProps> = ({
       'wordcount',
       'fontsize', // Plugin cho font size
       'fontfamily', // Plugin cho font family
-      'codesample'
+      'codesample',
     ],
     toolbar:
       'undo redo | formatselect fontfamily fontsize | bold italic underline strikethrough | \
       forecolor backcolor | alignleft aligncenter alignright alignjustify | \
       bullist numlist outdent indent | table link image media | preview fullscreen | codesample',
-      
+
     toolbar_mode: 'sliding' as 'sliding', // Đảm bảo định dạng kiểu
     content_style: `
       body {

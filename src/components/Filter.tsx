@@ -28,8 +28,6 @@ const FilterComponent: React.FC<FilterProps> = ({ filters, onFilter }) => {
   };
 
   const handleFilter = () => {
-    console.log(selectedFilters);
-
     const data = Object.keys(selectedFilters).reduce(
       (result, filterName) => {
         const selectedItems = selectedFilters[filterName];
@@ -50,7 +48,7 @@ const FilterComponent: React.FC<FilterProps> = ({ filters, onFilter }) => {
 
         return result;
       },
-      {} as Record<string, any>
+      {} as Record<string, any>,
     );
 
     // Gửi kết quả filter với searchText và các giá trị lọc

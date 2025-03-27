@@ -74,10 +74,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ isLoading, onSubmit, ...other
     } else {
       setCaptchaError('');
     }
-    console.log(result);
   };
-
-  console.log(captchaVerified);
 
   return (
     <form

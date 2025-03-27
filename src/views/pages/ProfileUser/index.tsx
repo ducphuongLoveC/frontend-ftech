@@ -1,18 +1,16 @@
-
-
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "@/api/axiosInstance";
-import { useUserCourses } from "@/api/useUserCourses";
-import useQueryParams from "@/hooks/useQueryParams";
-import { User } from "@/store/authReducer";
-import { Box, Typography, Avatar, Paper, Link, Grid, Container, useMediaQuery } from "@mui/material";
-import { PersonPinCircleRounded, CheckCircle } from "@mui/icons-material";
-import Progress from "@/components/Progress";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '@/api/axiosInstance';
+import { useUserCourses } from '@/api/useUserCourses';
+import useQueryParams from '@/hooks/useQueryParams';
+import { User } from '@/store/authReducer';
+import { Box, Typography, Avatar, Paper, Link, Grid, Container, useMediaQuery } from '@mui/material';
+import { PersonPinCircleRounded, CheckCircle } from '@mui/icons-material';
+import Progress from '@/components/Progress';
 
 const ProFile = () => {
   const query = useQueryParams();
-  const userIdFromURL = query.get("id");
+  const userIdFromURL = query.get('id');
   const navigate = useNavigate();
   const { courses, coursesError } = useUserCourses(userIdFromURL);
   const [user, setUser] = useState<User | null>(null);
@@ -29,13 +27,13 @@ const ProFile = () => {
               setUser(response.data.data);
               setError(null);
             } else {
-              setError("Không tìm thấy người dùng với ID này.");
+              setError('Không tìm thấy người dùng với ID này.');
             }
           } else {
-            setError("Không tìm thấy người dùng với ID này.");
+            setError('Không tìm thấy người dùng với ID này.');
           }
         } catch (error) {
-          setError("Lỗi khi lấy thông tin người dùng.");
+          setError('Lỗi khi lấy thông tin người dùng.');
         }
       }
     };
@@ -44,7 +42,7 @@ const ProFile = () => {
 
   useEffect(() => {
     if (error) {
-      navigate("/notfound");
+      navigate('/notfound');
     }
   }, [error, navigate]);
 
@@ -54,49 +52,49 @@ const ProFile = () => {
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + "...";
+      return text.substring(0, maxLength) + '...';
     }
     return text;
   };
 
   return (
     <Container>
-      <Box sx={{ position: "relative" }}>
+      <Box sx={{ position: 'relative' }}>
         <Box
           sx={{
-            margin: "auto",
-            width: "100%",
+            margin: 'auto',
+            width: '100%',
             height: isMobile ? 150 : 308,
-            borderRadius: "0px 0px 20px 20px",
-            overflow: "hidden",
-            position: "relative",
+            borderRadius: '0px 0px 20px 20px',
+            overflow: 'hidden',
+            position: 'relative',
           }}
         >
           <img
             src="/images/banner-user.png"
             alt="Banner"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </Box>
 
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "relative",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
             top: isMobile ? -50 : -80,
             left: isMobile ? 0 : -280,
           }}
         >
           <Avatar
-            src={user?.profile_picture || "default-avatar.png"}
+            src={user?.profile_picture || 'default-avatar.png'}
             alt="Avatar"
             sx={{
               width: isMobile ? 100 : 172,
               height: isMobile ? 100 : 172,
-              borderRadius: "50%",
-              border: "4px solid white",
+              borderRadius: '50%',
+              border: '4px solid white',
             }}
           />
           <Typography
@@ -104,17 +102,17 @@ const ProFile = () => {
             sx={{
               marginLeft: 2,
               fontSize: isMobile ? 20 : 30,
-              fontWeight: "bold",
-              color: "black",
+              fontWeight: 'bold',
+              color: 'black',
               marginTop: isMobile ? 3 : 6,
             }}
           >
-            {user?.name || "Tên người dùng"}
-            {user?.role === "admin" && (
+            {user?.name || 'Tên người dùng'}
+            {user?.role === 'admin' && (
               <CheckCircle
                 sx={{
-                  fontSize: "var(--medium-icon)",
-                  color: "primary.main",
+                  fontSize: 'var(--medium-icon)',
+                  color: 'primary.main',
                   ml: 1,
                 }}
               />
@@ -127,24 +125,20 @@ const ProFile = () => {
             <Paper
               sx={{
                 padding: 2,
-                background: "#fff",
-                borderRadius: "10px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                background: '#fff',
+                borderRadius: '10px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               }}
             >
               <Typography variant="h6" sx={{ fontSize: 16, marginBottom: 1 }}>
                 Giới thiệu
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Typography variant="body2">
-                  Biệt danh: {user?.referring}
-                </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="body2">Biệt danh: {user?.referring}</Typography>
                 <PersonPinCircleRounded />
                 <Typography variant="body2">
-                  Thành viên của Ftech - Ngày tham gia:{" "}
-                  {user?.createdAt
-                    ? new Date(user.createdAt).toLocaleDateString()
-                    : "Chưa có thông tin"}
+                  Thành viên của Ftech - Ngày tham gia:{' '}
+                  {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Chưa có thông tin'}
                 </Typography>
               </Box>
             </Paper>
@@ -153,9 +147,9 @@ const ProFile = () => {
               sx={{
                 marginTop: 2,
                 padding: 2,
-                background: "#fff",
-                borderRadius: "10px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                background: '#fff',
+                borderRadius: '10px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               }}
             >
               <Typography variant="h6" sx={{ fontSize: 16, marginBottom: 1 }}>
@@ -169,19 +163,17 @@ const ProFile = () => {
             <Typography variant="h6" sx={{ fontSize: 16, marginBottom: 2 }}>
               Các khóa học đã tham gia
             </Typography>
-            {coursesError && (
-              <Typography color="error">{coursesError}</Typography>
-            )}
+            {coursesError && <Typography color="error">{coursesError}</Typography>}
             {courses.length > 0 ? (
               courses.map((course, index) => (
                 <Box
                   key={index}
                   sx={{
-                    borderBottom: "1px solid #ccc",
-                    width: "100%",
-                    margin: "20px 0px",
-                    padding: "0px 0px 12px",
-                    display: "flex",
+                    borderBottom: '1px solid #ccc',
+                    width: '100%',
+                    margin: '20px 0px',
+                    padding: '0px 0px 12px',
+                    display: 'flex',
                     gap: 2,
                   }}
                 >
@@ -189,15 +181,11 @@ const ProFile = () => {
                     sx={{
                       width: isMobile ? 100 : 228,
                       height: isMobile ? 80 : 128,
-                      borderRadius: "20px",
-                      overflow: "hidden",
+                      borderRadius: '20px',
+                      overflow: 'hidden',
                     }}
                   >
-                    <img
-                      src={course.thumbnail}
-                      alt={course.title}
-                      style={{ width: "100%"}}
-                    />
+                    <img src={course.thumbnail} alt={course.title} style={{ width: '100%' }} />
                   </Box>
                   <Box>
                     <Typography variant="h6">
@@ -209,9 +197,7 @@ const ProFile = () => {
                         __html: truncateText(course.description, 70),
                       }}
                     />
-                    <Typography variant="body2">
-                      Tiến độ: {course.progress}%
-                    </Typography>
+                    <Typography variant="body2">Tiến độ: {course.progress}%</Typography>
                     <Progress value={course.progress || 0} />
                   </Box>
                 </Box>

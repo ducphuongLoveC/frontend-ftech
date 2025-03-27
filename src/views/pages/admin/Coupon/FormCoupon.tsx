@@ -34,12 +34,10 @@ const FormCoupon: React.FC<FormCouponProps> = ({ textBtn, values, courses, onSub
         ? new Date(new Date(values.start_date).getTime() + 7 * 60 * 60 * 1000).toISOString().slice(0, 16)
         : new Date(new Date().getTime() + 7 * 60 * 60 * 1000).toISOString().slice(0, 16),
 
-        end_date: values?.end_date
-        ? new Date(new Date(values.end_date).getTime() + 7 * 60 * 60 * 1000)
-              .toISOString()
-              .slice(0, 16)
+      end_date: values?.end_date
+        ? new Date(new Date(values.end_date).getTime() + 7 * 60 * 60 * 1000).toISOString().slice(0, 16)
         : '',
-    
+
       max_uses: values?.max_uses || 1,
       course_ids: values?.courses?.length ? values.courses.map((c: any) => c._id) : [],
     },
@@ -70,7 +68,7 @@ const FormCoupon: React.FC<FormCouponProps> = ({ textBtn, values, courses, onSub
               />
             )}
           />
-          <Button sx={{p:1.5}} variant="outlined" onClick={generateRandomCode}>
+          <Button sx={{ p: 1.5 }} variant="outlined" onClick={generateRandomCode}>
             Tạo ngẫu nhiên
           </Button>
         </Grid>
@@ -92,7 +90,7 @@ const FormCoupon: React.FC<FormCouponProps> = ({ textBtn, values, courses, onSub
                 onChange={(_, value) => {
                   setValue(
                     'course_ids',
-                    value.map((course) => course._id)
+                    value.map((course) => course._id),
                   );
                 }}
                 renderInput={(params) => (

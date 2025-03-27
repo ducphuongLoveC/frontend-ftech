@@ -31,8 +31,8 @@
 
 // export default TrackList;
 
-import { styled, Box, Slide } from '@mui/material'
-import LearningList from './LearningList'
+import { styled, Box, Slide } from '@mui/material';
+import LearningList from './LearningList';
 const BoxLearningList = styled(Box)(({ theme }) => ({
   position: 'static',
   zIndex: 887,
@@ -52,7 +52,7 @@ const BoxLearningList = styled(Box)(({ theme }) => ({
     width: '100% !important',
     height: '100%',
   },
-}))
+}));
 
 const TrackList: React.FC<any> = ({ modules, open, onClose }) => {
   return open ? (
@@ -63,7 +63,7 @@ const TrackList: React.FC<any> = ({ modules, open, onClose }) => {
         </Box>
       </Slide>
     </BoxLearningList>
-  ) : null
-}
+  ) : null;
+};
 
-export default TrackList
+export default TrackList;

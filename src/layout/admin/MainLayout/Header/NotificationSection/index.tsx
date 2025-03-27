@@ -127,11 +127,7 @@ const NotificationSection: React.FC = () => {
         }}
       >
         {({ TransitionProps }) => (
-          <Transitions
-            position={matchesXs ? 'top' : 'top-right'}
-            in={open}
-            {...TransitionProps}
-          >
+          <Transitions position={matchesXs ? 'top' : 'top-right'} in={open} {...TransitionProps}>
             <Paper
               elevation={16}
               sx={{
@@ -159,9 +155,7 @@ const NotificationSection: React.FC = () => {
                       >
                         <Grid item>
                           <Stack direction="row" spacing={2}>
-                            <Typography variant="subtitle1">
-                              All Notification
-                            </Typography>
+                            <Typography variant="subtitle1">All Notification</Typography>
                             <Chip
                               size="small"
                               label="01"
@@ -173,12 +167,7 @@ const NotificationSection: React.FC = () => {
                           </Stack>
                         </Grid>
                         <Grid item>
-                          <Typography
-                            component={Link}
-                            to="#"
-                            variant="subtitle2"
-                            color="primary"
-                          >
+                          <Typography component={Link} to="#" variant="subtitle2" color="primary">
                             Mark as all read
                           </Typography>
                         </Grid>
@@ -211,10 +200,7 @@ const NotificationSection: React.FC = () => {
                                 }}
                               >
                                 {status.map((option) => (
-                                  <option
-                                    key={option.value}
-                                    value={option.value}
-                                  >
+                                  <option key={option.value} value={option.value}>
                                     {option.label}
                                   </option>
                                 ))}

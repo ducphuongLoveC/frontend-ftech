@@ -75,7 +75,11 @@ const VideoUpload = forwardRef(({ defaultValue }: any, ref) => {
         }}
       />
 
-      {videoSrc ? <video width={'100%'} controls src={videoSrc} /> : formData.url && <video width={'100%'} controls src={formData.url} />}
+      {videoSrc ? (
+        <video width={'100%'} controls src={videoSrc} />
+      ) : (
+        formData.url && <video width={'100%'} controls src={formData.url} />
+      )}
     </Box>
   );
 });

@@ -1,33 +1,33 @@
-import { lazy } from 'react'
+import { lazy } from 'react';
 // layout
-import MainLayout from '@/layout/client/MainLayout'
-import BannerLayout from '@/layout/client/BannerLayout'
-import BasicLayout from '@/layout/client/BasicLayout'
+import MainLayout from '@/layout/client/MainLayout';
+import BannerLayout from '@/layout/client/BannerLayout';
+import BasicLayout from '@/layout/client/BasicLayout';
 
-import Loadable from '@/ui-component/Loadable'
+import Loadable from '@/ui-component/Loadable';
 
 // middlewares
-import RedirectIfAuthenticated from '@/middlewares/RedirectIfAuthenticated'
-import HasAccess from '@/middlewares/HasAccess'
-import HasUser from '@/middlewares/HasUser'
+import RedirectIfAuthenticated from '@/middlewares/RedirectIfAuthenticated';
+import HasAccess from '@/middlewares/HasAccess';
+import HasUser from '@/middlewares/HasUser';
 
 // route components
-const Home = Loadable(lazy(() => import('@/views/pages/Home')))
-const SettingUser = Loadable(lazy(() => import('@/views/pages/SettingUser')))
-const Profile = Loadable(lazy(() => import('@/views/pages/ProfileUser')))
-const LearningPath = Loadable(lazy(() => import('@/views/pages/LearningPath/LearningPath')))
-const LearningPathDetail = Loadable(lazy(() => import('@/views/pages/LearningPathDetail/LearningPathDetail')))
-const Login = Loadable(lazy(() => import('@/views/pages/authentication3/Login3')))
-const Register = Loadable(lazy(() => import('@/views/pages/authentication3/Register3')))
-const Contact = Loadable(lazy(() => import('@/views/pages/Contact')))
-const PostOverview = Loadable(lazy(() => import('@/views/pages/PostOverview')))
-const PostDetail = Loadable(lazy(() => import('@/views/pages/PostDetail')))
-const Learning = Loadable(lazy(() => import('@/views/pages/Learning')))
-const CourseDetail = Loadable(lazy(() => import('@/views/pages/CourseDetail')))
-const NewPost = Loadable(lazy(() => import('@/views/pages/Post/NewPost')))
-const MyCourses = Loadable(lazy(() => import('@/views/pages/MyCourses')))
-const CertificateCheck = Loadable(lazy(() => import('@/views/pages/CertificateCheck')))
-const ForgetPassword = Loadable(lazy(() => import('@/views/pages/authentication3/ForgetPassword')))
+const Home = Loadable(lazy(() => import('@/views/pages/Home')));
+const SettingUser = Loadable(lazy(() => import('@/views/pages/SettingUser')));
+const Profile = Loadable(lazy(() => import('@/views/pages/ProfileUser')));
+const LearningPath = Loadable(lazy(() => import('@/views/pages/LearningPath/LearningPath')));
+const LearningPathDetail = Loadable(lazy(() => import('@/views/pages/LearningPathDetail/LearningPathDetail')));
+const Login = Loadable(lazy(() => import('@/views/pages/authentication3/Login3')));
+const Register = Loadable(lazy(() => import('@/views/pages/authentication3/Register3')));
+const Contact = Loadable(lazy(() => import('@/views/pages/Contact')));
+const PostOverview = Loadable(lazy(() => import('@/views/pages/PostOverview')));
+const PostDetail = Loadable(lazy(() => import('@/views/pages/PostDetail')));
+const Learning = Loadable(lazy(() => import('@/views/pages/Learning')));
+const CourseDetail = Loadable(lazy(() => import('@/views/pages/CourseDetail')));
+const NewPost = Loadable(lazy(() => import('@/views/pages/Post/NewPost')));
+const MyCourses = Loadable(lazy(() => import('@/views/pages/MyCourses')));
+const CertificateCheck = Loadable(lazy(() => import('@/views/pages/CertificateCheck')));
+const ForgetPassword = Loadable(lazy(() => import('@/views/pages/authentication3/ForgetPassword')));
 
 const mainRoutes = [
   {
@@ -38,7 +38,9 @@ const mainRoutes = [
   {
     path: '/learning/:id',
     element: (
-      <HasAccess><Learning /></HasAccess>
+      <HasAccess>
+        <Learning />
+      </HasAccess>
     ),
   },
   {
@@ -94,6 +96,6 @@ const mainRoutes = [
       { path: 'certificate/check', element: <CertificateCheck /> },
     ],
   },
-]
+];
 
-export default mainRoutes
+export default mainRoutes;

@@ -164,7 +164,7 @@ const columns: Column[] = [
     },
   },
   {
-    id: 'amount', 
+    id: 'amount',
     label: 'Tổng Tiền',
     minWidth: 120,
     align: 'right',
@@ -190,7 +190,7 @@ const TransactionHistory: React.FC = () => {
     minPrice: '',
     maxPrice: '',
     sortPrice: '',
-    searchId: '', 
+    searchId: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -203,7 +203,7 @@ const TransactionHistory: React.FC = () => {
       if (filters.minPrice) params.append('minPrice', filters.minPrice);
       if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
       if (filters.sortPrice) params.append('sortPrice', filters.sortPrice);
-      if (filters.searchId) params.append('searchId', filters.searchId); 
+      if (filters.searchId) params.append('searchId', filters.searchId);
 
       const response = await axiosInstance.get(`/api/order/transactionhistory?${params.toString()}`);
       if (response.data && Array.isArray(response.data.data)) {
@@ -298,22 +298,16 @@ const TransactionHistory: React.FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((order : any) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={order._id}>
-                        {columns.map((column) => {
-                          const value = order[column.id];
-                          return (
-                            <TableCell key={column.id}>
-                              {column.format ? column.format(value) : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
+                {orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((order: any) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={order._id}>
+                      {columns.map((column) => {
+                        const value = order[column.id];
+                        return <TableCell key={column.id}>{column.format ? column.format(value) : value}</TableCell>;
+                      })}
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </TableContainer>

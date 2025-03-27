@@ -46,7 +46,7 @@ const MainCard = forwardRef<HTMLDivElement, MainCardProps>(
       title,
       ...others
     },
-    ref
+    ref,
   ) => {
     return (
       <Card
@@ -56,23 +56,15 @@ const MainCard = forwardRef<HTMLDivElement, MainCardProps>(
           border: border ? '1px solid' : 'none',
           borderColor: 'divider',
           ':hover': {
-            boxShadow: boxShadow
-              ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)'
-              : 'inherit',
+            boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit',
           },
           ...sx,
         }}
       >
         {/* card header and action */}
-        {!darkTitle && title && (
-          <CardHeader sx={headerSX} title={title} action={secondary} />
-        )}
+        {!darkTitle && title && <CardHeader sx={headerSX} title={title} action={secondary} />}
         {darkTitle && title && (
-          <CardHeader
-            sx={headerSX}
-            title={<Typography variant="h3">{title}</Typography>}
-            action={secondary}
-          />
+          <CardHeader sx={headerSX} title={<Typography variant="h3">{title}</Typography>} action={secondary} />
         )}
 
         {/* content & header divider */}
@@ -87,7 +79,7 @@ const MainCard = forwardRef<HTMLDivElement, MainCardProps>(
         {!content && children}
       </Card>
     );
-  }
+  },
 );
 
 export default MainCard;

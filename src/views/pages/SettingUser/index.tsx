@@ -415,12 +415,18 @@
 
 // export default SettingUser;
 
-
-
-
-
-
-import { useTheme, IconButton, TextField, Button, Typography, Snackbar, Box, Paper, Grid, Container } from '@mui/material';
+import {
+  useTheme,
+  IconButton,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+  Box,
+  Paper,
+  Grid,
+  Container,
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useState, useEffect } from 'react';
@@ -571,7 +577,6 @@ const SettingUser: React.FC = () => {
   };
 
   const handleSavePassword = (newPassword: string) => {
-    console.log(newPassword);
     handleClosePasswordModal();
   };
 
@@ -671,10 +676,27 @@ const SettingUser: React.FC = () => {
 
   return (
     <Container sx={{ background: theme.palette.background.paper, p: 3 }}>
-      <Box sx={{ position: 'relative', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, width: '100%', minHeight: '100vh', bgcolor: 'grey.100' }}>
+      <Box
+        sx={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          width: '100%',
+          minHeight: '100vh',
+          bgcolor: 'grey.100',
+        }}
+      >
         <IconButton
           onClick={handleClosePage}
-          sx={{ position: 'absolute', top: 16, right: { xs: -20, md: 50 }, bgcolor: 'grey.200', p: 1, borderRadius: '50%', '&:hover': { bgcolor: 'grey.300' } }}
+          sx={{
+            position: 'absolute',
+            top: 16,
+            right: { xs: -20, md: 50 },
+            bgcolor: 'grey.200',
+            p: 1,
+            borderRadius: '50%',
+            '&:hover': { bgcolor: 'grey.300' },
+          }}
           aria-label="close"
         >
           <CloseIcon />
@@ -683,52 +705,112 @@ const SettingUser: React.FC = () => {
         <Box sx={{ width: { xs: '100%', md: '75%' }, p: 3, background: theme.palette.background.paper }}>
           {activeSection === 'personalInfo' && (
             <>
-              <Typography variant="h4" sx={{ mb: 2, fontWeight: 'bold' }}>Thông tin cá nhân</Typography>
-              <Typography variant="body2" sx={{ mb: 6, color: 'text.secondary' }}>Quản lý thông tin cá nhân của bạn.</Typography>
+              <Typography variant="h4" sx={{ mb: 2, fontWeight: 'bold' }}>
+                Thông tin cá nhân
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 6, color: 'text.secondary' }}>
+                Quản lý thông tin cá nhân của bạn.
+              </Typography>
               <Box sx={{ mb: 12 }}>
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: 'medium' }}>Thông tin cơ bản</Typography>
-                <Typography variant="body2" sx={{ mb: 6, color: 'text.secondary' }}>Quản lý tên hiển thị, tên người dùng, bio và avatar của bạn</Typography>
+                <Typography variant="h6" sx={{ mb: 2, fontWeight: 'medium' }}>
+                  Thông tin cơ bản
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 6, color: 'text.secondary' }}>
+                  Quản lý tên hiển thị, tên người dùng, bio và avatar của bạn
+                </Typography>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Paper elevation={3} sx={{ p: 2 }}>
                       <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
                         <Box sx={{ position: 'relative' }}>
-                          <Box sx={{ width: 128, height: 128, borderRadius: '50%', overflow: 'hidden', border: '4px solid', borderColor: 'grey.100', boxShadow: 3 }}>
+                          <Box
+                            sx={{
+                              width: 128,
+                              height: 128,
+                              borderRadius: '50%',
+                              overflow: 'hidden',
+                              border: '4px solid',
+                              borderColor: 'grey.100',
+                              boxShadow: 3,
+                            }}
+                          >
                             <img
                               src={avatarUrl}
                               onError={handleImageError}
-                              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s', opacity: isUploading ? 0.5 : 1 }}
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                transition: 'transform 0.3s',
+                                opacity: isUploading ? 0.5 : 1,
+                              }}
                               alt={user?.name || 'Avatar'}
                             />
                             {isUploading && (
-                              <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'black', borderRadius: '50%', opacity: 0.5 }}>
-                                <Typography variant="body2" sx={{ color: 'white' }}>Đang tải...</Typography>
+                              <Box
+                                sx={{
+                                  position: 'absolute',
+                                  inset: 0,
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  bgcolor: 'black',
+                                  borderRadius: '50%',
+                                  opacity: 0.5,
+                                }}
+                              >
+                                <Typography variant="body2" sx={{ color: 'white' }}>
+                                  Đang tải...
+                                </Typography>
                               </Box>
                             )}
                           </Box>
                           <Button
                             onClick={handleAvatarClick}
-                            sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'black', borderRadius: '50%', opacity: 0, transition: 'opacity 0.3s', '&:hover': { opacity: 0.4 } }}
+                            sx={{
+                              position: 'absolute',
+                              inset: 0,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              bgcolor: 'black',
+                              borderRadius: '50%',
+                              opacity: 0,
+                              transition: 'opacity 0.3s',
+                              '&:hover': { opacity: 0.4 },
+                            }}
                             aria-label="Change avatar"
                           >
-                            <Typography variant="body2" sx={{ color: 'white' }}>Thay đổi ảnh</Typography>
+                            <Typography variant="body2" sx={{ color: 'white' }}>
+                              Thay đổi ảnh
+                            </Typography>
                           </Button>
                         </Box>
                         <Box sx={{ flex: 1 }}>
                           <Box sx={{ mb: 4 }}>
-                            <Typography variant="h6" sx={{ fontWeight: 'medium' }}>Ảnh hồ sơ</Typography>
-                            <Typography variant="body2" color="textSecondary">Ảnh đại diện giúp người dùng dễ dàng nhận biết bạn hơn</Typography>
+                            <Typography variant="h6" sx={{ fontWeight: 'medium' }}>
+                              Ảnh hồ sơ
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              Ảnh đại diện giúp người dùng dễ dàng nhận biết bạn hơn
+                            </Typography>
                           </Box>
                           <Box sx={{ display: 'flex', gap: 3 }}>
                             <Button
                               variant="outlined"
                               onClick={handleAvatarClick}
                               startIcon={<AddPhotoAlternateIcon />}
-                              sx={{ borderColor: '#6fe0dc', color: '#6fe0dc', '&:hover': { borderColor: '#58bcb9', bgcolor: '#f0fafa' } }}
+                              sx={{
+                                borderColor: '#6fe0dc',
+                                color: '#6fe0dc',
+                                '&:hover': { borderColor: '#58bcb9', bgcolor: '#f0fafa' },
+                              }}
                             >
                               Tải ảnh lên
                             </Button>
-                            <Typography variant="caption" color="textSecondary">Định dạng: JPG, PNG (tối đa 1MB)</Typography>
+                            <Typography variant="caption" color="textSecondary">
+                              Định dạng: JPG, PNG (tối đa 1MB)
+                            </Typography>
                           </Box>
                         </Box>
                       </Box>
@@ -750,12 +832,18 @@ const SettingUser: React.FC = () => {
 
           {activeSection === 'securitySettings' && (
             <>
-              <Typography variant="h4" sx={{ mb: 2, fontWeight: 'bold' }}>Mật khẩu và bảo mật</Typography>
-              <Typography variant="body2" sx={{ mb: 10, color: 'text.secondary' }}>Cài đặt bảo mật tài khoản của bạn.</Typography>
+              <Typography variant="h4" sx={{ mb: 2, fontWeight: 'bold' }}>
+                Mật khẩu và bảo mật
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 10, color: 'text.secondary' }}>
+                Cài đặt bảo mật tài khoản của bạn.
+              </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Paper elevation={3} sx={{ p: 2, cursor: 'pointer' }} onClick={handleOpenPasswordModal}>
                   <Typography variant="body1">Đổi mật khẩu</Typography>
-                  <Typography variant="body2" color="textSecondary">Bạn có muốn đổi mật khẩu chứ</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Bạn có muốn đổi mật khẩu chứ
+                  </Typography>
                 </Paper>
               </Box>
             </>

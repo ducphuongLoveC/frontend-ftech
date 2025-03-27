@@ -33,7 +33,6 @@ const UpdateCourse: React.FC = () => {
   });
 
   const handleUpdateCourse = (course: Course) => {
-    console.log(course);
     mutation.mutate(course);
   };
   if (isLoading) return <div>Loading...</div>;

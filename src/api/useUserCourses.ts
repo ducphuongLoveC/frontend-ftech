@@ -14,11 +14,11 @@ export const useUserCourses = (userId: string | null) => {
             setCourses(response.data.courses || []);
             setCoursesError(null);
           } else {
-            setCoursesError("Người dùng này chưa đăng ký khóa học nào.");
+            setCoursesError('Người dùng này chưa đăng ký khóa học nào.');
             setCourses([]);
           }
         } catch (error) {
-          setCoursesError("Lỗi khi lấy danh sách khóa học.");
+          setCoursesError('Lỗi khi lấy danh sách khóa học.');
         }
       };
       fetchUserCourses();

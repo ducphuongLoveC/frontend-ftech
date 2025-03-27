@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import imgCard from '@/assets/images/course/iimg-langage.png'
-import imgCard1 from '@/assets/images/course/image-3.png'
+import imgCard from '@/assets/images/course/iimg-langage.png';
+import imgCard1 from '@/assets/images/course/image-3.png';
 
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Box,
-  Typography,
-  Card,
-  CardMedia,
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material';
+import { Container, Box, Typography, Card, CardMedia, Button, Grid, List, ListItem, ListItemText } from '@mui/material';
 
 interface Course {
   id: string;
@@ -73,7 +62,6 @@ const LearningPath: React.FC = () => {
                     borderRadius: 2,
                     '&:hover .overlay': {
                       bottom: 0,
-                      
                     },
                   }}
                 >
@@ -83,14 +71,14 @@ const LearningPath: React.FC = () => {
                     alt={item.title}
                     sx={{
                       width: '100%',
-                      height: '100%',   
+                      height: '100%',
                       objectFit: 'cover',
-                      transition: 'filter 0.3s ease',  
+                      transition: 'filter 0.3s ease',
                       '&:hover': {
-                        filter: 'blur(8px)',  
+                        filter: 'blur(8px)',
                       },
                     }}
-                    className="card-image" 
+                    className="card-image"
                   />
                   <Box
                     className="overlay"
@@ -144,7 +132,7 @@ const LearningPath: React.FC = () => {
                 'Kiến thức cần có cho người mới',
                 'Học thế nào cho hiệu quả',
                 'Ngôn ngữ lập trình là gì?',
-                'Cách thức vận hành 1 trang web'
+                'Cách thức vận hành 1 trang web',
               ].map((text, index) => (
                 <ListItem key={index} sx={{ borderBottom: '1px solid #ddd' }}>
                   <ListItemText primary={text} />
@@ -152,11 +140,7 @@ const LearningPath: React.FC = () => {
               ))}
             </List>
             <Card sx={{ marginTop: 2 }}>
-              <CardMedia
-                component="img"
-                image={imgCard1}
-                alt="Tin tức"
-              />
+              <CardMedia component="img" image={imgCard1} alt="Tin tức" />
             </Card>
           </Box>
         </Grid>

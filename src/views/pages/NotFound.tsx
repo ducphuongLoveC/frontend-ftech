@@ -29,18 +29,11 @@ const NotFound = () => {
           <h2 className="tw-text-9xl tw-font-extrabold tw-text-transparent tw-bg-clip-text tw-bg-gradient-to-r tw-from-pink-500 tw-via-purple-500 tw-to-blue-500 tw-animate-pulse">
             404
           </h2>
-          <h3 className="tw-mt-2 tw-text-4xl tw-font-bold tw-text-white tw-drop-shadow-lg">
-            Không tìm thấy trang
-          </h3>
-          <p className="tw-mt-4 tw-text-xl tw-text-pink-200">
-            Oops! Có vẻ như bạn đã lạc vào vũ trụ song song.
-          </p>
+          <h3 className="tw-mt-2 tw-text-4xl tw-font-bold tw-text-white tw-drop-shadow-lg">Không tìm thấy trang</h3>
+          <p className="tw-mt-4 tw-text-xl tw-text-pink-200">Oops! Có vẻ như bạn đã lạc vào vũ trụ song song.</p>
         </div>
 
-        <div
-          onClick={() => window.history.back()}
-          className="tw-mt-12 tw-relative"
-        >
+        <div onClick={() => window.history.back()} className="tw-mt-12 tw-relative">
           <div className="tw-absolute tw-inset-0 tw-bg-gradient-to-r tw-from-pink-500 tw-via-purple-500 tw-to-blue-500 tw-blur-3xl tw-opacity-30"></div>
           <img
             className={`tw-relative tw-mx-auto tw-h-80 tw-w-auto tw-transform hover:tw-scale-110 tw-transition-all tw-duration-300 ${isExploding ? 'tw-animate-spin' : 'tw-animate-float'}`}

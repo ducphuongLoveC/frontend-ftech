@@ -13,7 +13,7 @@ import {
   LinearProgress,
   Alert,
 } from '@mui/material';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
@@ -140,7 +140,6 @@ const Question: React.FC<QuestionProps> = ({ questions, onCompleted }) => {
 
       {/* Display confetti for 3 seconds when quiz is completed */}
       {quizCompleted && <Confetti width={width} height={height} />}
-
     </Box>
   );
 };

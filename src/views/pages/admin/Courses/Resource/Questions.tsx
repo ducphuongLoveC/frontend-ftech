@@ -85,7 +85,6 @@
 //   }, [currentQuizIndex]);
 
 //   console.log(defaultValue);
-  
 
 //   const getData = () => {
 //     return { _id: defaultValue._id, questions: quizzes, duration: 0, resource_type: 'Question' };
@@ -185,7 +184,6 @@
 
 // export default QuizCreation;
 
-
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Box, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
@@ -202,11 +200,7 @@ interface Quiz {
 }
 
 const QuizCreation: React.FC = forwardRef(({ defaultValue }: any, ref) => {
-  console.log(defaultValue);
-
   const [quizzes, setQuizzes] = useState<Quiz[]>(defaultValue?.questions || []);
-
-  console.log(quizzes);
 
   const [currentQuizIndex, setCurrentQuizIndex] = useState<number>(0);
 
@@ -348,7 +342,7 @@ const QuizCreation: React.FC = forwardRef(({ defaultValue }: any, ref) => {
           name="correctAnswer"
           control={control}
           rules={{ required: 'Vui lòng chọn đáp án đúng' }}
-          defaultValue=''
+          defaultValue=""
           render={({ field }) => (
             <FormControl fullWidth margin="normal">
               <InputLabel>Đáp án đúng</InputLabel>

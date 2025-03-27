@@ -1,72 +1,77 @@
-import { useForm, Controller } from 'react-hook-form'
-import { Box, useTheme, Grid, Button, TextField } from '@mui/material'
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
-import React, { useState, useRef, useEffect } from 'react'
-import TabsCustom from '@/components/TabsCustom'
+import { useForm, Controller } from 'react-hook-form';
+import { Box, useTheme, Grid, Button, TextField } from '@mui/material';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import React, { useState, useRef, useEffect } from 'react';
+import TabsCustom from '@/components/TabsCustom';
 
-import Storage from './Storage'
+import Storage from './Storage';
 
 interface CardCourseProps {
-  labels: React.ReactNode[]
-  contents: React.ComponentType<any>[]
-  widthIconImage?: string
-  onSubmit?: (datas: { title: string; thumbnail: File | null } | any) => void
-  initialTitle?: string
-  initialThumbnail?: File | null | string
-  defaultValue?: any
-  isImage?: boolean
+  labels: React.ReactNode[];
+  contents: React.ComponentType<any>[];
+  widthIconImage?: string;
+  onSubmit?: (datas: { title: string; thumbnail: File | null } | any) => void;
+  initialTitle?: string;
+  initialThumbnail?: File | null | string;
+  defaultValue?: any;
+  isImage?: boolean;
 }
 
 interface CardFormProp {
-  title: string
-  thumbnail: File | null | string
+  title: string;
+  thumbnail: File | null | string;
 }
 
-const CardCourse: React.FC<CardCourseProps> = ({ labels, contents, widthIconImage, onSubmit, defaultValue = {}, isImage = true }) => {
-  const theme = useTheme()
+const CardCourse: React.FC<CardCourseProps> = ({
+  labels,
+  contents,
+  widthIconImage,
+  onSubmit,
+  defaultValue = {},
+  isImage = true,
+}) => {
+  const theme = useTheme();
 
   const { control, handleSubmit, setValue } = useForm<CardFormProp>({
     defaultValues: {
       title: defaultValue.title || '',
       thumbnail: defaultValue.thumbnail || null,
     },
-  })
+  });
 
-  const [datas, setDatas] = useState(defaultValue)
+  const [datas, setDatas] = useState(defaultValue);
   const contentRefs = useRef<(React.RefObject<any> | null)[]>(
     Array(contents.length)
       .fill(null)
-      .map(() => React.createRef())
-  )
+      .map(() => React.createRef()),
+  );
 
   const getDatas = () => {
     const contentsData = contentRefs.current.reduce((acc, ref) => {
       if (ref && ref.current && typeof ref.current.getData === 'function') {
-        acc = { ...acc, ...ref.current.getData() }
+        acc = { ...acc, ...ref.current.getData() };
       } else {
-        console.warn('Content component is missing getData method', ref)
-        acc = { ...acc }
+        console.warn('Content component is missing getData method', ref);
+        acc = { ...acc };
       }
-      return acc
-    }, {})
-    return contentsData
-  }
+      return acc;
+    }, {});
+    return contentsData;
+  };
 
   const onSubmitForm = (data: CardFormProp) => {
     if (onSubmit) {
-      console.log({ ...data, ...getDatas() })
-
-      onSubmit({ ...data, ...getDatas() })
+      onSubmit({ ...data, ...getDatas() });
     }
-  }
+  };
 
   const handleCreateData = () => {
-    setDatas(getDatas())
-  }
+    setDatas(getDatas());
+  };
 
   useEffect(() => {
-    contentRefs.current = contents.map((_, index) => contentRefs.current[index] || React.createRef())
-  }, [contents])
+    contentRefs.current = contents.map((_, index) => contentRefs.current[index] || React.createRef());
+  }, [contents]);
 
   return (
     <Box
@@ -125,7 +130,7 @@ const CardCourse: React.FC<CardCourseProps> = ({ labels, contents, widthIconImag
               name="thumbnail"
               control={control}
               render={({ field }) => {
-                const uniqueId = `upload-thumbnail-${Math.random()}` // Tạo id duy nhất
+                const uniqueId = `upload-thumbnail-${Math.random()}`; // Tạo id duy nhất
                 return (
                   <>
                     {/* Input file ẩn */}
@@ -133,8 +138,8 @@ const CardCourse: React.FC<CardCourseProps> = ({ labels, contents, widthIconImag
                       type="file"
                       accept="image/*"
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        const file = event.target.files?.[0] || null
-                        field.onChange(file)
+                        const file = event.target.files?.[0] || null;
+                        field.onChange(file);
                       }}
                       style={{ display: 'none' }}
                       id={uniqueId} // Sử dụng id duy nhất
@@ -172,7 +177,7 @@ const CardCourse: React.FC<CardCourseProps> = ({ labels, contents, widthIconImag
                       </Box>
                     </label>
                   </>
-                )
+                );
               }}
             />
           </Grid>
@@ -188,7 +193,11 @@ const CardCourse: React.FC<CardCourseProps> = ({ labels, contents, widthIconImag
         onChange={handleCreateData}
         labels={labels}
         contents={contents.map((Content, index) => (
-          <Content key={index} ref={contentRefs.current[index]} defaultValue={Object.keys(getDatas()).length > 0 ? getDatas() : datas} />
+          <Content
+            key={index}
+            ref={contentRefs.current[index]}
+            defaultValue={Object.keys(getDatas()).length > 0 ? getDatas() : datas}
+          />
         ))}
       />
 
@@ -196,7 +205,7 @@ const CardCourse: React.FC<CardCourseProps> = ({ labels, contents, widthIconImag
         Lưu
       </Button>
     </Box>
-  )
-}
+  );
+};
 
-export default CardCourse
+export default CardCourse;

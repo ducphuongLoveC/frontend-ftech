@@ -6,7 +6,6 @@ export const createOtp = async (email: string) => {
 
     return res;
   } catch (error: any) {
-  
     throw error.response.data.message;
   }
 };
@@ -17,7 +16,6 @@ export const createOtpForResetPassword = async (email: string) => {
 
     return res;
   } catch (error: any) {
-  
     throw error.response.data.message;
   }
 };
@@ -26,7 +24,6 @@ export const verifyOtp = async (data: { email: string; otp: string }) => {
     const res = await axiosInstance.post(`api/otp/verify`, data);
     return res;
   } catch (error) {
-  
     throw error;
   }
 };

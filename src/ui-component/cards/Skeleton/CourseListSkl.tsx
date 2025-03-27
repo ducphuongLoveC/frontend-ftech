@@ -5,21 +5,13 @@ const CourseListSkl: React.FC = () => {
   const theme = useTheme();
   return (
     <>
-      <Box
-        width={'100%'}
-        height={'50px'}
-        sx={{ backgroundColor: theme.palette.background.paper }}
-        mb={1}
-      ></Box>
+      <Box width={'100%'} height={'50px'} sx={{ backgroundColor: theme.palette.background.paper }} mb={1}></Box>
       <Grid container spacing={2}>
         {Array(4)
           .fill('')
           .map((_, index: number) => (
             <Grid key={index} item sm={12} md={6}>
-              <Box
-                sx={{ backgroundColor: theme.palette.background.paper }}
-                p={2}
-              >
+              <Box sx={{ backgroundColor: theme.palette.background.paper }} p={2}>
                 <Box
                   sx={{
                     display: 'flex',
@@ -34,18 +26,10 @@ const CourseListSkl: React.FC = () => {
                   <Grid item lg={6}>
                     <Grid container spacing={2}>
                       <Grid item>
-                        <Skeleton
-                          variant="rectangular"
-                          width={300}
-                          height={60}
-                        />
+                        <Skeleton variant="rectangular" width={300} height={60} />
                       </Grid>
                       <Grid item>
-                        <Skeleton
-                          variant="rectangular"
-                          width={120}
-                          height={40}
-                        />
+                        <Skeleton variant="rectangular" width={120} height={40} />
                       </Grid>
                     </Grid>
                   </Grid>

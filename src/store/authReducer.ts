@@ -1,7 +1,6 @@
 import * as actionTypes from './actions';
 import Cookies from 'js-cookie';
 
-
 export interface User {
   _id?: string;
   id?: string;
@@ -26,7 +25,6 @@ const initialState: AuthState = {
   user: (() => {
     try {
       const userStr = Cookies.get('user');
-      console.log(userStr)
       if (!userStr) return null;
       const user = JSON.parse(userStr);
       console.log('Parsed user from cookie:', user);
@@ -36,7 +34,6 @@ const initialState: AuthState = {
       return null;
     }
   })(),
-  
 };
 
 const authReducer = (state = initialState, action: any) => {
@@ -68,7 +65,7 @@ const authReducer = (state = initialState, action: any) => {
         ...state.user,
         profile_picture: action.payload,
       };
-      Cookies.set('user', JSON.stringify(userWithNewAvatar)); 
+      Cookies.set('user', JSON.stringify(userWithNewAvatar));
       return {
         ...state,
         user: userWithNewAvatar,

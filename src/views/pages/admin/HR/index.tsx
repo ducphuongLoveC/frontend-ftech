@@ -39,9 +39,7 @@ const HR = () => {
   }
 
   // Lọc người dùng theo tên
-  const filteredRows = rows.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredRows = rows.filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   // Phân trang danh sách đã lọc
   const paginatedRows = filteredRows.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
@@ -57,7 +55,6 @@ const HR = () => {
 
       {/* Tìm kiếm người dùng */}
       <Box sx={{ mb: 2, p: 2 }} component={Paper}>
-
         <TextField
           label="Tìm kiếm theo tên"
           variant="outlined"

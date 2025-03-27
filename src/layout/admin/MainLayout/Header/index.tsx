@@ -44,7 +44,7 @@ const Header: FC<HeaderProps> = ({ handleLeftDrawerToggle }) => {
             flexGrow: 1,
           }}
         >
-          <Logo/>
+          <Logo />
         </Box>
         <ButtonBase
           sx={{

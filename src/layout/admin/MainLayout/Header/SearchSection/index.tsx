@@ -16,40 +16,34 @@ import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
 import Transitions from '@/ui-component/extended/Transitions';
 
 // assets
-import {
-  IconAdjustmentsHorizontal,
-  IconSearch,
-  IconX,
-} from '@tabler/icons-react';
+import { IconAdjustmentsHorizontal, IconSearch, IconX } from '@tabler/icons-react';
 
 interface HeaderAvatarProps {
   children: ReactNode;
   [x: string]: any; // To allow any other props
 }
 
-const HeaderAvatar = forwardRef<HTMLDivElement, HeaderAvatarProps>(
-  ({ children, ...others }, ref) => {
-    const theme = useTheme();
+const HeaderAvatar = forwardRef<HTMLDivElement, HeaderAvatarProps>(({ children, ...others }, ref) => {
+  const theme = useTheme();
 
-    return (
-      <Avatar
-        ref={ref}
-        variant="rounded"
-        sx={{
-          color: theme.palette.text.primary,
-          background: 'none',
-          cursor: 'pointer',
-          '&:hover': {
-            background: theme.palette.background.paper2,
-          },
-        }}
-        {...others}
-      >
-        {children}
-      </Avatar>
-    );
-  }
-);
+  return (
+    <Avatar
+      ref={ref}
+      variant="rounded"
+      sx={{
+        color: theme.palette.text.primary,
+        background: 'none',
+        cursor: 'pointer',
+        '&:hover': {
+          background: theme.palette.background.paper2,
+        },
+      }}
+      {...others}
+    >
+      {children}
+    </Avatar>
+  );
+});
 
 interface MobileSearchProps {
   value: string;
@@ -57,11 +51,7 @@ interface MobileSearchProps {
   popupState: any;
 }
 
-const MobileSearch: React.FC<MobileSearchProps> = ({
-  value,
-  setValue,
-  popupState,
-}) => {
+const MobileSearch: React.FC<MobileSearchProps> = ({ value, setValue, popupState }) => {
   return (
     <OutlinedInput
       id="input-search-header"
@@ -181,17 +171,9 @@ const SearchSection: React.FC = () => {
                             p: 2,
                           }}
                         >
-                          <Grid
-                            container
-                            alignItems="center"
-                            justifyContent="space-between"
-                          >
+                          <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item xs>
-                              <MobileSearch
-                                value={value}
-                                setValue={setValue}
-                                popupState={popupState}
-                              />
+                              <MobileSearch value={value} setValue={setValue} popupState={popupState} />
                             </Grid>
                           </Grid>
                         </Box>

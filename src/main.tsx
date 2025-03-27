@@ -1,5 +1,5 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
@@ -21,7 +21,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './index.css';
 
-
 const store = configureStore({ reducer });
 
 createRoot(document.getElementById('root')!).render(
@@ -31,5 +30,5 @@ createRoot(document.getElementById('root')!).render(
         <App />
       </QueryClientProvider>
     </StrictMode>
-  </Provider>
-)
+  </Provider>,
+);

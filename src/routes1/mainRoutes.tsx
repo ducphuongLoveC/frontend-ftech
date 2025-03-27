@@ -34,7 +34,7 @@ const ForgetPassword = Loadable(lazy(() => import('../views/pages/authentication
 import RouteProp from '@/interfaces/route';
 import HasUser from '@/middlewares/HasUser';
 
-const publicRoutes : RouteProp[] = [
+const publicRoutes: RouteProp[] = [
   {
     path: '/',
     layout: BannerLayout,

@@ -16,10 +16,7 @@ import { Link as LinkDOM } from 'react-router-dom';
 import { useState } from 'react';
 
 const CertificateCheck: React.FC = () => {
-  const {
-    control,
-    handleSubmit,
-  } = useForm<FormValues>();
+  const { control, handleSubmit } = useForm<FormValues>();
 
   const [errorFind, setErrorFind] = useState('');
 
@@ -59,13 +56,7 @@ const CertificateCheck: React.FC = () => {
             <Controller
               name="code"
               control={control}
-              render={({ field }) => (
-                <TextField
-                  fullWidth
-                  {...field}
-                  label="Nhập code chứng chỉ"
-                />
-              )}
+              render={({ field }) => <TextField fullWidth {...field} label="Nhập code chứng chỉ" />}
             />
           </Grid>
           <Grid xs={12} md={2} item>

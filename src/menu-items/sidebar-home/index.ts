@@ -1,9 +1,4 @@
-import {
-  Home as HomeIcon,
-  LibraryBooks as LibraryBooksIcon,
-  Telegram as TelegramIcon,
-} from '@mui/icons-material';
-
+import { Home as HomeIcon, LibraryBooks as LibraryBooksIcon, Telegram as TelegramIcon } from '@mui/icons-material';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 

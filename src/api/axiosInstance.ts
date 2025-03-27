@@ -9,9 +9,8 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => { 
+  (config) => {
     const token = Cookies.get('accessToken');
-    // console.log("Token:", token);  // Kiểm tra token có đúng không
 
     // Kiểm tra nếu token có dấu ngoặc kép thì loại bỏ chúng
     if (token) {
@@ -21,9 +20,8 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
-
 
 axiosInstance.interceptors.response.use(
   (response) => {
@@ -31,7 +29,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;

@@ -24,6 +24,6 @@ export const registerUser = async (data: { name: string; email: string; password
 
 export const login = async (data: { email: string; password: string }) => {
   const res = await axiosInstance.post('api/auth/login', data);
-  Cookies.get('user')
+  Cookies.get('user');
   return res;
 };

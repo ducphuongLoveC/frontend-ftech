@@ -4,14 +4,7 @@ import { SxProps, Theme } from '@mui/material/styles';
 
 // Define types for props
 interface AvatarProps {
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'error'
-    | 'warning'
-    | 'info'
-    | 'success'
-    | string; // Define colors based on your theme
+  color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success' | string; // Define colors based on your theme
   outline?: boolean;
   size?: 'badge' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   sx?: SxProps<Theme>;
@@ -20,13 +13,7 @@ interface AvatarProps {
 
 // ==============================|| AVATAR ||============================== //
 
-const Avatar: React.FC<AvatarProps> = ({
-  color,
-  outline,
-  size,
-  sx,
-  ...others
-}) => {
+const Avatar: React.FC<AvatarProps> = ({ color, outline, size, sx, ...others }) => {
   const colorSX =
     color && !outline
       ? {

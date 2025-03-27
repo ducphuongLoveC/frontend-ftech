@@ -5,7 +5,7 @@ export const getNotificationById = async (id: string) => {
     const { data } = await axiosInstance.get(`api/notification/${id}`);
     return data;
   } catch (error) {
-    console.log();
+    console.log(error);
   }
 };
 export const markAsRead = async (id: string) => {

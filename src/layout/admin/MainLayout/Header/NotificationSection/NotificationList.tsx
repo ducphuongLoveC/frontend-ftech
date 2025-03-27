@@ -1,4 +1,3 @@
-
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
@@ -20,12 +19,7 @@ import Divider from '@mui/material/Divider';
 import Chip from '@/ui-component/extended/Chip';
 
 // assets
-import {
-  IconBrandTelegram,
-  IconBuildingStore,
-  IconMailbox,
-  IconPhoto,
-} from '@tabler/icons-react';
+import { IconBrandTelegram, IconBuildingStore, IconMailbox, IconPhoto } from '@tabler/icons-react';
 import User1 from '@/assets/images/users/user-round.svg';
 import React from 'react';
 
@@ -124,9 +118,7 @@ const NotificationList = () => {
               pb: 2,
             }}
           >
-            <Typography variant="subtitle2">
-              It is a long established fact that a reader will be distracted
-            </Typography>
+            <Typography variant="subtitle2">It is a long established fact that a reader will be distracted</Typography>
           </Grid>
           <Grid item xs={12}>
             <Grid container>
@@ -155,13 +147,7 @@ const NotificationList = () => {
               <IconBuildingStore stroke={1.5} size="1.3rem" />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText
-            primary={
-              <Typography variant="subtitle1">
-                Store Verification Done
-              </Typography>
-            }
-          />
+          <ListItemText primary={<Typography variant="subtitle1">Store Verification Done</Typography>} />
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
@@ -180,9 +166,7 @@ const NotificationList = () => {
               pb: 2,
             }}
           >
-            <Typography variant="subtitle2">
-              We have successfully received your request.
-            </Typography>
+            <Typography variant="subtitle2">We have successfully received your request.</Typography>
           </Grid>
           <Grid item xs={12}>
             <Grid container>
@@ -208,11 +192,7 @@ const NotificationList = () => {
               <IconMailbox stroke={1.5} size="1.3rem" />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText
-            primary={
-              <Typography variant="subtitle1">Check Your Mail.</Typography>
-            }
-          />
+          <ListItemText primary={<Typography variant="subtitle1">Check Your Mail.</Typography>} />
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item>
@@ -232,18 +212,13 @@ const NotificationList = () => {
             }}
           >
             <Typography variant="subtitle2">
-              All done! Now check your inbox as you&apos;re in for a sweet
-              treat!
+              All done! Now check your inbox as you&apos;re in for a sweet treat!
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Grid container>
               <Grid item>
-                <Button
-                  variant="contained"
-                  disableElevation
-                  endIcon={<IconBrandTelegram stroke={1.5} size="1.3rem" />}
-                >
+                <Button variant="contained" disableElevation endIcon={<IconBrandTelegram stroke={1.5} size="1.3rem" />}>
                   Mail
                 </Button>
               </Grid>
@@ -257,9 +232,7 @@ const NotificationList = () => {
           <ListItemAvatar>
             <Avatar alt="John Doe" src={User1} />
           </ListItemAvatar>
-          <ListItemText
-            primary={<Typography variant="subtitle1">John Doe</Typography>}
-          />
+          <ListItemText primary={<Typography variant="subtitle1">John Doe</Typography>} />
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
@@ -315,9 +288,7 @@ const NotificationList = () => {
           <ListItemAvatar>
             <Avatar alt="John Doe" src={User1} />
           </ListItemAvatar>
-          <ListItemText
-            primary={<Typography variant="subtitle1">John Doe</Typography>}
-          />
+          <ListItemText primary={<Typography variant="subtitle1">John Doe</Typography>} />
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
@@ -336,9 +307,7 @@ const NotificationList = () => {
               pb: 2,
             }}
           >
-            <Typography variant="subtitle2">
-              It is a long established fact that a reader will be distracted
-            </Typography>
+            <Typography variant="subtitle2">It is a long established fact that a reader will be distracted</Typography>
           </Grid>
           <Grid item xs={12}>
             <Grid container>

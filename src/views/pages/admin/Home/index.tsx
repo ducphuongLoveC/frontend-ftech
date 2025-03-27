@@ -334,17 +334,9 @@
 
 // export default Dashboard;
 
-import React, { useEffect, useMemo, useState } from "react";
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import React, { useEffect, useMemo, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import {
   Avatar,
   Paper,
@@ -362,19 +354,12 @@ import {
   InputLabel,
   FormControl,
   Grid,
-} from "@mui/material";
-import useUsers from "@/api/useUsers";
-import useCourses from "./api/useCourses";
-import { getOrders } from "@/api/OrderApi";
+} from '@mui/material';
+import useUsers from '@/api/useUsers';
+import useCourses from './api/useCourses';
+import { getOrders } from '@/api/OrderApi';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface Order {
   _id: object;
@@ -393,18 +378,12 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    new Date().getMonth()
-  );
-  const [selectedYear, setSelectedYear] = useState<number>(
-    new Date().getFullYear()
-  );
+  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
+  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [dailyRevenue, setDailyRevenue] = useState<number>(0);
   const [monthlyRevenue, setMonthlyRevenue] = useState<number>(0);
   const [totalRevenue, setTotalRevenue] = useState<number>(0);
-  const [chartData, setChartData] = useState<{ day: string; value: number }[]>(
-    []
-  );
+  const [chartData, setChartData] = useState<{ day: string; value: number }[]>([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -413,8 +392,8 @@ const Dashboard: React.FC = () => {
         const data = await getOrders();
         setOrders(data);
       } catch (error: any) {
-        console.error("Error fetching orders:", error);
-        setError("Failed to fetch orders");
+        console.error('Error fetching orders:', error);
+        setError('Failed to fetch orders');
       } finally {
         setLoading(false);
       }
@@ -426,26 +405,18 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const filteredOrders = orders.filter((order) => {
       const orderDate = new Date(order.createdAt);
-      return (
-        orderDate.getMonth() === selectedMonth &&
-        orderDate.getFullYear() === selectedYear
-      );
+      return orderDate.getMonth() === selectedMonth && orderDate.getFullYear() === selectedYear;
     });
 
     const daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
-    const allDays = Array.from({ length: daysInMonth }, (_, i) =>
-      (i + 1).toString().padStart(2, "0")
-    );
+    const allDays = Array.from({ length: daysInMonth }, (_, i) => (i + 1).toString().padStart(2, '0'));
 
-    const groupedData = filteredOrders.reduce(
-      (acc: { [key: string]: number }, order) => {
-        const orderDate = new Date(order.createdAt);
-        const day = orderDate.getDate().toString().padStart(2, "0");
-        acc[day] = (acc[day] || 0) + order.amount;
-        return acc;
-      },
-      {}
-    );
+    const groupedData = filteredOrders.reduce((acc: { [key: string]: number }, order) => {
+      const orderDate = new Date(order.createdAt);
+      const day = orderDate.getDate().toString().padStart(2, '0');
+      acc[day] = (acc[day] || 0) + order.amount;
+      return acc;
+    }, {});
 
     const formattedData = allDays.map((day) => ({
       day,
@@ -462,10 +433,7 @@ const Dashboard: React.FC = () => {
   const calculateRevenues = () => {
     const monthlyOrders = orders.filter((order) => {
       const orderDate = new Date(order.createdAt);
-      return (
-        orderDate.getMonth() === selectedMonth &&
-        orderDate.getFullYear() === selectedYear
-      );
+      return orderDate.getMonth() === selectedMonth && orderDate.getFullYear() === selectedYear;
     });
 
     const dailyOrders = orders.filter((order) => {
@@ -499,15 +467,13 @@ const Dashboard: React.FC = () => {
   };
 
   const data = {
-    labels: chartData.map(
-      (item) => `${selectedYear}-${selectedMonth + 1}-${item.day}`
-    ),
+    labels: chartData.map((item) => `${selectedYear}-${selectedMonth + 1}-${item.day}`),
     datasets: [
       {
-        label: "Doanh số",
+        label: 'Doanh số',
         data: chartData.map((item) => item.value),
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 2,
       },
     ],
@@ -523,9 +489,7 @@ const Dashboard: React.FC = () => {
 
   const ordersSorted = useMemo(() => {
     const merged = orders.reduce((acc: any, o: any) => {
-      const user: any = acc.find(
-        (item: any) => item.user_id._id === o.user_id._id
-      );
+      const user: any = acc.find((item: any) => item.user_id._id === o.user_id._id);
       if (user) {
         user.amount += o.amount;
       } else {
@@ -537,9 +501,7 @@ const Dashboard: React.FC = () => {
     return merged.sort((a: any, b: any) => b.amount - a.amount);
   }, [orders]);
 
-  const top10Courses = [...courses]
-    .sort((a, b) => b.enrollment_count - a.enrollment_count)
-    .slice(0, 10);
+  const top10Courses = [...courses].sort((a, b) => b.enrollment_count - a.enrollment_count).slice(0, 10);
 
   if (loading) {
     return <Typography>Loading ...</Typography>;
@@ -566,8 +528,8 @@ const Dashboard: React.FC = () => {
                 >
                   {Array.from({ length: 12 }, (_, i) => (
                     <MenuItem key={i} value={i}>
-                      {new Date(0, i).toLocaleString("default", {
-                        month: "long",
+                      {new Date(0, i).toLocaleString('default', {
+                        month: 'long',
                       })}
                     </MenuItem>
                   ))}
@@ -575,13 +537,7 @@ const Dashboard: React.FC = () => {
               </FormControl>
               <FormControl>
                 <InputLabel id="year-label">Năm</InputLabel>
-                <Select
-                  labelId="year-label"
-                  id="year"
-                  value={selectedYear}
-                  onChange={handleYearChange}
-                  label="Năm"
-                >
+                <Select labelId="year-label" id="year" value={selectedYear} onChange={handleYearChange} label="Năm">
                   {Array.from({ length: 5 }, (_, i) => (
                     <MenuItem key={i} value={new Date().getFullYear() - i}>
                       {new Date().getFullYear() - i}
@@ -595,25 +551,23 @@ const Dashboard: React.FC = () => {
         </Grid>
 
         <Grid item xs={12} md={3}>
-          <Box
-            sx={{ display: "flex", flexDirection: "column", height: "100%" }}
-          >
-            <Paper sx={{ p: 3, position: "relative", height: "100%" }}>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Paper sx={{ p: 3, position: 'relative', height: '100%' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h6">Học viên</Typography>
               </Box>
               <Box
                 sx={{
-                  bgcolor: "violet.500",
+                  bgcolor: 'violet.500',
 
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  mx: "auto",
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  mx: 'auto',
                   my: 3,
-                  fontSize: "90px",
-                  height: "100%",
+                  fontSize: '90px',
+                  height: '100%',
                 }}
               >
                 {users.length}
@@ -621,28 +575,21 @@ const Dashboard: React.FC = () => {
             </Paper>
             <Box
               sx={{
-                bgcolor: "black",
-                color: "white",
+                bgcolor: 'black',
+                color: 'white',
                 p: 2,
                 bottom: 0,
                 left: 0,
                 right: 0,
               }}
             >
-              <Typography
-                variant="body1"
-                sx={{ color: "#AAC8C6", fontWeight: "medium", mb: 1 }}
-              >
-                Doanh thu tháng{" "}
-                {new Date(selectedYear, selectedMonth).toLocaleString(
-                  "default",
-                  { month: "numeric" }
-                )}
+              <Typography variant="body1" sx={{ color: '#AAC8C6', fontWeight: 'medium', mb: 1 }}>
+                Doanh thu tháng {new Date(selectedYear, selectedMonth).toLocaleString('default', { month: 'numeric' })}
               </Typography>
-              <Typography variant="h4" color={theme.palette.text.primary} sx={{ fontWeight: "bold" }}>
-                {monthlyRevenue.toLocaleString("vi-VN")} VNĐ
+              <Typography variant="h4" color={theme.palette.text.primary} sx={{ fontWeight: 'bold' }}>
+                {monthlyRevenue.toLocaleString('vi-VN')} VNĐ
               </Typography>
-              <Typography variant="body2" sx={{ color: "green.600" }}>
+              <Typography variant="body2" sx={{ color: 'green.600' }}>
                 Doanh thu trong cả một tháng
               </Typography>
             </Box>
@@ -652,32 +599,26 @@ const Dashboard: React.FC = () => {
         <Grid item xs={12}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <Paper sx={{ p: 3,height: "100%" }}>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Paper sx={{ p: 3, height: '100%' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="h6">Doanh thu ngày:</Typography>
                   <input
                     id="date"
                     type="date"
-                    value={selectedDate.toISOString().split("T")[0]}
+                    value={selectedDate.toISOString().split('T')[0]}
                     onChange={handleDateChange}
                   />
                 </Box>
-                <Typography
-                  variant="h3"
-                  sx={{ textAlign: "center", fontWeight: "bold" }}
-                >
-                  {dailyRevenue.toLocaleString("vi-VN")} VNĐ
+                <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
+                  {dailyRevenue.toLocaleString('vi-VN')} VNĐ
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs={12} md={6}>
               <Paper sx={{ p: 3 }}>
                 <Typography variant="h6">Tổng danh thu:</Typography>
-                <Typography
-                  variant="h3"
-                  sx={{ textAlign: "center", fontWeight: "bold", pb: 5 }}
-                >
-                  {totalRevenue.toLocaleString("vi-VN")} VNĐ
+                <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold', pb: 5 }}>
+                  {totalRevenue.toLocaleString('vi-VN')} VNĐ
                 </Typography>
               </Paper>
             </Grid>
@@ -702,17 +643,10 @@ const Dashboard: React.FC = () => {
                     <TableRow key={course._id}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>
-                        <Avatar
-                          variant="square"
-                          src={course.thumbnail}
-                          alt="Course"
-                          sx={{ width: 40, height: 28 }}
-                        />
+                        <Avatar variant="square" src={course.thumbnail} alt="Course" sx={{ width: 40, height: 28 }} />
                       </TableCell>
                       <TableCell>{course.title}</TableCell>
-                      <TableCell align="right">
-                        {course.enrollment_count}
-                      </TableCell>
+                      <TableCell align="right">{course.enrollment_count}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -738,9 +672,7 @@ const Dashboard: React.FC = () => {
                     <TableRow key={index}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{o.user_id.name}</TableCell>
-                      <TableCell align="right">
-                        {o.amount.toLocaleString("vi-VN")} VNĐ
-                      </TableCell>
+                      <TableCell align="right">{o.amount.toLocaleString('vi-VN')} VNĐ</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

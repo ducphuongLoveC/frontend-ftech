@@ -21,12 +21,7 @@ interface AvatarUploadModalProps {
   onUpload: (file: File) => void;
 }
 
-const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({
-  open,
-  onClose,
-  currentAvatarUrl,
-  onUpload,
-}) => {
+const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({ open, onClose, currentAvatarUrl, onUpload }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>(currentAvatarUrl);
   const [isUploading, setIsUploading] = useState(false);
@@ -59,10 +54,9 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({
 
     setIsUploading(true);
     try {
-      
-      await onUpload(selectedFile); 
+      await onUpload(selectedFile);
       setSelectedFile(null);
-      setPreview(currentAvatarUrl); 
+      setPreview(currentAvatarUrl);
       onClose();
     } catch (error) {
       console.error('Upload failed:', error);
@@ -75,11 +69,7 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>
         Ảnh đại diện
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{ position: 'absolute', right: 8, top: 8 }}
-        >
+        <IconButton aria-label="close" onClick={onClose} sx={{ position: 'absolute', right: 8, top: 8 }}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -109,12 +99,7 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({
             }}
           >
             Tải ảnh mới lên
-            <input
-              type="file"
-              hidden
-              accept="image/*"
-              onChange={handleFileChange}
-            />
+            <input type="file" hidden accept="image/*" onChange={handleFileChange} />
           </Button>
         </Box>
       </DialogContent>

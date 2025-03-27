@@ -1,15 +1,7 @@
 import * as React from 'react';
 
 import { useState, ChangeEvent } from 'react';
-import {
-  Button,
-  TextField,
-  Grid,
-  MenuItem,
-  Typography,
-  Paper,
-  Box,
-} from '@mui/material';
+import { Button, TextField, Grid, MenuItem, Typography, Paper, Box } from '@mui/material';
 
 const AddPost: React.FC = () => {
   const [category, setCategory] = useState<string>('');
@@ -35,12 +27,7 @@ const AddPost: React.FC = () => {
     >
       <Paper elevation={3} sx={{ p: 4 }}>
         {/* Header */}
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          mb={2}
-        >
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
           <Typography variant="h3">Thêm bài viết</Typography>
           <Button variant="outlined">Bảng điều khiển</Button>
         </Box>
@@ -48,12 +35,7 @@ const AddPost: React.FC = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography variant="subtitle1">Tiêu đề bài viết</Typography>
-            <TextField
-              placeholder="Thêm tiêu đề..."
-              variant="outlined"
-              fullWidth
-              margin="dense"
-            />
+            <TextField placeholder="Thêm tiêu đề..." variant="outlined" fullWidth margin="dense" />
           </Grid>
 
           <Grid item xs={12}>

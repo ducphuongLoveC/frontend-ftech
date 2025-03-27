@@ -18,10 +18,7 @@ const BackgroundOverlayStyle = styled(Box)<{ open: boolean }>(({ open }) => ({
 interface BackgroundOverlayProps extends BoxProps {
   open: boolean;
 }
-const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
-  open,
-  ...otherProps
-}) => {
+const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({ open, ...otherProps }) => {
   return <BackgroundOverlayStyle open={open} {...otherProps} />;
 };
 export default BackgroundOverlay;

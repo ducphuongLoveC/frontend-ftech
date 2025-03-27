@@ -75,7 +75,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ datas, onSubmit }) => {
           onChange={handleSetDes}
         />
       );
-    })
+    }),
   );
 
   const TableResource = memo(
@@ -87,15 +87,11 @@ const CourseForm: React.FC<CourseFormProps> = ({ datas, onSubmit }) => {
 
       // Handle resource actions
       const handleAddResource = (resource: Resource) => {
-        console.log(resource);
-
         setResources((prev) => [...prev, { ...resource, isActive: true }]);
         setIsOpenModalDocument(false);
       };
 
       const handleEditResource = (resource: Resource) => {
-        console.log(resource);
-
         if (idResourceEdit !== null) {
           const updatedResources = [...resources];
           updatedResources[idResourceEdit] = resource;
@@ -218,7 +214,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ datas, onSubmit }) => {
           </Dialog>
         </>
       );
-    })
+    }),
   );
 
   const TableModule = memo(
@@ -245,7 +241,6 @@ const CourseForm: React.FC<CourseFormProps> = ({ datas, onSubmit }) => {
           ...module,
           resources: resources[index] || [],
         }));
-        console.log(modules);
 
         return { modules: updatedModules };
       };
@@ -413,7 +408,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ datas, onSubmit }) => {
           <Button onClick={handleQuickAddCertificate}>Thêm nhanh chứng chỉ</Button>
         </TableContainer>
       );
-    })
+    }),
   );
 
   return (

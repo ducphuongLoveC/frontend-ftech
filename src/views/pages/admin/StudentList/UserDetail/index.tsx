@@ -22,11 +22,9 @@ const UserDetails = () => {
     const fetchUserDetails = async () => {
       try {
         setLoading(true);
-        console.log('Fetching user details for userId:', id);
 
         // Gọi API lấy thông tin người dùng
         const userResponse = await axiosInstance.get(`/api/user/${id}`);
-        console.log('User response:', userResponse);
         if (userResponse.data.success) {
           setUser(userResponse.data.data);
         } else {
@@ -35,7 +33,6 @@ const UserDetails = () => {
 
         // Gọi API lấy danh sách khóa học
         const coursesResponse = await axiosInstance.get(`/api/user/${id}/courses`);
-        console.log('Courses response:', coursesResponse);
 
         // Kiểm tra nếu khóa học rỗng, không trả về lỗi 404
         if (coursesResponse.status === 200) {

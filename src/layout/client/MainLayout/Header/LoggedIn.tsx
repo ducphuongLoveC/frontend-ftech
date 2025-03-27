@@ -1,54 +1,69 @@
-import { useEffect } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { Box, Button, Typography, useTheme, Avatar, List, ListItem, ListItemText, Divider, IconButton, Badge } from '@mui/material'
-import { useMediaQuery } from '@mui/material'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import {
+  Box,
+  Button,
+  Typography,
+  useTheme,
+  Avatar,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  IconButton,
+  Badge,
+} from '@mui/material';
+import { useMediaQuery } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 // tippy
-import Tippy from '@tippyjs/react'
-import HeadlessTippy from '@tippyjs/react/headless'
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless';
 
-import lodash from 'lodash'
+import lodash from 'lodash';
 // moment
-import moment from 'moment'
+import moment from 'moment';
 // redux
-import { useDispatch } from 'react-redux'
-import * as actionTypes from '@/store/actions'
+import { useDispatch } from 'react-redux';
+import * as actionTypes from '@/store/actions';
 // icon
-import { BiBell } from 'react-icons/bi'
+import { BiBell } from 'react-icons/bi';
 
 // my pj
 
-import Dropdown from '@/components/Dropdown'
-import Wrapper from '@/components/Wrapper'
+import Dropdown from '@/components/Dropdown';
+import Wrapper from '@/components/Wrapper';
 
-import path from '@/constants/routes'
-import Cookies from 'js-cookie'
+import path from '@/constants/routes';
+import Cookies from 'js-cookie';
 // socket
-import { io } from 'socket.io-client'
+import { io } from 'socket.io-client';
 
 // api
-import { deleteAllNotificationsByUserId, getNotificationById, markAllAsRead, markAsRead } from '../../../../api/notification'
+import {
+  deleteAllNotificationsByUserId,
+  getNotificationById,
+  markAllAsRead,
+  markAsRead,
+} from '../../../../api/notification';
 
 interface UserProp {
   user: {
-    _id: string
-    name: string
-    email: string
-    nickname: string
-    profile_picture?: string
-    role?: string
-  }
+    _id: string;
+    name: string;
+    email: string;
+    nickname: string;
+    profile_picture?: string;
+    role?: string;
+  };
 }
-const socket = io(import.meta.env.VITE_URL_SERVER)
+const socket = io(import.meta.env.VITE_URL_SERVER);
 
 const LoggedIn: React.FC<UserProp> = ({ user }) => {
-  console.log(user)
-
-  const dispatch = useDispatch()
-  const theme = useTheme()
-  const downSM = useMediaQuery(theme.breakpoints.down('sm'))
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
   const {
     data: notifications,
     isLoading: isLoadingNoti,
@@ -56,68 +71,67 @@ const LoggedIn: React.FC<UserProp> = ({ user }) => {
   } = useQuery({
     queryKey: ['notification'],
     queryFn: () => getNotificationById(user._id),
-  })
+  });
 
   const handleLogout = () => {
-    Cookies.remove('accessToken')
-    Cookies.remove('user')
-    dispatch({ type: actionTypes.SET_ACCESS_TOKEN, payload: '' })
-    dispatch({ type: actionTypes.SET_USER, payload: '' })
-  }
+    Cookies.remove('accessToken');
+    Cookies.remove('user');
+    dispatch({ type: actionTypes.SET_ACCESS_TOKEN, payload: '' });
+    dispatch({ type: actionTypes.SET_USER, payload: '' });
+  };
 
   const handleNotificationClick = async (notification: any) => {
-    await markAsRead(notification._id)
+    await markAsRead(notification._id);
     switch (notification.type) {
       case 'comment':
-        const { course_id, resource_id, comment_id } = notification.data
-        navigate(`/learning/${course_id}?id=${resource_id}&comment=${comment_id}`)
-        break
+        const { course_id, resource_id, comment_id } = notification.data;
+        navigate(`/learning/${course_id}?id=${resource_id}&comment=${comment_id}`);
+        break;
     }
-  }
+  };
 
   const handleMarkIsReadUserNotifications = async () => {
-    const res = await markAllAsRead(user._id)
+    const res = await markAllAsRead(user._id);
     if (res.status === 200) {
-      refetch()
+      refetch();
     }
-  }
+  };
 
   const handleDeleteAllNotificationsByUserId = async () => {
-    const res = await deleteAllNotificationsByUserId(user._id)
+    const res = await deleteAllNotificationsByUserId(user._id);
     if (res.status === 200) {
-      refetch()
+      refetch();
     }
-  }
+  };
 
   const notificationUnReadTotal = () => {
-    return notifications.reduce((acc: number, currentNotification: any) => acc + (!currentNotification.isRead ? 1 : 0), 0)
-  }
+    return notifications.reduce(
+      (acc: number, currentNotification: any) => acc + (!currentNotification.isRead ? 1 : 0),
+      0,
+    );
+  };
 
   // socket notification
   useEffect(() => {
-    console.log(user._id)
-
-    socket.emit('joinNotificationRoom', user._id)
+    socket.emit('joinNotificationRoom', user._id);
 
     socket.on('newNotification', (data) => {
-      refetch()
-      console.log(data)
-    })
+      refetch();
+      console.log(data);
+    });
     return () => {
-      socket.emit('leaveNotificationRoom', user._id)
-      socket.off('newNotification')
-    }
-  }, [])
+      socket.emit('leaveNotificationRoom', user._id);
+      socket.off('newNotification');
+    };
+  }, []);
 
-  if (isLoadingNoti) return <div>Loading...</div>
+  if (isLoadingNoti) return <div>Loading...</div>;
   return (
     <>
       <Box sx={{ position: 'relative', ml: downSM ? 0.5 : 1 }}>
         <Box sx={{ fontSize: '1.5rem', px: 1 }}>
           <Badge badgeContent={notificationUnReadTotal()} color="error">
-            
             <HeadlessTippy
-
               trigger="click"
               placement="top-end"
               interactive
@@ -189,7 +203,7 @@ const LoggedIn: React.FC<UserProp> = ({ user }) => {
               )}
             >
               <Tippy content="Thông báo">
-                <IconButton sx={{p: 0}}>
+                <IconButton sx={{ p: 0 }}>
                   <BiBell style={{ color: theme.palette.text.primary }} />
                 </IconButton>
               </Tippy>
@@ -261,6 +275,6 @@ const LoggedIn: React.FC<UserProp> = ({ user }) => {
         </HeadlessTippy>
       </Box>
     </>
-  )
-}
-export default LoggedIn
+  );
+};
+export default LoggedIn;

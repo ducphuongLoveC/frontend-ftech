@@ -49,7 +49,7 @@ const Certificate: React.FC<CertificateProp> = ({ certificate_code, user_id, cou
         setId(certificate_code);
       } else if (user_id && course_id && name && description) {
         const { certificate_code: existingCertificateCode } = await getCertificateByCertificateId(
-          certificate_code || ''
+          certificate_code || '',
         );
 
         if (existingCertificateCode) {

@@ -22,18 +22,8 @@ interface SubCardProps {
 
 const SubCard = React.forwardRef<HTMLDivElement, SubCardProps>(
   (
-    {
-      children,
-      content = true,
-      contentClass,
-      darkTitle,
-      secondary,
-      sx = {},
-      contentSX = {},
-      title,
-      ...others
-    },
-    ref
+    { children, content = true, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others },
+    ref,
   ) => {
     const defaultShadow = '0 2px 14px 0 rgb(32 40 45 / 8%)';
 
@@ -88,7 +78,7 @@ const SubCard = React.forwardRef<HTMLDivElement, SubCardProps>(
         {!content && children}
       </Card>
     );
-  }
+  },
 );
 
 SubCard.displayName = 'SubCard';

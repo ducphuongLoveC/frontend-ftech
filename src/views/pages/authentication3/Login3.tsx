@@ -1,66 +1,64 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { useMutation } from '@tanstack/react-query'
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useMutation } from '@tanstack/react-query';
 
 // toast
-import { toast, ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify';
 // material-ui
-import Divider from '@mui/material/Divider'
-import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useTheme } from '@mui/material/styles'
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 // project imports
-import * as actionTypes from '@/store/actions'
+import * as actionTypes from '@/store/actions';
 
-import AuthWrapper1 from '../AuthWrapper1'
-import AuthCardWrapper from '../AuthCardWrapper'
-import AuthLogin, { FormLoginValues } from '../authentication/auth-forms/AuthLogin'
+import AuthWrapper1 from '../AuthWrapper1';
+import AuthCardWrapper from '../AuthCardWrapper';
+import AuthLogin, { FormLoginValues } from '../authentication/auth-forms/AuthLogin';
 
 // api
-import { login } from '@/api/authApi'
-import Cookies from 'js-cookie'
-import { BeatLoader } from 'react-spinners'
+import { login } from '@/api/authApi';
+import Cookies from 'js-cookie';
+import { BeatLoader } from 'react-spinners';
 
 // ================================|| AUTH3 - LOGIN ||================================ //
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const mutation = useMutation({
     mutationKey: ['user'],
     mutationFn: login,
     onSuccess: (res) => {
-      console.log(res.data)
-      toast.success('Đăng nhập thành công!')
+      toast.success('Đăng nhập thành công!');
 
-      Cookies.set('accessToken', res.data.accessToken || '')
-      Cookies.set('user', JSON.stringify(res.data.user || {}))
-      console.log(res.data.user)
+      Cookies.set('accessToken', res.data.accessToken || '');
+      Cookies.set('user', JSON.stringify(res.data.user || {}));
       dispatch({
         type: actionTypes.SET_ACCESS_TOKEN,
         payload: res.data.accessToken,
-      })
-      dispatch({ type: actionTypes.SET_USER, payload: res.data.user })
+      });
+      dispatch({ type: actionTypes.SET_USER, payload: res.data.user });
 
-      navigate('/')
+      navigate('/');
     },
     onError: (error) => {
-      toast.error('Mật khẩu hoặc tài khoản không đúng. Thử lại!')
-      console.log(error)
+      toast.error('Mật khẩu hoặc tài khoản không đúng. Thử lại!');
+      console.log(error);
     },
-  })
+  });
 
-  const theme = useTheme()
-  const downMD = useMediaQuery(theme.breakpoints.down('md')) // Kiểm tra màn hình nhỏ hơn md
+  const theme = useTheme();
+  const downMD = useMediaQuery(theme.breakpoints.down('md')); // Kiểm tra màn hình nhỏ hơn md
 
   const handleLogin = async (data: FormLoginValues) => {
-    mutation.mutate(data)
-  }
+    mutation.mutate(data);
+  };
 
   return (
     <AuthWrapper1>
@@ -109,7 +107,12 @@ const Login: React.FC = () => {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <AuthLogin textElement={mutation.isPending ? <BeatLoader color={theme.palette.background.paper} size={6} /> : 'Đăng nhập'} onSubmit={handleLogin} />
+                <AuthLogin
+                  textElement={
+                    mutation.isPending ? <BeatLoader color={theme.palette.background.paper} size={6} /> : 'Đăng nhập'
+                  }
+                  onSubmit={handleLogin}
+                />
               </Grid>
               <Grid item xs={12}>
                 <Divider
@@ -139,7 +142,7 @@ const Login: React.FC = () => {
       </Grid>
       <ToastContainer />
     </AuthWrapper1>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

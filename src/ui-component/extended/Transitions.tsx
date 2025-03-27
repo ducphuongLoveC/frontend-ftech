@@ -17,13 +17,7 @@ import {
 interface TransitionsProps {
   children?: React.ReactNode;
   type?: 'grow' | 'fade' | 'collapse' | 'slide' | 'zoom';
-  position?:
-    | 'top-left'
-    | 'top-right'
-    | 'top'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'bottom';
+  position?: 'top-left' | 'top-right' | 'top' | 'bottom-left' | 'bottom-right' | 'bottom';
   direction?: 'up' | 'down' | 'left' | 'right';
   [key: string]: any; // Allows additional props like timeout, in, etc.
 }
@@ -31,16 +25,7 @@ interface TransitionsProps {
 // ==============================|| TRANSITIONS ||============================== //
 
 const Transitions: React.FC<TransitionsProps> = React.forwardRef(
-  (
-    {
-      children,
-      position = 'top-left',
-      type = 'grow',
-      direction = 'up',
-      ...others
-    },
-    ref
-  ) => {
+  ({ children, position = 'top-left', type = 'grow', direction = 'up', ...others }, ref) => {
     let positionSX: React.CSSProperties = {
       transformOrigin: '0 0 0',
     };
@@ -123,7 +108,7 @@ const Transitions: React.FC<TransitionsProps> = React.forwardRef(
         )}
       </Box>
     );
-  }
+  },
 );
 
 export default Transitions;

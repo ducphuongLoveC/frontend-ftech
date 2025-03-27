@@ -22,11 +22,7 @@ interface SidebarProps {
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
-const Sidebar: React.FC<SidebarProps> = ({
-  drawerOpen,
-  drawerToggle,
-  window,
-}) => {
+const Sidebar: React.FC<SidebarProps> = ({ drawerOpen, drawerToggle, window }) => {
   const theme = useTheme();
   const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -51,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             mx: 'auto',
           }}
         >
-         <Logo/>
+          <Logo />
         </Box>
       </Box>
       <BrowserView>
@@ -65,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         >
           <MenuList />
 
-            {/* <Stack
+          {/* <Stack
               direction="row"
               justifyContent="center"
               sx={{

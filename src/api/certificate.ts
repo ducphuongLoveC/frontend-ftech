@@ -10,11 +10,9 @@ export const getCertificateByCertificateId = async (certificate_code: string) =>
 };
 
 export const createCertificate = async (payload: {}) => {
-  console.log(payload);
-  
   try {
     const { data } = await axiosInstance.post('api/certificate/', payload);
-    console.log(data);
+
     if (data.isExist) {
       return data;
     }

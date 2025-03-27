@@ -7,12 +7,7 @@ interface TitleProps extends ButtonProps {
   link?: string;
 }
 
-const HeaderTitle: React.FC<TitleProps> = ({
-  titleButton,
-  des,
-  link,
-  ...props
-}) => {
+const HeaderTitle: React.FC<TitleProps> = ({ titleButton, des, link, ...props }) => {
   const theme = useTheme();
 
   return (
@@ -28,19 +23,19 @@ const HeaderTitle: React.FC<TitleProps> = ({
     >
       <Typography variant="body2">{des}</Typography>
 
-      {titleButton && <Button
-        {...(link
-          ? {
-            component: Link,
-            to: link,
-          }
-          : props)}
-        variant="outlined"
-      >
-        {titleButton}
-      </Button>}
-
-
+      {titleButton && (
+        <Button
+          {...(link
+            ? {
+                component: Link,
+                to: link,
+              }
+            : props)}
+          variant="outlined"
+        >
+          {titleButton}
+        </Button>
+      )}
     </Box>
   );
 };

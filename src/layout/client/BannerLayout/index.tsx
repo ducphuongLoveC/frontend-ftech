@@ -1,24 +1,24 @@
-import { useTheme, Theme, useMediaQuery, Box } from '@mui/material'
-import { useQuery } from '@tanstack/react-query'
-import SideBar from '../MainLayout/SideBar'
-import Carousel from '@/components/Carousel'
-import Header from '../MainLayout/Header'
-import Footer from '../MainLayout/Footer'
-import axiosInstance from '@/api/axiosInstance'
-import { Outlet } from 'react-router-dom'
+import { useTheme, Theme, useMediaQuery, Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+import SideBar from '../MainLayout/SideBar';
+import Carousel from '@/components/Carousel';
+import Header from '../MainLayout/Header';
+import Footer from '../MainLayout/Footer';
+import axiosInstance from '@/api/axiosInstance';
+import { Outlet } from 'react-router-dom';
 
 interface CarouselItem {
-  _id: string
-  path: string
-  image: string
-  background: string
-  title: string
-  description: string
+  _id: string;
+  path: string;
+  image: string;
+  background: string;
+  title: string;
+  description: string;
 }
 
 const BannerLayout: React.FC = () => {
-  const theme: Theme = useTheme()
-  const downMD = useMediaQuery(theme.breakpoints.down('md'))
+  const theme: Theme = useTheme();
+  const downMD = useMediaQuery(theme.breakpoints.down('md'));
 
   const {
     data: carousels,
@@ -27,13 +27,13 @@ const BannerLayout: React.FC = () => {
   } = useQuery<CarouselItem[], Error>({
     queryKey: ['carousels'],
     queryFn: async () => {
-      const response = await axiosInstance.get('/api/carousel')
-      return response.data.data
+      const response = await axiosInstance.get('/api/carousel');
+      return response.data.data;
     },
-  })
+  });
 
   if (isError) {
-    console.error('Failed to fetch carousels')
+    console.error('Failed to fetch carousels');
   }
 
   return (
@@ -49,10 +49,6 @@ const BannerLayout: React.FC = () => {
               sm: '86%',
               md: '84%',
               lg: '87%',
-            },
-            [`@media (min-width:1600px)`]:{
-              width: '100%',
-              paddingRight: '11%',
             },
             [`@media (min-width:2000px)`]: {
               width: '1630px',
@@ -71,7 +67,7 @@ const BannerLayout: React.FC = () => {
       </Box>
       <Footer />
     </Box>
-  )
-}
+  );
+};
 
-export default BannerLayout
+export default BannerLayout;

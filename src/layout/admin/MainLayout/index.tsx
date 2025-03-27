@@ -34,7 +34,7 @@ const Main = styled('main', {
       : {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
-        }
+        },
   ),
   [theme.breakpoints.up('md')]: {
     marginLeft: open ? 0 : -(drawerWidth - 20),
@@ -56,7 +56,6 @@ const Main = styled('main', {
 // const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
 const MainLayout: React.FC = () => {
-
   const theme: any = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
 

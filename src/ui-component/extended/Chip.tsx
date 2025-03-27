@@ -4,13 +4,7 @@ import { alpha, useTheme, SxProps, Theme } from '@mui/material/styles';
 
 // Define types for props
 interface ChipProps {
-  chipcolor?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'orange'
-    | 'warning';
+  chipcolor?: 'primary' | 'secondary' | 'success' | 'error' | 'orange' | 'warning';
   variant?: 'contained' | 'outlined';
   disabled?: boolean;
   sx?: SxProps<Theme>;

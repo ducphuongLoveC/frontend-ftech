@@ -52,7 +52,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course }) => {
     const totalDuration = course?.modules.reduce(
       (moduleAcc, module) =>
         moduleAcc + module.resources.reduce((resourceAcc, resource) => resourceAcc + resource.duration, 0),
-      0
+      0,
     );
     return moment.utc(totalDuration * 1000).format('HH:mm:ss');
   };

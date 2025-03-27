@@ -430,23 +430,15 @@
 
 // export default Profile;
 
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/reducer";
-import axiosInstance from "@/api/axiosInstance";
-import { SET_USER } from "@/store/actions";
-import Cookies from "js-cookie";
-import {
-  Button,
-  Typography,
-  TextField,
-  Paper,
-  Avatar,
-  Box,
-  Grid,
-} from "@mui/material";
-import { toast, ToastContainer } from "react-toastify";
-import Loading from "@/ui-component/Loading";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/store/reducer';
+import axiosInstance from '@/api/axiosInstance';
+import { SET_USER } from '@/store/actions';
+import Cookies from 'js-cookie';
+import { Button, Typography, TextField, Paper, Avatar, Box, Grid } from '@mui/material';
+import { toast, ToastContainer } from 'react-toastify';
+import Loading from '@/ui-component/Loading';
 
 interface FormData {
   id?: string;
@@ -468,15 +460,15 @@ const Profile: React.FC = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    name: user?.name || "",
-    phone: user?.phone || "",
-    profile_picture: user?.profile_picture || "",
+    name: user?.name || '',
+    phone: user?.phone || '',
+    profile_picture: user?.profile_picture || '',
   });
 
   const [passwordForm, setPasswordForm] = useState<PasswordFormData>({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
   });
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -489,21 +481,19 @@ const Profile: React.FC = () => {
   }
 
   useEffect(() => {
-    const userFromCookies = Cookies.get("user");
+    const userFromCookies = Cookies.get('user');
     if (userFromCookies) {
       const userObj = JSON.parse(userFromCookies);
       dispatch({ type: SET_USER, payload: userObj });
-      console.log("Đã lấy thông tin người dùng từ cookies: ", userObj);
     }
   }, [dispatch]);
 
   useEffect(() => {
     if (!isEditing) {
-      console.log("Dữ liệu user được cập nhật: ", user);
       setFormData({
-        name: user?.name || "",
-        phone: user?.phone || "",
-        profile_picture: user?.profile_picture || "",
+        name: user?.name || '',
+        phone: user?.phone || '',
+        profile_picture: user?.profile_picture || '',
       });
     }
   }, [user, isEditing]);
@@ -530,34 +520,29 @@ const Profile: React.FC = () => {
     setPasswordError(null);
 
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      toast.error("Mật khẩu mới và xác nhận mật khẩu không khớp");
+      toast.error('Mật khẩu mới và xác nhận mật khẩu không khớp');
       return;
     }
 
     if (passwordForm.newPassword.length < 6) {
-      toast.error("Mật khẩu mới phải có ít nhất 6 ký tự");
+      toast.error('Mật khẩu mới phải có ít nhất 6 ký tự');
       return;
     }
 
     try {
-      const response = await axiosInstance.put(
-        "/api/user/change-password",
-        passwordForm
-      );
+      const response = await axiosInstance.put('/api/user/change-password', passwordForm);
 
       if (response.data.message) {
         toast.success(response.data.message);
         setPasswordForm({
-          currentPassword: "",
-          newPassword: "",
-          confirmPassword: "",
+          currentPassword: '',
+          newPassword: '',
+          confirmPassword: '',
         });
         setIsChangingPassword(false);
       }
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.message || "Có lỗi xảy ra khi đổi mật khẩu"
-      );
+      toast.error(error.response?.data?.message || 'Có lỗi xảy ra khi đổi mật khẩu');
     }
   };
 
@@ -567,22 +552,19 @@ const Profile: React.FC = () => {
 
     if (file && userId) {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append('file', file);
 
       setLoading(true);
 
-      const response = await axiosInstance.post("/api/media/upload", formData, {
+      const response = await axiosInstance.post('/api/media/upload', formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
 
-      const responseUpdatePictureLink = await axiosInstance.put(
-        `/api/user/${userId}`,
-        {
-          profile_picture: response.data.url,
-        }
-      );
+      const responseUpdatePictureLink = await axiosInstance.put(`/api/user/${userId}`, {
+        profile_picture: response.data.url,
+      });
 
       if (response.data.success && responseUpdatePictureLink.data.success) {
         const uploadedImageUrl = response.data.url;
@@ -594,20 +576,20 @@ const Profile: React.FC = () => {
 
         const updatedUser = { ...user, profile_picture: uploadedImageUrl };
         dispatch({ type: SET_USER, payload: updatedUser });
-        Cookies.set("user", JSON.stringify(updatedUser), {
-          domain: "admin.localhost",
+        Cookies.set('user', JSON.stringify(updatedUser), {
+          domain: 'admin.localhost',
           expires: 7,
         });
         setLoading(false);
       } else {
-        throw new Error(response.data.message || "Upload failed");
+        throw new Error(response.data.message || 'Upload failed');
       }
     }
   };
 
   const handleSave = async () => {
     if (!user?._id && !user?.id) {
-      setError("Không tìm thấy thông tin người dùng!");
+      setError('Không tìm thấy thông tin người dùng!');
       return;
     }
 
@@ -621,30 +603,26 @@ const Profile: React.FC = () => {
         profile_picture: formData.profile_picture,
       };
 
-      const response = await axiosInstance.put(
-        `/api/user/${user._id || user.id}`,
-        updatedData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axiosInstance.put(`/api/user/${user._id || user.id}`, updatedData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.data.success) {
         const updatedUser = { ...user, ...response.data.data };
         dispatch({ type: SET_USER, payload: updatedUser });
-        Cookies.set("user", JSON.stringify(updatedUser), {
-          domain: "admin.localhost",
+        Cookies.set('user', JSON.stringify(updatedUser), {
+          domain: 'admin.localhost',
           expires: 7,
         });
 
         setIsEditing(false);
-        toast.success("Cập nhật thông tin thành công");
+        toast.success('Cập nhật thông tin thành công');
       }
     } catch (error: any) {
-      console.error("Lỗi khi cập nhật:", error);
-      setError("Có lỗi xảy ra, vui lòng thử lại!");
+      console.error('Lỗi khi cập nhật:', error);
+      setError('Có lỗi xảy ra, vui lòng thử lại!');
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
@@ -655,11 +633,11 @@ const Profile: React.FC = () => {
     <Box sx={{ p: 3 }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, textAlign: "center" }}>
+          <Paper sx={{ p: 3, textAlign: 'center' }}>
             <Avatar
               src={formData.profile_picture || user.profile_picture}
               alt="Admin"
-              sx={{ width: 150, height: 150, mx: "auto" }}
+              sx={{ width: 150, height: 150, mx: 'auto' }}
             />
             <Typography variant="h5" sx={{ mt: 2 }}>
               {formData.name}
@@ -682,12 +660,7 @@ const Profile: React.FC = () => {
               </Grid>
               <Grid item xs={12} sm={9}>
                 {isEditing ? (
-                  <TextField
-                    fullWidth
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                  />
+                  <TextField fullWidth name="name" value={formData.name} onChange={handleInputChange} />
                 ) : (
                   <Typography>{formData.name}</Typography>
                 )}
@@ -698,12 +671,7 @@ const Profile: React.FC = () => {
               </Grid>
               <Grid item xs={12} sm={9}>
                 {isEditing ? (
-                  <TextField
-                    fullWidth
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                  />
+                  <TextField fullWidth name="phone" value={formData.phone} onChange={handleInputChange} />
                 ) : (
                   <Typography>{formData.phone}</Typography>
                 )}
@@ -736,20 +704,11 @@ const Profile: React.FC = () => {
 
             <Box sx={{ mt: 3 }}>
               {isEditing ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSave}
-                  disabled={loading}
-                >
-                  {loading ? "Đang lưu..." : "Lưu"}
+                <Button variant="contained" color="primary" onClick={handleSave} disabled={loading}>
+                  {loading ? 'Đang lưu...' : 'Lưu'}
                 </Button>
               ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setIsEditing(true)}
-                >
+                <Button variant="contained" color="primary" onClick={() => setIsEditing(true)}>
                   Sửa
                 </Button>
               )}
@@ -759,9 +718,9 @@ const Profile: React.FC = () => {
           <Paper sx={{ p: 3 }}>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
                 mb: 3,
               }}
             >
@@ -773,13 +732,13 @@ const Profile: React.FC = () => {
                   setIsChangingPassword(!isChangingPassword);
                   setPasswordError(null);
                   setPasswordForm({
-                    currentPassword: "",
-                    newPassword: "",
-                    confirmPassword: "",
+                    currentPassword: '',
+                    newPassword: '',
+                    confirmPassword: '',
                   });
                 }}
               >
-                {isChangingPassword ? "Hủy" : "Đổi mật khẩu"}
+                {isChangingPassword ? 'Hủy' : 'Đổi mật khẩu'}
               </Button>
             </Box>
 

@@ -1,7 +1,20 @@
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Avatar, Paper, Box, Rating, MenuItem, Select, InputLabel, FormControl, Typography,
-  TablePagination
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Avatar,
+  Paper,
+  Box,
+  Rating,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Typography,
+  TablePagination,
 } from '@mui/material';
 import HeaderTitle from '../Title';
 import axiosInstance from '@/api/axiosInstance';
@@ -56,24 +69,23 @@ const ReviewList = () => {
     <Box>
       <HeaderTitle des="Đây là trang quản lý đánh giá" />
 
-      <Box sx={{ mb: 2, p: 2   }} component={Paper}>
-        
-      <FormControl fullWidth sx={{ mb: 2 }}>
-        <InputLabel id="stars-filter-label">Lọc theo số sao</InputLabel>
-        <Select
-          labelId="stars-filter-label"
-          value={starsFilter}
-          label="Lọc theo số sao"
-          onChange={(e: any) => setStarsFilter(e.target.value)}
-        >
-          <MenuItem value="">Tất cả</MenuItem>
-          {[1, 2, 3, 4, 5].map((star) => (
-            <MenuItem key={star} value={star}>
-              {star} sao
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Box sx={{ mb: 2, p: 2 }} component={Paper}>
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel id="stars-filter-label">Lọc theo số sao</InputLabel>
+          <Select
+            labelId="stars-filter-label"
+            value={starsFilter}
+            label="Lọc theo số sao"
+            onChange={(e: any) => setStarsFilter(e.target.value)}
+          >
+            <MenuItem value="">Tất cả</MenuItem>
+            {[1, 2, 3, 4, 5].map((star) => (
+              <MenuItem key={star} value={star}>
+                {star} sao
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
 
       {reviews.length === 0 ? (
@@ -86,7 +98,9 @@ const ReviewList = () => {
             <Table aria-label="review table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="center" sx={{ display: "flex", justifyItems: "center", alignItems: "center" }}>Avatar</TableCell>
+                  <TableCell align="center" sx={{ display: 'flex', justifyItems: 'center', alignItems: 'center' }}>
+                    Avatar
+                  </TableCell>
                   <TableCell align="center">Tên người đánh giá</TableCell>
                   <TableCell align="center">Khóa học đánh giá</TableCell>
                   <TableCell align="center">Nội dung đánh giá</TableCell>

@@ -1,19 +1,19 @@
-import { useState, useCallback, useRef } from 'react'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useSelector } from 'react-redux'
+import { useState, useCallback, useRef } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
 
-import ArtPlayerComponent from '@/components/ArtplayComponent'
-import Question from './Question'
+import ArtPlayerComponent from '@/components/ArtplayComponent';
+import Question from './Question';
 // redux
 
 // ui
-import { toast, ToastContainer } from 'react-toastify'
-import { Box, Typography, Button, useMediaQuery } from '@mui/material'
-import { useTheme, styled } from '@mui/material'
+import { toast, ToastContainer } from 'react-toastify';
+import { Box, Typography, Button, useMediaQuery } from '@mui/material';
+import { useTheme, styled } from '@mui/material';
 
 // api
-import { completeResource } from '@/api/progess'
-import { createNote } from '@/api/noteApi'
+import { completeResource } from '@/api/progess';
+import { createNote } from '@/api/noteApi';
 
 const BoxHeaderAndNote = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -21,62 +21,62 @@ const BoxHeaderAndNote = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column',
   },
-}))
+}));
 
 //  icon
 
 // my pj
-import formatLastUpdated from '@/utils/formatLastUpdated'
-import TextEditor from '@/components/TextEditor'
-import { RootState } from '@/store/reducer'
+import formatLastUpdated from '@/utils/formatLastUpdated';
+import TextEditor from '@/components/TextEditor';
+import { RootState } from '@/store/reducer';
 
-import formatTime from '@/utils/formatTime'
-import Certificate from './Cetificate/Cetificate'
-import { getSingleCourseById } from '@/api/courseApi'
-import { useParams } from 'react-router-dom'
-import PlacementToggle from '@/components/PlacementToggle'
+import formatTime from '@/utils/formatTime';
+import Certificate from './Cetificate/Cetificate';
+import { getSingleCourseById } from '@/api/courseApi';
+import { useParams } from 'react-router-dom';
+import PlacementToggle from '@/components/PlacementToggle';
 
 const Resource: React.FC<any> = ({ resource, refetchResource, refetchNote }) => {
-  const { id } = useParams()
+  const { id } = useParams();
 
-  const user = useSelector((state: RootState) => state.authReducer.user)
-  const [isVisibleNote, setIsVisibleNote] = useState<boolean>(false)
+  const user = useSelector((state: RootState) => state.authReducer.user);
+  const [isVisibleNote, setIsVisibleNote] = useState<boolean>(false);
 
-  const [note, setNote] = useState('')
-  const [currentTime, setCurrentTime] = useState<number>(0)
+  const [note, setNote] = useState('');
+  const [currentTime, setCurrentTime] = useState<number>(0);
 
-  const artPlayer = useRef<any>()
+  const artPlayer = useRef<any>();
 
-  const theme = useTheme()
+  const theme = useTheme();
 
   const { data: course, isLoading: isLoadingCourse } = useQuery({
     queryKey: ['singleCourseById'],
     queryFn: () => getSingleCourseById(id || ''),
-  })
+  });
 
   const mutationNote = useMutation({
     mutationKey: ['note'],
     mutationFn: createNote,
     onSuccess: () => {
-      toast.success('Thêm mới ghi chú thành công')
-      setIsVisibleNote(false)
-      refetchNote()
+      toast.success('Thêm mới ghi chú thành công');
+      setIsVisibleNote(false);
+      refetchNote();
     },
     onError: (error: any) => {
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     },
-  })
+  });
 
   const handleOpenNote = () => {
-    setIsVisibleNote(true)
+    setIsVisibleNote(true);
 
-    artPlayer.current.pause()
-  }
+    artPlayer.current.pause();
+  };
 
   const closeNote = () => {
-    setIsVisibleNote(false)
-    artPlayer.current.play()
-  }
+    setIsVisibleNote(false);
+    artPlayer.current.play();
+  };
 
   const saveNote = () => {
     const payload = {
@@ -85,38 +85,34 @@ const Resource: React.FC<any> = ({ resource, refetchResource, refetchNote }) => 
       resource_id: resource._id,
       user_id: user._id,
       markAt: currentTime,
-    }
-    console.log(payload)
-    mutationNote.mutate(payload)
-  }
+    };
+    mutationNote.mutate(payload);
+  };
 
   const handleCompletedResource = useCallback(async () => {
-    console.log(resource._id)
-
     try {
-      const res = await completeResource(user._id, resource._id)
+      const res = await completeResource(user._id, resource._id);
 
       if (res && res.status === 200) {
-        console.log('Resource completed successfully')
+        console.log('Resource completed successfully');
       } else {
-        console.error('Failed to complete resource')
+        console.error('Failed to complete resource');
       }
     } catch (error) {
-      console.error('Error completing resource:', error)
+      console.error('Error completing resource:', error);
     } finally {
-      refetchResource()
+      refetchResource();
     }
-  }, [resource._id, user._id])
+  }, [resource._id, user._id]);
 
   const handleUpdateTime = useCallback(
     (time: number) => {
-      setCurrentTime(time)
+      setCurrentTime(time);
     },
-    [resource._id, user._id]
-  )
+    [resource._id, user._id],
+  );
 
-
-  const isXs = useMediaQuery('(max-width:600px)')
+  const isXs = useMediaQuery('(max-width:600px)');
 
   return (
     <>
@@ -133,24 +129,31 @@ const Resource: React.FC<any> = ({ resource, refetchResource, refetchNote }) => 
                 onCompleted={handleCompletedResource}
                 onTimeUpdate={handleUpdateTime}
               />
-            )
+            );
 
           case 'Question':
-            return <Question questions={resource.questions} onCompleted={handleCompletedResource} />
+            return <Question questions={resource.questions} onCompleted={handleCompletedResource} />;
 
           case 'Document':
-            setTimeout(handleCompletedResource, 3000)
+            setTimeout(handleCompletedResource, 3000);
 
             return (
               <Typography mt={2} fontSize={20} textAlign={'center'}>
                 Tài liệu
               </Typography>
-            )
+            );
           case 'Certificate':
             if (!resource.progress.is_completed) {
-              handleCompletedResource()
+              handleCompletedResource();
             }
-            return <Certificate user_id={user._id} course_id={id} description={!isLoadingCourse && course.title} name={user.name} />
+            return (
+              <Certificate
+                user_id={user._id}
+                course_id={id}
+                description={!isLoadingCourse && course.title}
+                name={user.name}
+              />
+            );
         }
       })()}
       <Box
@@ -174,45 +177,6 @@ const Resource: React.FC<any> = ({ resource, refetchResource, refetchNote }) => 
 
           {resource.resource_type == 'Video' && (
             <Box>
-              {/* <HeadlessTippy
-                zIndex={999}
-                visible={isVisibleNote}
-                placement="bottom-end"
-                allowHTML
-                interactive
-                render={(attrs) => (
-                  <Wrapper {...attrs} style={{ width: '500px' }}>
-                    <TextEditor
-                      key={isVisibleNote ? 'visible' : 'hidden'}
-                      initialHeight="250px"
-                      initialValue=""
-                      onChange={setNote}
-                    />
-                    <Box mt={2} display={'flex'} justifyContent={'space-between'}>
-                      <Button variant="outlined" onClick={closeNote}>
-                        Đóng
-                      </Button>
-
-                      <Button variant="contained" onClick={saveNote}>
-                        Lưu ghi chú
-                      </Button>
-                    </Box>
-                  </Wrapper>
-                )}
-              >
-                <Button
-                  onClick={handleOpenNote}
-                  sx={{
-                    color: theme.palette.text.primary,
-                    backgroundColor: theme.palette.background.paper2,
-                    padding: '10px 30px',
-                    borderRadius: '10px',
-                  }}
-                >
-                  Thêm ghi chú tại {formatTime(currentTime)}
-                </Button>
-              </HeadlessTippy> */}
-
               <PlacementToggle
                 onClose={closeNote}
                 open={isVisibleNote}
@@ -233,7 +197,12 @@ const Resource: React.FC<any> = ({ resource, refetchResource, refetchNote }) => 
                   </Button>
                 )}
               >
-                <TextEditor key={isVisibleNote ? 'visible' : 'hidden'} initialHeight="350px" initialValue="" onChange={setNote} />
+                <TextEditor
+                  key={isVisibleNote ? 'visible' : 'hidden'}
+                  initialHeight="350px"
+                  initialValue=""
+                  onChange={setNote}
+                />
                 <Box mt={2} display={'flex'} justifyContent={'space-between'}>
                   <Button variant="outlined" onClick={closeNote}>
                     Đóng
@@ -252,6 +221,6 @@ const Resource: React.FC<any> = ({ resource, refetchResource, refetchNote }) => 
       </Box>
       <ToastContainer />
     </>
-  )
-}
-export default Resource
+  );
+};
+export default Resource;

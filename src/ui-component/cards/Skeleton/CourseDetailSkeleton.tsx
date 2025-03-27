@@ -66,12 +66,7 @@ const CourseDetailSkeleton: React.FC = () => {
             <Box sx={{ position: 'sticky', top: 20 }}>
               {/* Video Preview */}
               <Box sx={{ position: 'relative', mb: 3 }}>
-                <Skeleton
-                  variant="rectangular"
-                  width="100%"
-                  height={225}
-                  sx={{ borderRadius: 2 }}
-                />
+                <Skeleton variant="rectangular" width="100%" height={225} sx={{ borderRadius: 2 }} />
               </Box>
 
               {/* Price */}
