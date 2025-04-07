@@ -3,7 +3,7 @@ import { Box, Paper } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseStatistics } from '@/api/courseApi';
-import HeaderTitle from '../../Title';
+import HeaderTitle from '@/views/pages/admin/Title';
 import TabsCustom from '@/components/TabsCustom';
 import StudentList from './StudentList';
 import CourseDetail from './CourseDetail';

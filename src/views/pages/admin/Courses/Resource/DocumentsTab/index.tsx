@@ -41,7 +41,7 @@ const contentTypes = [
   },
 ];
 
-const ChooseDocument = forwardRef(({ defaultValue }: any, ref) => {
+const ChooseDocumentTab = forwardRef(({ defaultValue }: any, ref) => {
   const [selectedContent, setSelectedContent] = useState<any>(null);
 
   const documentRef = useRef<any>(null);
@@ -92,4 +92,4 @@ const ChooseDocument = forwardRef(({ defaultValue }: any, ref) => {
   );
 });
 
-export default ChooseDocument;
+export default ChooseDocumentTab;

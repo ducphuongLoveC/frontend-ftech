@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import CourseForm from './CourseForm';
+import CourseForm from '../Components/CourseForm';
 import { Course } from '@/interfaces/course';
-import HeaderTitle from '../Title';
+import HeaderTitle from '../../Title';
 import path from '@/constants/routes';
 import { getCourse, updateCourse } from '@/api/courseApi';
 import { useParams } from 'react-router-dom';
@@ -33,6 +33,7 @@ const UpdateCourse: React.FC = () => {
   });
 
   const handleUpdateCourse = (course: Course) => {
+    console.log(course);
     mutation.mutate(course);
   };
   if (isLoading) return <div>Loading...</div>;

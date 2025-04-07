@@ -10,33 +10,34 @@ export interface Progress {
 export interface Resource {
   _id?: string;
   title: string;
-  type: string;
-  url: string;
-  duration: number;
+  type?: string;
+  url?: string;
+  thumbnail?: string;
+  duration?: number;
   description: string;
   resource_type: string;
-  progress: Progress;
-  isActive: boolean;
+  progress?: Progress;
+  isActive?: boolean;
 }
 export interface Module {
   _id?: string;
-  title: string;
+  title?: string;
   resources: Resource[];
-  isActive: boolean;
+  isActive?: boolean;
 }
 export interface Course {
-  _id: string;
+  _id?: string;
   title: string;
   user_id?: string;
   learning_path_id?: string;
   description: string;
-  learning_outcomes: string[];
-  level: 'easy' | 'medium' | 'high';
+  learning_outcomes?: string[];
+  level?: 'easy' | 'medium' | 'high';
   modules: Module[];
-  original_price: string;
-  sale_price: string;
-  thumbnail: File | null;
-  has_certificate: boolean;
-  isActive: boolean;
-  isFree: boolean;
+  original_price?: string;
+  sale_price?: string;
+  thumbnail?: File | null;
+  has_certificate?: boolean;
+  isActive?: boolean;
+  isFree?: boolean;
 }

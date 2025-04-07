@@ -48,7 +48,7 @@ interface CourseData {
   isActive: boolean;
 }
 
-const OptionOther = forwardRef(({ defaultValue }: any, ref) => {
+const CourseSettingTab = forwardRef(({ defaultValue }: any, ref) => {
   const user = useSelector((state: RootState) => state.authReducer.user);
 
   const {
@@ -341,4 +341,4 @@ const OptionOther = forwardRef(({ defaultValue }: any, ref) => {
   );
 });
 
-export default OptionOther;
+export default CourseSettingTab;

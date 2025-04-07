@@ -1,4 +1,4 @@
-import CourseForm from './CourseForm';
+import CourseForm from '../Components/CourseForm';
 import { useMutation } from '@tanstack/react-query';
 import { newCourse } from '@/api/courseApi';
 import { toast, ToastContainer } from 'react-toastify';
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 // my pj
 import { Course } from '@/interfaces/course';
 import path from '@/constants/routes';
-import HeaderTitle from '../Title';
+import HeaderTitle from '../../Title';
 import sleep from '@/utils/sleep';
 import Loading from '@/ui-component/Loading';
 
@@ -36,6 +36,25 @@ const NewCourse: React.FC = () => {
     mutation.mutate(course);
   };
 
+  const data = {
+    title: 'Khóa học mới',
+    description: 'Mô tả khóa học mới',
+    thumbnail: null,
+    modules: [
+      {
+        title: 'Chương 1',
+        description: 'Mô tả chương 1',
+        resources: [
+          {
+            title: 'Tài liệu 1',
+            description: 'Mô tả tài liệu 1',
+            resource_type: 'video',
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <HeaderTitle
@@ -44,7 +63,7 @@ const NewCourse: React.FC = () => {
         titleButton="Danh sách khóa học"
         link={path.admin.courses}
       />
-      <CourseForm onSubmit={handleNewCourse} />
+      <CourseForm onSubmit={handleNewCourse} datas={data} />
       {mutation.isPending && <Loading />}
       <ToastContainer />
     </>

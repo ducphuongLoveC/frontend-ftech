@@ -8,7 +8,7 @@ import moment from 'moment';
 import HeadlessTippy from '@tippyjs/react/headless';
 // my pj
 import CourseListSkl from '@/ui-component/cards/Skeleton/CourseListSkl';
-import HeaderTitle from '../Title';
+import HeaderTitle from '../../Title';
 import path from '@/constants/routes';
 import { Course } from '@/interfaces/course';
 import FilterComponent from '@/components/Filter';
@@ -163,7 +163,12 @@ const CourseList: React.FC = () => {
                         )}
                       </Grid>
                       <Grid item xs={12}>
-                        <Button fullWidth component={Link} to={path.admin.updateCourse(course._id)} variant="outlined">
+                        <Button
+                          fullWidth
+                          component={Link}
+                          to={path.admin.updateCourse(course._id ? course._id : '')}
+                          variant="outlined"
+                        >
                           Xem và sửa khóa học
                         </Button>
                       </Grid>

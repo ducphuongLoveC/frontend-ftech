@@ -1,7 +1,7 @@
 import { useState, memo, forwardRef, useImperativeHandle } from 'react';
 
 import TextEditor from '@/components/TextEditor';
-const DescriptionResource = memo(
+const DescriptionResourceTab = memo(
   forwardRef(({ defaultValue }: any, ref) => {
     const [description, setDescription] = useState(defaultValue?.description);
 
@@ -18,4 +18,4 @@ const DescriptionResource = memo(
   }),
 );
 
-export default DescriptionResource;
+export default DescriptionResourceTab;

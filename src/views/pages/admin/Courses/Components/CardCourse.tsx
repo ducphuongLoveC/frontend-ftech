@@ -5,7 +5,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import TabsCustom from '@/components/TabsCustom';
 
 import Storage from './Storage';
-
 interface CardCourseProps {
   labels: React.ReactNode[];
   contents: React.ComponentType<any>[];

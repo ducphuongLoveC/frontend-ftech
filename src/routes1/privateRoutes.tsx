@@ -6,9 +6,9 @@ import Loadable from '@/ui-component/Loadable';
 
 const Dashboard = Loadable(lazy(() => import('../views/pages/admin/Home')));
 const LearningPathList = Loadable(lazy(() => import('../views/pages/admin/LearningPath/LearningPathList')));
-const CoursesList = Loadable(lazy(() => import('../views/pages/admin/Courses/CourseList')));
-const NewCourses = Loadable(lazy(() => import('../views/pages/admin/Courses/NewCourse')));
-const UpdateCourse = Loadable(lazy(() => import('../views/pages/admin/Courses/UpdateCourse')));
+const CoursesList = Loadable(lazy(() => import('../views/pages/admin/Courses/Page/CourseList')));
+const NewCourses = Loadable(lazy(() => import('../views/pages/admin/Courses/Page/NewCourse')));
+const UpdateCourse = Loadable(lazy(() => import('../views/pages/admin/Courses/Page/UpdateCourse')));
 const CategoryList = Loadable(lazy(() => import('../views/pages/admin/ListCategory')));
 const ContentList = Loadable(lazy(() => import('../views/pages/admin/Content')));
 const AddContent = Loadable(lazy(() => import('../views/pages/admin/Content/AddContent')));
@@ -32,7 +32,7 @@ const Comments = Loadable(lazy(() => import('../views/pages/admin/Comments/index
 
 const Coupon = Loadable(lazy(() => import('../views/pages/admin/Coupon/index')));
 
-const CourseStatistics = Loadable(lazy(() => import('../views/pages/admin/Courses/CourseStatistics')));
+const CourseStatistics = Loadable(lazy(() => import('../views/pages/admin/Courses/Page/CourseStatistics')));
 const CarouselManager = Loadable(lazy(() => import('../views/pages/admin/CarouselManager')));
 
 const PrivateRoutes: RouteProp[] = [

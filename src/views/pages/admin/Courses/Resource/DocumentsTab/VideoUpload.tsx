@@ -2,7 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Box, Button } from '@mui/material';
 import { CloudUpload } from '@mui/icons-material';
 
-import Storage from '../Storage';
+import Storage from '../../Components/Storage';
 
 const VideoUpload = forwardRef(({ defaultValue }: any, ref) => {
   const [formData, setFormData] = useState<any>({
